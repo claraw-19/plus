@@ -1,0 +1,166 @@
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("/next-assets/fonts/Roboto-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url("/next-assets/fonts/Roboto-Bold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("/next-assets/fonts/Roboto-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  src: url("/next-assets/fonts/MaterialIcons-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Material Icons Outlined";
+  src: url("/next-assets/fonts/MaterialIconsOutlined-Regular.ttf");
+}
+
+
+/* TODO: get rid of deprecated font faces in content. after that this 3 font families can be removed */
+/* BEGIN OF DEPRECATED FONTS */
+@font-face {
+  font-family: "HelveticaMedium";
+  src: url("/next-assets/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("/next-assets/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Medium";
+  src: url("/next-assets/fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Segoe-Print-Bold";
+  src: url("/next-assets/fonts/Segoe_Print_Bold.ttf");
+}
+/* END OF DEPRECATED FONTS */
+
+body {
+  margin: 0;
+  min-width: 375px;
+}
+
+body,
+button {
+  font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: 0.4px;
+  font-family: "Roboto-Bold", Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+@media only screen and (max-width: 960px) {
+  h1 {
+    font-size: 40px;
+    overflow: auto;
+    white-space: normal;
+  }
+  h2 {
+    font-size: 32px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+}
+
+* {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Styling for cookies */
+.cookieButtonsWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+@media only screen and (max-width: 600px) {
+  .cookieButtonsWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
