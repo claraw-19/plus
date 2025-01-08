@@ -13,13 +13,25 @@ export default function Plus() {
 
     ColorWrapper: styled.div`
       color: ${({ theme }) => theme.colors.grey2};
+      padding-top: 190px;
+    `,
+
+    StickyHeader: styled.div`
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: ${({ theme }) => theme.colors.white};
+      z-index: 10;
     `,
   };
 
   return (
     <Styled.ColorWrapper>
-      <h1>PLUS-Lizenzen</h1>
-      <UserListHeader />
+      <Styled.StickyHeader>
+        <h1>PLUS-Lizenzen</h1>
+        <UserListHeader />
+      </Styled.StickyHeader>
       <Styled.UserList>
         {users.map((user) => (
           <li key={user.id}>
