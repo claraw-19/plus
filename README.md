@@ -4,7 +4,7 @@ Diese Applikation wurde mit React unter Verwendung von next.js umgesetzt: https:
 
 ## Vorbedingungen
 
-- `pnpm` und `node` sind installiert
+- `npm` und `node` sind installiert
 
 ## How to use
 
@@ -14,9 +14,3 @@ Diese Applikation wurde mit React unter Verwendung von next.js umgesetzt: https:
 - `npm run start` um einen lokalen Produktionsserver zu starten
 - `npm build` um den application build zu starten
 - `npm export` um den (zuvor ausgeführten) build in einem statischen, lokalen Ordner zu speichern
-
-## Deployment
-
-- Der CI build wurde via AWS Amplify eingerichtet
-- Amplify ist mit dem Github-Repo verbunden und führt bei jedem Push auf den `main`-Branch deployment durch
-
