@@ -1,6 +1,9 @@
 import users from "../constants/dummyData.json";
-import UserCard from "@/components/UserCard";
+import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
+import { UserContainer } from "@/components/Plus/UserCard";
+import { UserData } from "@/components/Plus/UserCard";
+import UserListHeader from "@/components/Plus/UserListHeader";
 
 export default function Plus() {
   const UserList = styled.ul`
@@ -13,6 +16,7 @@ export default function Plus() {
     <>
       <h1>PLUS-Lizenzen</h1>
       <UserList>
+        <UserListHeader />
         {users.map((user) => (
           <li key={user.id}>
             <UserCard user={user} />
