@@ -1,4 +1,5 @@
 import users from "../constants/dummyData.json";
+import UserCard from "@/components/UserCard";
 
 export default function Plus() {
   console.log("users: ", users);
@@ -8,7 +9,7 @@ export default function Plus() {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            {user.firstName} {user.lastName}
+            <UserCard user={user} />
           </li>
         ))}
       </ul>
