@@ -2,7 +2,6 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
-import { Padding } from "@mui/icons-material";
 
 export default function Plus() {
   const Styled = {
