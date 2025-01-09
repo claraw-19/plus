@@ -47,7 +47,7 @@ export default function Plus() {
         {users.map((user) => (
           <li key={user.id}>
             <div onClick={() => toggleUserDetails(user.id)}>
-              <UserCard user={user} />
+              <UserCard user={user} isOpen={openUserId === user.id} />
             </div>
             {openUserId === user.id && <UserDetails user={user} />}
           </li>
