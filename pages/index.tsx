@@ -2,6 +2,7 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
+import { Padding } from "@mui/icons-material";
 
 export default function Plus() {
   const Styled = {
@@ -26,12 +27,16 @@ export default function Plus() {
       background-color: ${({ theme }) => theme.colors.white};
       z-index: 1;
     `,
+
+    Heading: styled.h1`
+      padding: 0 16px;
+    `,
   };
 
   return (
     <Styled.ColorWrapper>
       <Styled.StickyHeader>
-        <h1>PLUS-Lizenzen</h1>
+        <Styled.Heading>PLUS-Lizenzen</Styled.Heading>
         <UserListHeader />
       </Styled.StickyHeader>
 
