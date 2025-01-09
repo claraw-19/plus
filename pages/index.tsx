@@ -2,8 +2,15 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
+import { useState } from "react";
 
 export default function Plus() {
+  const [openUserId, setOpenUserId] = useState(null);
+
+  const toggleUserDetails = (userId) => {
+    setOpenUserId(openUserId === userId ? null : userId);
+  };
+
   const Styled = {
     UserList: styled.ul`
       list-style: none;
