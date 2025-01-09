@@ -21,10 +21,6 @@ export default function Plus() {
       height: calc(100vh - 190px);
     `,
 
-    ColorWrapper: styled.div`
-      color: ${({ theme }) => theme.colors.grey2};
-    `,
-
     StickyHeader: styled.div`
       position: fixed;
       top: 0;
@@ -40,12 +36,11 @@ export default function Plus() {
   };
 
   return (
-    <Styled.ColorWrapper>
+    <>
       <Styled.StickyHeader>
         <Styled.Heading>PLUS-Lizenzen</Styled.Heading>
         <UserListHeader />
       </Styled.StickyHeader>
-
       <Styled.UserList>
         {users.map((user) => (
           <li key={user.id}>
@@ -53,6 +48,6 @@ export default function Plus() {
           </li>
         ))}
       </Styled.UserList>
-    </Styled.ColorWrapper>
+    </>
   );
 }

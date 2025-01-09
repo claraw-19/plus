@@ -122,5 +122,6 @@ const Styled = {
     width: 100%;
     justify-content: space-between;
     background-color: white;
+    color: ${({ theme }) => theme.colors.grey2};
   `,
 };
