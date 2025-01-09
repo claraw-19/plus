@@ -5,6 +5,9 @@ const UserContainer = styled.div`
   justify-content: space-between;
   padding: 8px 16px;
   border-bottom: 1px solid #ccc;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.grey7};
+  }
 `;
 
 const UserData = styled.p`

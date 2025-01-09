@@ -13,7 +13,6 @@ export default function Plus() {
 
     ColorWrapper: styled.div`
       color: ${({ theme }) => theme.colors.grey2};
-      padding-top: 190px;
     `,
 
     StickyHeader: styled.div`
@@ -22,7 +21,13 @@ export default function Plus() {
       left: 0;
       right: 0;
       background-color: ${({ theme }) => theme.colors.white};
-      z-index: 10;
+      z-index: 1;
+    `,
+
+    ScrollableContent: styled.div`
+      padding-top: 190px;
+      overflow-y: auto;
+      height: calc(100vh - 190px);
     `,
   };
 
@@ -32,13 +37,16 @@ export default function Plus() {
         <h1>PLUS-Lizenzen</h1>
         <UserListHeader />
       </Styled.StickyHeader>
-      <Styled.UserList>
-        {users.map((user) => (
-          <li key={user.id}>
-            <UserCard user={user} />
-          </li>
-        ))}
-      </Styled.UserList>
+
+      <Styled.ScrollableContent>
+        <Styled.UserList>
+          {users.map((user) => (
+            <li key={user.id}>
+              <UserCard user={user} />
+            </li>
+          ))}
+        </Styled.UserList>
+      </Styled.ScrollableContent>
     </Styled.ColorWrapper>
   );
 }
