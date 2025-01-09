@@ -9,6 +9,9 @@ export default function Plus() {
       list-style: none;
       margin: 0;
       padding: 0;
+      padding-top: 190px;
+      overflow-y: auto;
+      height: calc(100vh - 190px);
     `,
 
     ColorWrapper: styled.div`
@@ -23,12 +26,6 @@ export default function Plus() {
       background-color: ${({ theme }) => theme.colors.white};
       z-index: 1;
     `,
-
-    ScrollableContent: styled.div`
-      padding-top: 190px;
-      overflow-y: auto;
-      height: calc(100vh - 190px);
-    `,
   };
 
   return (
@@ -38,15 +35,13 @@ export default function Plus() {
         <UserListHeader />
       </Styled.StickyHeader>
 
-      <Styled.ScrollableContent>
-        <Styled.UserList>
-          {users.map((user) => (
-            <li key={user.id}>
-              <UserCard user={user} />
-            </li>
-          ))}
-        </Styled.UserList>
-      </Styled.ScrollableContent>
+      <Styled.UserList>
+        {users.map((user) => (
+          <li key={user.id}>
+            <UserCard user={user} />
+          </li>
+        ))}
+      </Styled.UserList>
     </Styled.ColorWrapper>
   );
 }
