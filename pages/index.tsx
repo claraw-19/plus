@@ -9,6 +9,7 @@ export default function Plus() {
 
   const toggleUserDetails = (userId) => {
     setOpenUserId(openUserId === userId ? null : userId);
+    // console.log("clicked user");
   };
 
   const Styled = {
@@ -44,7 +45,16 @@ export default function Plus() {
       <Styled.UserList>
         {users.map((user) => (
           <li key={user.id}>
-            <UserCard user={user} />
+            <div onClick={() => toggleUserDetails(user.id)}>
+              <UserCard user={user} />
+            </div>
+            {openUserId === user.id && (
+              <div>
+                <p>
+                  Weitere Details zu {user.firstName} {user.lastName}
+                </p>
+              </div>
+            )}
           </li>
         ))}
       </Styled.UserList>
