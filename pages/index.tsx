@@ -3,6 +3,7 @@ import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
 import { useState } from "react";
+import UserDetails from "@/components/Plus/UserDetails";
 
 export default function Plus() {
   const [openUserId, setOpenUserId] = useState(null);
@@ -48,13 +49,7 @@ export default function Plus() {
             <div onClick={() => toggleUserDetails(user.id)}>
               <UserCard user={user} />
             </div>
-            {openUserId === user.id && (
-              <div>
-                <p>
-                  Weitere Details zu {user.firstName} {user.lastName}
-                </p>
-              </div>
-            )}
+            {openUserId === user.id && <UserDetails user={user} />}
           </li>
         ))}
       </Styled.UserList>
