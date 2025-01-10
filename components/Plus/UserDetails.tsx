@@ -3,6 +3,9 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SellIcon from "@mui/icons-material/Sell";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import PaymentIcon from "@mui/icons-material/Payment";
+import EventIcon from "@mui/icons-material/Event";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 export default function UserDetails({ user }) {
   const Styled = {
@@ -55,6 +58,18 @@ export default function UserDetails({ user }) {
             <SellIcon />
           </Styled.HoverEffect>
           {user.price} €
+        </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect description="Zahlungsmethode">
+            <PaymentIcon />
+          </Styled.HoverEffect>
+          {user.payment}
+        </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect description="Nächstes Zahlungsdatum">
+            <EventIcon />
+          </Styled.HoverEffect>
+          {user.nextPaymentDate}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
