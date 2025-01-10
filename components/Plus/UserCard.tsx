@@ -3,13 +3,16 @@ import UserDetails from "./UserDetails";
 import { useState } from "react";
 
 const Styled = {
-  UserContainer: styled.div`
+  UserContainer: styled.button`
+    all: unset;
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>
       $isOpen ? theme.colors.grey7 : theme.colors.white};
+    cursor: pointer;
+    width: 100%;
     &:hover {
       background-color: ${({ theme }) => theme.colors.grey7};
     }
