@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SellIcon from "@mui/icons-material/Sell";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export default function UserDetails({ user }) {
   const Styled = {
@@ -47,9 +50,18 @@ export default function UserDetails({ user }) {
           </Styled.HoverEffect>
           {user.date}
         </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect description="Preis">
+            <SellIcon />
+          </Styled.HoverEffect>
+          {user.price} €
+        </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
-        {user.status ? "Aktiv" : "Inaktiv"}
+        <Styled.IconTextWrapper>
+          {user.status ? <CheckCircleIcon /> : <HighlightOffIcon />}
+          {user.status ? "Aktiv" : "Inaktiv"}
+        </Styled.IconTextWrapper>
       </Styled.DetailsData>
     </Styled.DetailsContainer>
   );
