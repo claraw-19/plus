@@ -6,8 +6,8 @@ const Styled = {
     justify-content: space-between;
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
-    background-color: ${({ isOpen, theme }) =>
-      isOpen ? theme.colors.grey7 : theme.colors.white};
+    background-color: ${({ $isOpen, theme }) =>
+      $isOpen ? theme.colors.grey7 : theme.colors.white};
     &:hover {
       background-color: ${({ theme }) => theme.colors.grey7};
     }
@@ -20,7 +20,7 @@ const Styled = {
 
 export default function UserCard({ user, isOpen }) {
   return (
-    <Styled.UserContainer isOpen={isOpen}>
+    <Styled.UserContainer $isOpen={isOpen}>
       <Styled.UserData>
         {user.firstName} {user.lastName}
       </Styled.UserData>
