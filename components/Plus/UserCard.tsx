@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { User } from "../../types/dataTypes";
 
 const Styled = {
   UserContainer: styled.div`
