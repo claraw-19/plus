@@ -12,7 +12,7 @@ export default function UserDetails({ user }) {
     DetailsContainer: styled.div`
       display: flex;
       justify-content: space-between;
-      padding: 8px 20px;
+      padding: 8px 20px 0 20px;
       border-bottom: 1px solid #ccc;
     `,
 
@@ -24,6 +24,10 @@ export default function UserDetails({ user }) {
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 16px;
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
     `,
 
     HoverEffect: styled.div`
