@@ -6,6 +6,9 @@ const Styled = {
     justify-content: space-between;
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.gray4};
+    }
   `,
 
   UserData: styled.p`
