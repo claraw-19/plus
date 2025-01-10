@@ -6,11 +6,18 @@ import { useState } from "react";
 import UserDetails from "@/components/Plus/UserDetails";
 
 export default function Plus() {
-  const [openUserId, setOpenUserId] = useState(null);
+  const [openUserIds, setOpenUserIds] = useState([]);
+
+  console.log("openUserIds: ", openUserIds);
 
   const toggleUserDetails = (userId) => {
-    setOpenUserId(openUserId === userId ? null : userId);
-    // console.log("clicked user");
+    setOpenUserIds(() => {
+      if (openUserIds.includes(userId)) {
+        return openUserIds.filter((id) => id !== userId);
+      } else {
+        return [...openUserIds, userId];
+      }
+    });
   };
 
   const Styled = {
@@ -18,7 +25,7 @@ export default function Plus() {
       list-style: none;
       margin: 0;
       padding: 0;
-      padding-top: 190px;
+      padding-top: 186px;
       overflow-y: auto;
       height: calc(100vh - 190px);
     `,
@@ -47,9 +54,9 @@ export default function Plus() {
         {users.map((user) => (
           <li key={user.id}>
             <div onClick={() => toggleUserDetails(user.id)}>
-              <UserCard user={user} isOpen={openUserId === user.id} />
+              <UserCard user={user} isOpen={openUserIds.includes(user.id)} />
             </div>
-            {openUserId === user.id && <UserDetails user={user} />}
+            {openUserIds.includes(user.id) && <UserDetails user={user} />}
           </li>
         ))}
       </Styled.UserList>
