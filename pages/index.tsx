@@ -5,14 +5,29 @@ import UserListHeader from "@/components/Plus/UserListHeader";
 import { useState } from "react";
 import UserDetails from "@/components/Plus/UserDetails";
 
+const Styled = {
+  UserList: styled.ul`
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    height: calc(100vh - 190px);
+  `,
+
+  Header: styled.div`
+    background-color: ${({ theme }) => theme.colors.white};
+    z-index: 1;
+  `,
+
+  Heading: styled.h1`
+    padding: 0 16px;
+  `,
+};
+
 export default function Plus() {
   const [openUserIds, setOpenUserIds] = useState([]);
 
-  console.log("openUserIds: ", openUserIds);
-  console.log(users);
-
   const toggleUserDetails = (userId) => {
-    console.log("Hello");
     setOpenUserIds((prev) => {
       if (prev.includes(userId)) {
         return prev.filter((id) => id !== userId);
@@ -20,25 +35,6 @@ export default function Plus() {
         return [...prev, userId];
       }
     });
-  };
-
-  const Styled = {
-    UserList: styled.div`
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      overflow-y: auto;
-      height: calc(100vh - 190px);
-    `,
-
-    Header: styled.div`
-      background-color: ${({ theme }) => theme.colors.white};
-      z-index: 1;
-    `,
-
-    Heading: styled.h1`
-      padding: 0 16px;
-    `,
   };
 
   return (
@@ -49,12 +45,12 @@ export default function Plus() {
       </Styled.Header>
       <Styled.UserList>
         {users.map((user) => (
-          <div key={user.id}>
+          <li key={user.id}>
             <div onClick={() => toggleUserDetails(user.id)}>
               <UserCard user={user} isOpen={openUserIds.includes(user.id)} />
             </div>
             {openUserIds.includes(user.id) && <UserDetails user={user} />}
-          </div>
+          </li>
         ))}
       </Styled.UserList>
     </>
