@@ -31,9 +31,8 @@ const Styled = {
   HoverEffect: styled.div`
     position: relative;
     display: inline-block;
-
     &:hover::after {
-      content: "${(props) => props.description}";
+      content: "${(props) => props.$description}";
       position: absolute;
       bottom: -25px;
       transform: translateX(-40%);
@@ -52,25 +51,25 @@ export default function UserDetails({ user }) {
     <Styled.DetailsContainer>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect description="Startdatum">
+          <Styled.HoverEffect $description="Startdatum">
             <PlayArrowIcon />
           </Styled.HoverEffect>
           {user.date}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect description="Preis">
+          <Styled.HoverEffect $description="Preis">
             <SellIcon />
           </Styled.HoverEffect>
           {user.price} €
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect description="Zahlungsmethode">
+          <Styled.HoverEffect $description="Zahlungsmethode">
             <PaymentIcon />
           </Styled.HoverEffect>
           {user.payment}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect description="Nächstes Zahlungsdatum">
+          <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
             <EventIcon />
           </Styled.HoverEffect>
           {user.nextPaymentDate}
