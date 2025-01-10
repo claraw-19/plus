@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import UserDetails from "./UserDetails";
+import { useState } from "react";
 
 const Styled = {
   UserContainer: styled.div`
@@ -18,15 +20,24 @@ const Styled = {
   `,
 };
 
-export default function UserCard({ user, isOpen }) {
+export default function UserCard({ user }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDetails = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <Styled.UserContainer $isOpen={isOpen}>
-      <Styled.UserData>
-        {user.firstName} {user.lastName}
-      </Styled.UserData>
-      <Styled.UserData>{user.email}</Styled.UserData>
-      <Styled.UserData>{user.accessCodesId}</Styled.UserData>
-      <Styled.UserData>{user.nextPaymentDate}</Styled.UserData>
-    </Styled.UserContainer>
+    <>
+      <Styled.UserContainer $isOpen={isOpen} onClick={toggleDetails}>
+        <Styled.UserData>
+          {user.firstName} {user.lastName}
+        </Styled.UserData>
+        <Styled.UserData>{user.email}</Styled.UserData>
+        <Styled.UserData>{user.accessCodesId}</Styled.UserData>
+        <Styled.UserData>{user.nextPaymentDate}</Styled.UserData>
+      </Styled.UserContainer>
+      {isOpen && <UserDetails user={user} />}
+    </>
   );
 }

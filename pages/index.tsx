@@ -2,8 +2,6 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
-import { useState } from "react";
-import UserDetails from "@/components/Plus/UserDetails";
 
 const Styled = {
   UserList: styled.ul`
@@ -25,18 +23,6 @@ const Styled = {
 };
 
 export default function Plus() {
-  const [openUserIds, setOpenUserIds] = useState([]);
-
-  const toggleUserDetails = (userId) => {
-    setOpenUserIds((prev) => {
-      if (prev.includes(userId)) {
-        return prev.filter((id) => id !== userId);
-      } else {
-        return [...prev, userId];
-      }
-    });
-  };
-
   return (
     <>
       <Styled.Header>
@@ -46,10 +32,7 @@ export default function Plus() {
       <Styled.UserList>
         {users.map((user) => (
           <li key={user.id}>
-            <div onClick={() => toggleUserDetails(user.id)}>
-              <UserCard user={user} isOpen={openUserIds.includes(user.id)} />
-            </div>
-            {openUserIds.includes(user.id) && <UserDetails user={user} />}
+            <UserCard user={user} />
           </li>
         ))}
       </Styled.UserList>
