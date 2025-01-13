@@ -3,15 +3,7 @@ import styled from "styled-components";
 import ButtonBase from "@mui/material/ButtonBase";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function SubmitButton({
-  buttonTitle,
-  isLoading,
-  disabled,
-}: {
-  buttonTitle: string;
-  isLoading: boolean;
-  disabled: boolean;
-}) {
+export default function SubmitButton({ buttonTitle, isLoading, disabled }) {
   return (
     <Styled.AcceptButton type="submit" disabled={disabled || isLoading}>
       {isLoading ? (

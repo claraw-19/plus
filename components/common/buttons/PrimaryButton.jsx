@@ -9,12 +9,6 @@ export default function Button({
   title,
   isLoading = false,
   width,
-}: {
-  onClick: () => void;
-  disabled?: boolean;
-  title: string;
-  isLoading?: boolean;
-  width?: string;
 }) {
   return (
     <Styled.Button width={width} onClick={onClick} disabled={disabled}>
@@ -30,7 +24,7 @@ export default function Button({
 }
 
 const Styled = {
-  Button: styled(ButtonBase)<{ width?: string }>`
+  Button: styled(ButtonBase)`
     color: ${({ theme }) => theme.colors.white} !important;
     background: ${({ theme }) => theme.colors.tintColor} !important;
     &:hover {

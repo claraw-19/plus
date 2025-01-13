@@ -1,28 +1,16 @@
 import { useState, useEffect } from "react";
-import { CookiesProvider } from "react-cookie";
 import styled from "styled-components";
 import Head from "next/head";
-
 import "@/styles/index.css";
-import { UserDataProvider, useUserData } from "@/context/userData";
 import ThemeProvider from "@/theme/ThemeProvider";
-import Header from "@/components/common/header/Header";
-import Login from "@/components/common/Login";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SchoolsWithDependenciesProvider } from "@/context/schoolsWithDependencies";
 
 const queryClient = new QueryClient();
 
-export default function App({
-  Component,
-  pageProps,
-}: {
-  Component: React.ComponentType<any>;
-  pageProps: any;
-}) {
-  const [pageTitle, setPageTitle] = useState<string>("SchulLV");
-  const [metaDescription, setMetaDescription] = useState<string>("SchulLV");
+export default function App({ Component, pageProps }) {
+  const [pageTitle, setPageTitle] = useState("SchulLV");
+  const [metaDescription, setMetaDescription] = useState("SchulLV");
 
   useEffect(() => {
     //avoid duplicate mui styles (server vs. client)
@@ -96,19 +84,14 @@ export function RootElement({
   pageProps,
   setPageTitle,
   setMetaDescription,
-}: {
-  Component: React.ComponentType<any>;
-  pageProps: any;
-  setPageTitle: (title: string) => void;
-  setMetaDescription: (description: string) => void;
 }) {
   return (
     <>
       <Styled.Content>
         <Component
           {...pageProps}
-          setPageTitle={(title: string) => setPageTitle(title)}
-          setMetaDescription={(title: string) => setMetaDescription(title)}
+          setPageTitle={(title) => setPageTitle(title)}
+          setMetaDescription={(title) => setMetaDescription(title)}
         />
       </Styled.Content>
     </>

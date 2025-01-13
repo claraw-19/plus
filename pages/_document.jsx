@@ -3,7 +3,7 @@ import { ServerStyleSheet as SCServerStyleSheet } from "styled-components";
 import { ServerStyleSheets as MUIServerStyleSheets } from "@mui/styles";
 
 export default class SchulLVDocument extends Document {
-  static async getInitialProps(ctx: any) {
+  static async getInitialProps(ctx) {
     const muiSheets = new MUIServerStyleSheets();
     const scSheet = new SCServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -11,7 +11,7 @@ export default class SchulLVDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App: React.ComponentType<any>) => (props: any) => {
+          enhanceApp: (App) => (props) => {
             return scSheet.collectStyles(muiSheets.collect(<App {...props} />));
           },
         });
