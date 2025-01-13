@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Styled = {
   UserContainer: styled.div`
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;

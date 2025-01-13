@@ -2,6 +2,8 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
+import SearchBar from "@/components/Plus/SearchBar";
+import { useState } from "react";
 
 const Styled = {
   UserList: styled.ul`
@@ -23,18 +25,25 @@ const Styled = {
 };
 
 export default function Plus() {
+  const [filteredUsers, setFilteredUsers] = useState(users);
+
   return (
     <>
       <Styled.Header>
         <Styled.Heading>PLUS-Lizenzen</Styled.Heading>
+        <SearchBar users={users} onSearch={setFilteredUsers} />
         <UserListHeader />
       </Styled.Header>
       <Styled.UserList>
-        {users.map((user) => (
-          <li key={user.id}>
-            <UserCard user={user} />
-          </li>
-        ))}
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => (
+            <li key={user.id}>
+              <UserCard user={user} />
+            </li>
+          ))
+        ) : (
+          <p>Keine User gefunden.</p>
+        )}
       </Styled.UserList>
     </>
   );
