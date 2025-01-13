@@ -2,6 +2,7 @@ import users from "../constants/dummyData.json";
 import UserCard from "@/components/Plus/UserCard";
 import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
+import SearchBar from "@/components/Plus/SearchBar";
 
 const Styled = {
   UserList: styled.ul`
@@ -27,6 +28,8 @@ export default function Plus() {
     <>
       <Styled.Header>
         <Styled.Heading>PLUS-Lizenzen</Styled.Heading>
+        <SearchBar />
+
         <UserListHeader />
       </Styled.Header>
       <Styled.UserList>
