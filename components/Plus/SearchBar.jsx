@@ -37,7 +37,15 @@ export default function SearchBar({ users, onSearch }) {
     setSearchTerm(value);
 
     const fuse = new Fuse(users, {
-      keys: ["firstName", "lastName", "accessCodesId"],
+      keys: [
+        "firstName",
+        "lastName",
+        {
+          name: "combinedName",
+          getFn: (user) => `${user.firstName} ${user.lastName}`,
+        },
+        "accessCodesId",
+      ],
       threshold: 0.1,
     });
 
