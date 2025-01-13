@@ -35,11 +35,15 @@ export default function Plus() {
         <UserListHeader />
       </Styled.Header>
       <Styled.UserList>
-        {filteredUsers.map((user) => (
-          <li key={user.id}>
-            <UserCard user={user} />
-          </li>
-        ))}
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => (
+            <li key={user.id}>
+              <UserCard user={user} />
+            </li>
+          ))
+        ) : (
+          <p>Keine User gefunden.</p>
+        )}
       </Styled.UserList>
     </>
   );
