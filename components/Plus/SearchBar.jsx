@@ -37,6 +37,7 @@ export default function SearchBar({ users, onSearch }) {
 
     const fuse = new Fuse(users, {
       keys: ["firstName", "lastName"],
+      threshold: 0,
     });
 
     const filteredUsers = event.target.value.trim()
