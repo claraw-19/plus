@@ -33,15 +33,16 @@ export default function SearchBar({ users, onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+    const value = event.target.value;
+    setSearchTerm(value);
 
     const fuse = new Fuse(users, {
-      keys: ["firstName", "lastName"],
-      threshold: 0,
+      keys: ["firstName", "lastName", "accessCodesId"],
+      threshold: 0.1,
     });
 
-    const filteredUsers = event.target.value.trim()
-      ? fuse.search(event.target.value).map((result) => result.item)
+    const filteredUsers = value.trim()
+      ? fuse.search(value).map((result) => result.item)
       : users;
 
     onSearch(filteredUsers);
