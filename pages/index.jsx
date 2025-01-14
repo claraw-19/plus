@@ -20,6 +20,14 @@ const Styled = {
     z-index: 1;
     padding: 0 16px;
   `,
+
+  KPIAndSearchWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0;
+    gap: 1rem;
+  `,
 };
 
 export default function Plus() {
@@ -29,8 +37,11 @@ export default function Plus() {
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
-        <SearchBar users={users} onSearch={setFilteredUsers} />
-        <KPI />
+        <Styled.KPIAndSearchWrapper>
+          <SearchBar users={users} onSearch={setFilteredUsers} />
+          <KPI />
+        </Styled.KPIAndSearchWrapper>
+
         <UserListHeader />
       </Styled.Header>
       <Styled.UserList>

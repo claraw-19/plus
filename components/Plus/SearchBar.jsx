@@ -13,9 +13,6 @@ const Styled = {
     background-color: ${({ theme }) => theme.colors.white};
     border: 1.5px solid ${({ theme }) => theme.colors.grey6};
     width: 100%;
-    transition:
-      background-color 0.2s ease-out,
-      width 1.2s ease-out;
   `,
 
   SearchInput: styled.input`
