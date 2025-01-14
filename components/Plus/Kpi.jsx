@@ -19,6 +19,24 @@ export default function KPI({ users }) {
       align-items: center;
       gap: 8px;
     `,
+
+    HoverEffect: styled.div`
+      white-space: nowrap;
+      position: relative;
+      display: inline-block;
+      &:hover::after {
+        content: "${(props) => props.$description}";
+        position: absolute;
+        bottom: -25px;
+        transform: translateX(-40%);
+        background-color: ${({ theme }) => theme.colors.grey2};
+        color: ${({ theme }) => theme.colors.white};
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        z-index: 1;
+      }
+    `,
   };
   const totalUsers = users.length;
 
@@ -38,12 +56,19 @@ export default function KPI({ users }) {
     <>
       <Styled.KpiWrapper>
         <Styled.IconTextWrapper>
-          <NumbersIcon />
+          <Styled.HoverEffect $description="aktive User/User">
+            <NumbersIcon />
+          </Styled.HoverEffect>
           {totalActiveUsers} / {totalUsers}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
-          <CreditScoreIcon />
-          {Math.round(payingVolumeMonthly * 100) / 100} €
+          <Styled.HoverEffect $description="monatlicher AE">
+            <CreditScoreIcon />
+          </Styled.HoverEffect>
+          {(Math.round(payingVolumeMonthly * 100) / 100)
+            .toFixed(2)
+            .replace(".", ",")}{" "}
+          €
         </Styled.IconTextWrapper>
       </Styled.KpiWrapper>
     </>
