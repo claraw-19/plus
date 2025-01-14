@@ -11,7 +11,6 @@ const Styled = {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.colors.white};
-    margin: 0 0.5rem;
     border: 1.5px solid ${({ theme }) => theme.colors.grey6};
     width: 90%;
     transition:

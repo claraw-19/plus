@@ -4,12 +4,13 @@ import styled from "styled-components";
 import UserListHeader from "@/components/Plus/UserListHeader";
 import SearchBar from "@/components/Plus/SearchBar";
 import { useState } from "react";
+import KPI from "@/components/Plus/Kpi";
 
 const Styled = {
   UserList: styled.ul`
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 16px;
     overflow-y: auto;
     height: calc(100vh - 190px);
   `,
@@ -17,9 +18,6 @@ const Styled = {
   Header: styled.div`
     background-color: ${({ theme }) => theme.colors.white};
     z-index: 1;
-  `,
-
-  Heading: styled.h1`
     padding: 0 16px;
   `,
 };
@@ -30,8 +28,9 @@ export default function Plus() {
   return (
     <>
       <Styled.Header>
-        <Styled.Heading>PLUS-Lizenzen</Styled.Heading>
+        <h1>PLUS-Lizenzen</h1>
         <SearchBar users={users} onSearch={setFilteredUsers} />
+        <KPI />
         <UserListHeader />
       </Styled.Header>
       <Styled.UserList>
