@@ -77,8 +77,12 @@ export default function UserDetails({ user }) {
       </Styled.DetailsData>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          {user.status ? <CheckCircleIcon /> : <HighlightOffIcon />}
-          {user.status ? "Aktiv" : "Inaktiv"}
+          {user.status === "active" ? (
+            <CheckCircleIcon />
+          ) : (
+            <HighlightOffIcon />
+          )}
+          {user.status === "active" ? "Aktiv" : "Inaktiv"}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
     </Styled.DetailsContainer>

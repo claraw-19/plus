@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function KPI() {
+export default function KPI({ users }) {
   const Styled = {
     KpiWrapper: styled.div`
       display: flex;
@@ -12,5 +12,15 @@ export default function KPI() {
       background-color: ${({ theme }) => theme.colors.schullv4};
     `,
   };
-  return <Styled.KpiWrapper>KPI</Styled.KpiWrapper>;
+  const totalUsers = users.length;
+
+  const totalActiveUsers = users.filter(
+    (user) => user.status === "active"
+  ).length;
+
+  return (
+    <Styled.KpiWrapper>
+      {totalActiveUsers} / {totalUsers}
+    </Styled.KpiWrapper>
+  );
 }
