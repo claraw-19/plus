@@ -2,13 +2,14 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import Fuse from "fuse.js";
+import { ClearIcon } from "@mui/x-date-pickers";
 
 const Styled = {
   SearchWrapper: styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.colors.white};
     border: 1.5px solid ${({ theme }) => theme.colors.grey6};
@@ -24,8 +25,9 @@ const Styled = {
     margin-left: 0.25;
   `,
 
-  SearchIcon: styled(SearchIcon)`
-    margin-left: 1rem;
+  ClearSearchIcon: styled(ClearIcon)`
+    font-size: 1.2rem;
+    cursor: pointer;
   `,
 };
 
@@ -58,13 +60,21 @@ export default function SearchBar({ users, onSearch }) {
 
   return (
     <Styled.SearchWrapper>
-      <Styled.SearchIcon />
+      <SearchIcon />
       <Styled.SearchInput
         type="text"
         placeholder="Suchen..."
         value={searchTerm}
         onChange={handleSearch}
       />
+      {searchTerm && (
+        <Styled.ClearSearchIcon
+          onClick={() => {
+            setSearchTerm("");
+            onSearch(users);
+          }}
+        />
+      )}
     </Styled.SearchWrapper>
   );
 }

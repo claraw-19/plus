@@ -8,7 +8,6 @@ export default function KPI() {
       align-items: center;
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
-      /* border: 1.5px solid ${({ theme }) => theme.colors.grey6}; */
       width: 100%;
       background-color: ${({ theme }) => theme.colors.schullv4};
     `,
