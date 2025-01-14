@@ -12,7 +12,7 @@ const Styled = {
     margin: 0;
     padding: 0 16px;
     overflow-y: auto;
-    height: calc(100vh - 190px);
+    height: calc(100vh - 247px);
   `,
 
   Header: styled.div`
