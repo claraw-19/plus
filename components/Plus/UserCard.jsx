@@ -7,7 +7,7 @@ const Styled = {
     all: unset;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px;
+    padding: 8px 0;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>
       $isOpen ? theme.colors.grey7 : theme.colors.white};
