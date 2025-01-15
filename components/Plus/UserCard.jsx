@@ -38,7 +38,9 @@ export default function UserCard({ user }) {
         </Styled.UserData>
         <Styled.UserData>{user.email}</Styled.UserData>
         <Styled.UserData>{user.accessCodesId}</Styled.UserData>
-        <Styled.UserData>{user.nextPaymentDate}</Styled.UserData>
+        <Styled.UserData>
+          {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
+        </Styled.UserData>
       </Styled.UserContainer>
       {isOpen && <UserDetails user={user} />}
     </>

@@ -66,13 +66,13 @@ export default function UserDetails({ user }) {
           <Styled.HoverEffect $description="Startdatum">
             <PlayArrowIcon />
           </Styled.HoverEffect>
-          {user.date}
+          {new Date(user.date).toLocaleDateString("de-DE")}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Preis">
             <SellIcon />
           </Styled.HoverEffect>
-          {user.price} €
+          {user.price.toLocaleString("de-DE")} €
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Zahlungsmethode">
@@ -84,7 +84,7 @@ export default function UserDetails({ user }) {
           <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
             <EventIcon />
           </Styled.HoverEffect>
-          {user.nextPaymentDate}
+          {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
