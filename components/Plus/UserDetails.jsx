@@ -48,7 +48,10 @@ const Styled = {
 };
 
 export default function UserDetails({ user }) {
-  const endDate = new Date();
+  const endDate = user.cancellationDate
+    ? new Date(user.endDate)
+    : new Date(user.nextPaymentDate);
+
   const calcCostumerLifetime = (startDate, endDate) => {
     const start = new Date(startDate);
     let yearsDiff = endDate.getFullYear() - start.getFullYear();
@@ -85,7 +88,9 @@ export default function UserDetails({ user }) {
           <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
             <EventIcon />
           </Styled.HoverEffect>
-          {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
+          {user.nextPaymentDate
+            ? new Date(user.nextPaymentDate).toLocaleDateString("de-DE")
+            : ""}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
