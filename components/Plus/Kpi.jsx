@@ -46,7 +46,7 @@ export default function KPI({ users }) {
 
   const payingVolumeMonthly = users.reduce((total, user) => {
     if (user.status === "active") {
-      const price = parseFloat(user.price.replace(",", "."));
+      const price = user.price;
       return total + price;
     }
     return total;

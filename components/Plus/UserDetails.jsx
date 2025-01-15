@@ -47,9 +47,11 @@ const Styled = {
 };
 
 export default function UserDetails({ user }) {
+  const endDate = new Date();
   const calcCostumerLifetime = (startDate, endDate) => {
-    let yearsDiff = endDate.getFullYear() - startDate.getFullYear();
-    let monthsDiff = endDate.getMonth() - startDate.getMonth();
+    const start = new Date(startDate);
+    let yearsDiff = endDate.getFullYear() - start.getFullYear();
+    let monthsDiff = endDate.getMonth() - start.getMonth();
     if (monthsDiff < 0) {
       yearsDiff -= 1;
       monthsDiff += 12;
@@ -87,7 +89,9 @@ export default function UserDetails({ user }) {
       </Styled.DetailsData>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          {`${result.years} Jahre und ${result.months} Monate`}
+          <Styled.IconTextWrapper>
+            {`${calcCostumerLifetime(user.date, endDate).years} Jahre ${calcCostumerLifetime(user.date, endDate).months} Monate`}
+          </Styled.IconTextWrapper>
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
