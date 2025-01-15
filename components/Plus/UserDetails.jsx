@@ -6,6 +6,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PaymentIcon from "@mui/icons-material/Payment";
 import EventIcon from "@mui/icons-material/Event";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import EventBusyIcon from "@mui/icons-material/EventBusy";
 
 const Styled = {
   DetailsContainer: styled.div`
@@ -81,13 +82,23 @@ export default function UserDetails({ user }) {
           </Styled.HoverEffect>
           {user.payment}
         </Styled.IconTextWrapper>
+
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
-            <EventIcon />
-          </Styled.HoverEffect>
-          {user.nextPaymentDate
-            ? new Date(user.nextPaymentDate).toLocaleDateString("de-DE")
-            : ""}
+          {user.status === "active" ? (
+            <>
+              <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
+                <EventIcon />
+              </Styled.HoverEffect>
+              {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
+            </>
+          ) : (
+            <>
+              <Styled.HoverEffect $description="Enddatum">
+                <EventBusyIcon />
+              </Styled.HoverEffect>
+              {new Date(user.endDate).toLocaleDateString("de-DE")}
+            </>
+          )}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
