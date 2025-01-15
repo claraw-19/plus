@@ -54,13 +54,10 @@ export default function UserDetails({ user }) {
 
   const calcCostumerLifetime = (startDate, endDate) => {
     const start = new Date(startDate);
+    const end = new Date(endDate);
     let yearsDiff = endDate.getFullYear() - start.getFullYear();
     let monthsDiff = endDate.getMonth() - start.getMonth();
-    if (monthsDiff < 0) {
-      yearsDiff -= 1;
-      monthsDiff += 12;
-    }
-    return { years: yearsDiff, months: monthsDiff };
+    return yearsDiff * 12 + monthsDiff;
   };
 
   return (
@@ -99,7 +96,7 @@ export default function UserDetails({ user }) {
             <Styled.HoverEffect $description="Laufzeit">
               <HourglassEmptyIcon />
             </Styled.HoverEffect>
-            {`${calcCostumerLifetime(user.date, endDate).years} Jahre ${calcCostumerLifetime(user.date, endDate).months} Monate`}
+            {`${calcCostumerLifetime(user.date, endDate)} Monate`}
           </Styled.IconTextWrapper>
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
