@@ -79,7 +79,7 @@ export default function KPI({ users }) {
           <Styled.HoverEffect $description="⌀ Costumer Lifetime">
             <HourglassEmptyIcon />
           </Styled.HoverEffect>
-          {calcAverageCostumerLifetime}
+          {Math.round(calcAverageCostumerLifetime)} Monate
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="monatlicher AE">
