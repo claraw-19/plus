@@ -5,7 +5,7 @@ const Styled = {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px;
+    padding: 8px 0;
     border-bottom: 1px solid #ccc;
     &:hover {
       background-color: ${({ theme }) => theme.colors.gray4};
