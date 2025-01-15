@@ -38,8 +38,8 @@ export default function Plus() {
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
         <Styled.KPIAndSearchWrapper>
-          <SearchBar users={users} onSearch={setFilteredUsers} />
           <KPI users={users} />
+          <SearchBar users={users} onSearch={setFilteredUsers} />
         </Styled.KPIAndSearchWrapper>
 
         <UserListHeader />

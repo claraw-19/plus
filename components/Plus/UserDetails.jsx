@@ -92,22 +92,18 @@ export default function UserDetails({ user }) {
       </Styled.DetailsData>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          <Styled.IconTextWrapper>
-            <Styled.HoverEffect $description="Laufzeit">
-              <HourglassEmptyIcon />
-            </Styled.HoverEffect>
-            {`${calcCostumerLifetime(user.date, endDate)} Monate`}
-          </Styled.IconTextWrapper>
-        </Styled.IconTextWrapper>
-      </Styled.DetailsData>
-      <Styled.DetailsData>
-        <Styled.IconTextWrapper>
           {user.status === "active" ? (
             <CheckCircleIcon />
           ) : (
             <HighlightOffIcon />
           )}
           {user.status === "active" ? "Aktiv" : "Inaktiv"}
+        </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect $description="Laufzeit">
+            <HourglassEmptyIcon />
+          </Styled.HoverEffect>
+          {`${calcCostumerLifetime(user.date, endDate)} Monate`}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
     </Styled.DetailsContainer>

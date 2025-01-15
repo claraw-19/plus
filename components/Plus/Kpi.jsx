@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 export default function KPI({ users }) {
   const Styled = {
     KpiWrapper: styled.div`
       display: flex;
       border-radius: 0.5rem;
-      width: 50%;
+      width: 35%;
       background-color: ${({ theme }) => theme.colors.schullv4};
       justify-content: space-between;
       align-items: center;
-      padding: 10px;
+      padding: 10px 20px;
     `,
 
     IconTextWrapper: styled.div`
@@ -38,6 +39,7 @@ export default function KPI({ users }) {
       }
     `,
   };
+
   const totalUsers = users.length;
 
   const totalActiveUsers = users.filter(
@@ -52,6 +54,18 @@ export default function KPI({ users }) {
     return total;
   }, 0);
 
+  const calcAverageCostumerLifetime =
+    users.reduce((total, user) => {
+      const start = new Date(user.date);
+      const endDate = user.cancellationDate
+        ? new Date(user.endDate)
+        : new Date(user.nextPaymentDate);
+      let yearsDiff = endDate.getFullYear() - start.getFullYear();
+      let monthsDiff = endDate.getMonth() - start.getMonth();
+      const costumerLifetime = yearsDiff * 12 + monthsDiff;
+      return total + costumerLifetime;
+    }, 0) / users.length;
+
   return (
     <>
       <Styled.KpiWrapper>
@@ -60,6 +74,12 @@ export default function KPI({ users }) {
             <NumbersIcon />
           </Styled.HoverEffect>
           {totalActiveUsers} / {totalUsers}
+        </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect $description="⌀ Costumer Lifetime">
+            <HourglassEmptyIcon />
+          </Styled.HoverEffect>
+          {calcAverageCostumerLifetime}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="monatlicher AE">
