@@ -7,7 +7,7 @@ export default function KPI({ users }) {
     KpiWrapper: styled.div`
       display: flex;
       border-radius: 0.5rem;
-      width: 100%;
+      width: 50%;
       background-color: ${({ theme }) => theme.colors.schullv4};
       justify-content: space-between;
       align-items: center;
@@ -67,7 +67,7 @@ export default function KPI({ users }) {
           </Styled.HoverEffect>
           {(Math.round(payingVolumeMonthly * 100) / 100)
             .toFixed(2)
-            .replace(".", ",")}{" "}
+            .replace(".", ",")}
           €
         </Styled.IconTextWrapper>
       </Styled.KpiWrapper>
