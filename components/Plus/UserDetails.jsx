@@ -5,6 +5,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PaymentIcon from "@mui/icons-material/Payment";
 import EventIcon from "@mui/icons-material/Event";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 const Styled = {
   DetailsContainer: styled.div`
@@ -90,6 +91,9 @@ export default function UserDetails({ user }) {
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Laufzeit">
+              <HourglassEmptyIcon />
+            </Styled.HoverEffect>
             {`${calcCostumerLifetime(user.date, endDate).years} Jahre ${calcCostumerLifetime(user.date, endDate).months} Monate`}
           </Styled.IconTextWrapper>
         </Styled.IconTextWrapper>
