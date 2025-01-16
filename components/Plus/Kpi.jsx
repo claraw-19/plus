@@ -3,7 +3,7 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
-export default function KPI({ users }) {
+export default function KPI({ singleOrdersWithDependencies }) {
   const Styled = {
     KpiWrapper: styled.div`
       display: flex;
@@ -42,31 +42,38 @@ export default function KPI({ users }) {
     `,
   };
 
-  const totalUsers = users.length;
+  const totalSingleOrders = singleOrdersWithDependencies.length;
 
-  const totalActiveUsers = users.filter(
-    (user) => user.status === "active"
+  const totalActiveSingleOrders = singleOrdersWithDependencies.filter(
+    (singleOrderWithDependencies) =>
+      singleOrderWithDependencies.status === "active"
   ).length;
 
-  const payingVolumeMonthly = users.reduce((total, user) => {
-    if (user.status === "active") {
-      const price = user.price;
-      return total + price;
-    }
-    return total;
-  }, 0);
+  const payingVolumeMonthly = singleOrdersWithDependencies.reduce(
+    (total, singleOrderWithDependencies) => {
+      if (singleOrderWithDependencies.status === "active") {
+        const price = singleOrderWithDependencies.price;
+        return total + price;
+      }
+      return total;
+    },
+    0
+  );
 
   const calcAverageCostumerLifetime =
-    users.reduce((total, user) => {
-      const start = new Date(user.date);
-      const endDate = user.cancellationDate
-        ? new Date(user.endDate)
-        : new Date(user.nextPaymentDate);
-      let yearsDiff = endDate.getFullYear() - start.getFullYear();
-      let monthsDiff = endDate.getMonth() - start.getMonth();
-      const costumerLifetime = yearsDiff * 12 + monthsDiff;
-      return total + costumerLifetime;
-    }, 0) / users.length;
+    singleOrdersWithDependencies.reduce(
+      (total, singleOrderWithDependencies) => {
+        const start = new Date(singleOrderWithDependencies.date);
+        const endDate = singleOrderWithDependencies.cancellationDate
+          ? new Date(singleOrderWithDependencies.endDate)
+          : new Date(singleOrderWithDependencies.nextPaymentDate);
+        let yearsDiff = endDate.getFullYear() - start.getFullYear();
+        let monthsDiff = endDate.getMonth() - start.getMonth();
+        const costumerLifetime = yearsDiff * 12 + monthsDiff;
+        return total + costumerLifetime;
+      },
+      0
+    ) / singleOrdersWithDependencies.length;
 
   return (
     <>
@@ -75,7 +82,7 @@ export default function KPI({ users }) {
           <Styled.HoverEffect $description="aktive User/User">
             <NumbersIcon />
           </Styled.HoverEffect>
-          {totalActiveUsers} / {totalUsers}
+          {totalActiveSingleOrders} / {totalSingleOrders}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="⌀ Costumer Lifetime">

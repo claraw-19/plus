@@ -32,31 +32,32 @@ const Styled = {
   `,
 };
 
-export default function SearchBar({ users, onSearch }) {
+export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
 
-    const fuse = new Fuse(users, {
+    const fuse = new Fuse(singleOrdersWithDependencies, {
       keys: [
         "firstName",
         "lastName",
         {
           name: "combinedName",
-          getFn: (user) => `${user.firstName} ${user.lastName}`,
+          getFn: (singleOrderWithDependencies) =>
+            `${singleOrderWithDependencies.firstName} ${singleOrderWithDependencies.lastName}`,
         },
         "accessCodesId",
       ],
       threshold: 0.1,
     });
 
-    const filteredUsers = value.trim()
+    const singleOrdersWithDependencies = value.trim()
       ? fuse.search(value).map((result) => result.item)
-      : users;
+      : singleOrdersWithDependencies;
 
-    onSearch(filteredUsers);
+    onSearch(singleOrdersWithDependencies);
   };
 
   return (
@@ -72,7 +73,7 @@ export default function SearchBar({ users, onSearch }) {
         <Styled.ClearSearchIcon
           onClick={() => {
             setSearchTerm("");
-            onSearch(users);
+            onSearch(singleOrdersWithDependencies);
           }}
         />
       )}
