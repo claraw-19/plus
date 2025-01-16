@@ -1,0 +1,462 @@
+[
+  {
+    "school": {
+      "name": "Goetheschule",
+      "id": "SCH-448"
+    },
+    "user": {
+      "id": "1",
+      "firstName": "Jonas",
+      "lastName": "Hoffmann",
+      "email": "jonas.hoffmann@example.com"
+    },
+    "singleOrder": {
+      "id": "1",
+      "accessCodesId": "AC-371",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-09-15"
+    }
+  },
+  {
+    "school": {
+      "name": "Schillerschule",
+      "id": "SCH-429"
+    },
+    "user": {
+      "id": "2",
+      "firstName": "Lina",
+      "lastName": "Krause",
+      "email": "lina.krause@example.com"
+    },
+    "singleOrder": {
+      "id": "2",
+      "accessCodesId": "AC-378",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": "2024-02-01",
+      "cancellationDate": "2024-01-01",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-789"
+    },
+    "user": {
+      "id": "3",
+      "firstName": "Jonas",
+      "lastName": "Schmidt",
+      "email": "jonas.schmidt@example.com"
+    },
+    "singleOrder": {
+      "id": "3",
+      "accessCodesId": "AC-885",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2025-05-12"
+    }
+  },
+  {
+    "school": {
+      "name": "Angergymnasium",
+      "id": "SCH-784"
+    },
+    "user": {
+      "id": "4",
+      "firstName": "David",
+      "lastName": "Weber",
+      "email": "david.weber@example.com"
+    },
+    "singleOrder": {
+      "id": "4",
+      "accessCodesId": "AC-999",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": "2024-03-15",
+      "cancellationDate": "2024-02-15",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-787"
+    },
+    "user": {
+      "id": "5",
+      "firstName": "Finn",
+      "lastName": "Becker",
+      "email": "finn.becker@example.com"
+    },
+    "singleOrder": {
+      "id": "5",
+      "accessCodesId": "AC-190",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-11-21"
+    }
+  },
+  {
+    "school": {
+      "name": "Humboldtschule",
+      "id": "SCH-526"
+    },
+    "user": {
+      "id": "6",
+      "firstName": "Clara",
+      "lastName": "Fischer",
+      "email": "clara.fischer@example.com"
+    },
+    "singleOrder": {
+      "id": "6",
+      "accessCodesId": "AC-940",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2025-03-18"
+    }
+  },
+  {
+    "school": {
+      "name": "Goetheschule",
+      "id": "SCH-670"
+    },
+    "user": {
+      "id": "7",
+      "firstName": "Ella",
+      "lastName": "Richter",
+      "email": "ella.richter@example.com"
+    },
+    "singleOrder": {
+      "id": "7",
+      "accessCodesId": "AC-395",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": "2024-06-01",
+      "cancellationDate": "2024-05-01",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Schillerschule",
+      "id": "SCH-159"
+    },
+    "user": {
+      "id": "8",
+      "firstName": "Hanna",
+      "lastName": "Koch",
+      "email": "hanna.koch@example.com"
+    },
+    "singleOrder": {
+      "id": "8",
+      "accessCodesId": "AC-837",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-08-19"
+    }
+  },
+  {
+    "school": {
+      "name": "Angergymnasium",
+      "id": "SCH-566"
+    },
+    "user": {
+      "id": "9",
+      "firstName": "Clara",
+      "lastName": "Hoffmann",
+      "email": "clara.hoffmann@example.com"
+    },
+    "singleOrder": {
+      "id": "9",
+      "accessCodesId": "AC-561",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": "2024-04-30",
+      "cancellationDate": "2024-03-30",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-637"
+    },
+    "user": {
+      "id": "10",
+      "firstName": "Jonas",
+      "lastName": "Krause",
+      "email": "jonas.krause@example.com"
+    },
+    "singleOrder": {
+      "id": "10",
+      "accessCodesId": "AC-368",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-12-07"
+    }
+  },
+  {
+    "school": {
+      "name": "Humboldtschule",
+      "id": "SCH-187"
+    },
+    "user": {
+      "id": "11",
+      "firstName": "Anna",
+      "lastName": "Weber",
+      "email": "anna.weber@example.com"
+    },
+    "singleOrder": {
+      "id": "11",
+      "accessCodesId": "AC-489",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": "2024-01-15",
+      "cancellationDate": "2024-01-01",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Schillerschule",
+      "id": "SCH-627"
+    },
+    "user": {
+      "id": "12",
+      "firstName": "Finn",
+      "lastName": "Koch",
+      "email": "finn.koch@example.com"
+    },
+    "singleOrder": {
+      "id": "12",
+      "accessCodesId": "AC-661",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-10-10"
+    }
+  },
+  {
+    "school": {
+      "name": "Angergymnasium",
+      "id": "SCH-372"
+    },
+    "user": {
+      "id": "13",
+      "firstName": "Finn",
+      "lastName": "Meyer",
+      "email": "finn.meyer@example.com"
+    },
+    "singleOrder": {
+      "id": "13",
+      "accessCodesId": "AC-476",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": "2024-05-20",
+      "cancellationDate": "2024-04-20",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Humboldtschule",
+      "id": "SCH-549"
+    },
+    "user": {
+      "id": "14",
+      "firstName": "Greta",
+      "lastName": "Becker",
+      "email": "greta.becker@example.com"
+    },
+    "singleOrder": {
+      "id": "14",
+      "accessCodesId": "AC-830",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2025-01-15"
+    }
+  },
+  {
+    "school": {
+      "name": "Schillerschule",
+      "id": "SCH-931"
+    },
+    "user": {
+      "id": "15",
+      "firstName": "Lina",
+      "lastName": "Fischer",
+      "email": "lina.fischer@example.com"
+    },
+    "singleOrder": {
+      "id": "15",
+      "accessCodesId": "AC-526",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": "2024-02-10",
+      "cancellationDate": "2024-01-10",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-736"
+    },
+    "user": {
+      "id": "16",
+      "firstName": "David",
+      "lastName": "Richter",
+      "email": "david.richter@example.com"
+    },
+    "singleOrder": {
+      "id": "16",
+      "accessCodesId": "AC-488",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-07-22"
+    }
+  },
+  {
+    "school": {
+      "name": "Angergymnasium",
+      "id": "SCH-498"
+    },
+    "user": {
+      "id": "17",
+      "firstName": "Finn",
+      "lastName": "Schneider",
+      "email": "finn.schneider@example.com"
+    },
+    "singleOrder": {
+      "id": "17",
+      "accessCodesId": "AC-314",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": "2024-09-15",
+      "cancellationDate": "2024-08-15",
+      "nextPaymentDate": null
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-978"
+    },
+    "user": {
+      "id": "18",
+      "firstName": "Ella",
+      "lastName": "Becker",
+      "email": "ella.becker@example.com"
+    },
+    "singleOrder": {
+      "id": "18",
+      "accessCodesId": "AC-257",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-10-05"
+    }
+  },
+  {
+    "school": {
+      "name": "Lessinggymnasium",
+      "id": "SCH-142"
+    },
+    "user": {
+      "id": "19",
+      "firstName": "Greta",
+      "lastName": "Weber",
+      "email": "greta.weber@example.com"
+    },
+    "singleOrder": {
+      "id": "19",
+      "accessCodesId": "AC-745",
+      "date": "2023-09-01",
+      "status": "active",
+      "payment": "Lastschrift",
+      "price": 14.99,
+      "endDate": null,
+      "cancellationDate": null,
+      "nextPaymentDate": "2024-06-30"
+    }
+  },
+  {
+    "school": {
+      "name": "Humboldtschule",
+      "id": "SCH-443"
+    },
+    "user": {
+      "id": "20",
+      "firstName": "Hanna",
+      "lastName": "Schmidt",
+      "email": "hanna.schmidt@example.com"
+    },
+    "singleOrder": {
+      "id": "20",
+      "accessCodesId": "AC-734",
+      "date": "2023-09-01",
+      "status": "inactive",
+      "payment": "Lastschrift",
+      "price": 24.99,
+      "endDate": "2024-04-01",
+      "cancellationDate": "2024-03-01",
+      "nextPaymentDate": null
+    }
+  }
+]
