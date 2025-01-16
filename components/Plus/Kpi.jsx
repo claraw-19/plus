@@ -8,11 +8,13 @@ export default function KPI({ users }) {
     KpiWrapper: styled.div`
       display: flex;
       border-radius: 0.5rem;
-      width: 35%;
+      min-width: 350px;
+      max-width: 400px;
       background-color: ${({ theme }) => theme.colors.schullv4};
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      flex: 1;
     `,
 
     IconTextWrapper: styled.div`

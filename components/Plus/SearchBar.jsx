@@ -13,7 +13,8 @@ const Styled = {
     border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.colors.white};
     border: 1.5px solid ${({ theme }) => theme.colors.grey6};
-    width: 100%;
+    flex: 1;
+    max-width: 100%;
   `,
 
   SearchInput: styled.input`
