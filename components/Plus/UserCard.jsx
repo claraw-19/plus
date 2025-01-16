@@ -7,7 +7,7 @@ const Styled = {
     all: unset;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px;
+    padding: 8px 0;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>
       $isOpen ? theme.colors.grey7 : theme.colors.white};
@@ -38,7 +38,11 @@ export default function UserCard({ user }) {
         </Styled.UserData>
         <Styled.UserData>{user.email}</Styled.UserData>
         <Styled.UserData>{user.accessCodesId}</Styled.UserData>
-        <Styled.UserData>{user.nextPaymentDate}</Styled.UserData>
+        <Styled.UserData>
+          {user.nextPaymentDate
+            ? new Date(user.nextPaymentDate).toLocaleDateString("de-DE")
+            : ""}
+        </Styled.UserData>
       </Styled.UserContainer>
       {isOpen && <UserDetails user={user} />}
     </>

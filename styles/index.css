@@ -26,7 +26,6 @@
   src: url("/next-assets/fonts/MaterialIconsOutlined-Regular.ttf");
 }
 
-
 /* TODO: get rid of deprecated font faces in content. after that this 3 font families can be removed */
 /* BEGIN OF DEPRECATED FONTS */
 @font-face {
@@ -53,6 +52,7 @@
 body {
   margin: 0;
   min-width: 375px;
+  overflow: hidden;
 }
 
 body,
@@ -77,10 +77,10 @@ h2 {
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -98,14 +98,14 @@ h2 {
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
 }
 
 .material-icons-outlined {
-  font-family: 'Material Icons Outlined';
+  font-family: "Material Icons Outlined";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -123,7 +123,7 @@ h2 {
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
 }
 
 @media only screen and (max-width: 960px) {

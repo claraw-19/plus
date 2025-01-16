@@ -5,6 +5,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PaymentIcon from "@mui/icons-material/Payment";
 import EventIcon from "@mui/icons-material/Event";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import EventBusyIcon from "@mui/icons-material/EventBusy";
 
 const Styled = {
   DetailsContainer: styled.div`
@@ -47,6 +49,17 @@ const Styled = {
 };
 
 export default function UserDetails({ user }) {
+  const endDate = user.cancellationDate
+    ? new Date(user.endDate)
+    : new Date(user.nextPaymentDate);
+
+  const calcCostumerLifetime = (startDate, endDate) => {
+    const start = new Date(startDate);
+    let yearsDiff = endDate.getFullYear() - start.getFullYear();
+    let monthsDiff = endDate.getMonth() - start.getMonth();
+    return yearsDiff * 12 + monthsDiff;
+  };
+
   return (
     <Styled.DetailsContainer>
       <Styled.DetailsData>
@@ -54,13 +67,13 @@ export default function UserDetails({ user }) {
           <Styled.HoverEffect $description="Startdatum">
             <PlayArrowIcon />
           </Styled.HoverEffect>
-          {user.date}
+          {new Date(user.date).toLocaleDateString("de-DE")}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Preis">
             <SellIcon />
           </Styled.HoverEffect>
-          {user.price} €
+          {user.price.toLocaleString("de-DE")} €
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Zahlungsmethode">
@@ -68,17 +81,39 @@ export default function UserDetails({ user }) {
           </Styled.HoverEffect>
           {user.payment}
         </Styled.IconTextWrapper>
+
         <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
-            <EventIcon />
-          </Styled.HoverEffect>
-          {user.nextPaymentDate}
+          {user.status === "active" ? (
+            <>
+              <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
+                <EventIcon />
+              </Styled.HoverEffect>
+              {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
+            </>
+          ) : (
+            <>
+              <Styled.HoverEffect $description="Enddatum">
+                <EventBusyIcon />
+              </Styled.HoverEffect>
+              {new Date(user.endDate).toLocaleDateString("de-DE")}
+            </>
+          )}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          {user.status ? <CheckCircleIcon /> : <HighlightOffIcon />}
-          {user.status ? "Aktiv" : "Inaktiv"}
+          {user.status === "active" ? (
+            <CheckCircleIcon />
+          ) : (
+            <HighlightOffIcon />
+          )}
+          {user.status === "active" ? "Aktiv" : "Inaktiv"}
+        </Styled.IconTextWrapper>
+        <Styled.IconTextWrapper>
+          <Styled.HoverEffect $description="Costumer Lifetime">
+            <HourglassEmptyIcon />
+          </Styled.HoverEffect>
+          {`${calcCostumerLifetime(user.date, endDate)} Monate`}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
     </Styled.DetailsContainer>
