@@ -8,7 +8,6 @@ const Styled = {
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
-    gap: 40px;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>
       $isOpen ? theme.colors.grey7 : theme.colors.white};
