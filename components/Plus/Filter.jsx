@@ -7,12 +7,14 @@ import Select from "@mui/material/Select";
 import ClearIcon from "@mui/icons-material/Clear";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const Styled = {
   PlaylistAddIcon: styled(PlaylistAddIcon)`
     font-size: 2rem;
     padding: 10px;
-
     cursor: pointer;
     &:hover {
       border-radius: 100%;
@@ -24,6 +26,7 @@ const Styled = {
     display: flex;
     gap: 15px;
     margin-top: 20px;
+    align-items: center;
   `,
 
   ModalContent: styled(Box)`
@@ -48,6 +51,17 @@ const Styled = {
     font-size: 1.2rem;
     cursor: pointer;
   `,
+
+  ClearFilterIcon: styled(ClearIcon)`
+    font-size: 1.2rem;
+    cursor: pointer;
+  `,
+
+  AddCircleIcon: styled(AddCircleIcon)`
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 15px 0;
+  `,
 };
 
 export default function Filter() {
@@ -70,32 +84,38 @@ export default function Filter() {
       <Modal open={isOpen} onClose={handleClose}>
         <Styled.ModalContent>
           <Styled.InputContainer>
-            <Select
-              value={field}
-              onChange={(e) => setField(e.target.value)}
-              displayEmpty
-              fullWidth
-            >
-              <MenuItem value="" disabled style={{ display: "none" }}>
-                Feld
-              </MenuItem>
-              <MenuItem value="Name">Name</MenuItem>
-              <MenuItem value="Email">Email</MenuItem>
-              <MenuItem value="Status">Status</MenuItem>
-            </Select>
-            <Select
-              value={filterMethod}
-              onChange={(e) => setFilterMethod(e.target.value)}
-              displayEmpty
-              fullWidth
-            >
-              <MenuItem value="" disabled style={{ display: "none" }}>
-                Filtermethode
-              </MenuItem>
-              <MenuItem value="equals">Gleich</MenuItem>
-              <MenuItem value="contains">Enthält</MenuItem>
-              <MenuItem value="startsWith">Beginnt mit</MenuItem>
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel>Feld</InputLabel>
+              <Select
+                value={field}
+                onChange={(e) => setField(e.target.value)}
+                displayEmpty
+              >
+                <MenuItem value="" disabled style={{ display: "none" }}>
+                  Feld
+                </MenuItem>
+                <MenuItem value="Name">Name</MenuItem>
+                <MenuItem value="Email">Email</MenuItem>
+                <MenuItem value="Status">Status</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel>Filtermethode</InputLabel>
+              <Select
+                value={filterMethod}
+                onChange={(e) => setFilterMethod(e.target.value)}
+                displayEmpty
+              >
+                <MenuItem value="" disabled style={{ display: "none" }}>
+                  Filtermethode
+                </MenuItem>
+                <MenuItem value="equals">Gleich</MenuItem>
+                <MenuItem value="contains">Enthält</MenuItem>
+                <MenuItem value="startsWith">Beginnt mit</MenuItem>
+              </Select>
+            </FormControl>
+
             <TextField
               label="Wert"
               variant="outlined"
@@ -103,7 +123,9 @@ export default function Filter() {
               onChange={(e) => setValue(e.target.value)}
               fullWidth
             />
+            <Styled.ClearFilterIcon />
           </Styled.InputContainer>
+          <Styled.AddCircleIcon />
           <Styled.ClearPopupIcon onClick={handleClose} />
         </Styled.ModalContent>
       </Modal>
