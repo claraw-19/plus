@@ -32,26 +32,27 @@ const Styled = {
 };
 
 export default function Plus() {
-  const [singleOrdersWithDependencies, setSingleOrdersWithDependencies] =
-    useState(allSingleOrdersWithDependencies);
+  const [filteredSingleOrders, setFilteredSingleOrders] = useState(
+    allSingleOrdersWithDependencies
+  );
 
   return (
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
         <Styled.KPIAndSearchWrapper>
-          <KPI singleOrdersWithDependencies={singleOrdersWithDependencies} />
+          <KPI singleOrdersWithDependencies={filteredSingleOrders} />
           <SearchBar
-            singleOrdersWithDependencies={singleOrdersWithDependencies}
-            onSearch={setSingleOrdersWithDependencies}
+            singleOrdersWithDependencies={allSingleOrdersWithDependencies}
+            onSearch={setFilteredSingleOrders}
           />
         </Styled.KPIAndSearchWrapper>
 
         <SingleOrdersListHeader />
       </Styled.Header>
       <Styled.singleOrdersList>
-        {singleOrdersWithDependencies.length > 0 ? (
-          singleOrdersWithDependencies.map((singleOrderWithDependencies) => (
+        {filteredSingleOrders.length > 0 ? (
+          filteredSingleOrders.map((singleOrderWithDependencies) => (
             <li key={singleOrderWithDependencies.id}>
               <SingleOrderCard
                 singleOrderWithDependencies={singleOrderWithDependencies}
@@ -59,7 +60,7 @@ export default function Plus() {
             </li>
           ))
         ) : (
-          <p>Keine User gefunden.</p>
+          <p>Keine Bestellungen gefunden.</p>
         )}
       </Styled.singleOrdersList>
     </>

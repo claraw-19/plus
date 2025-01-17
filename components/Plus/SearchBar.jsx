@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import Fuse from "fuse.js";
-import { ClearIcon } from "@mui/x-date-pickers";
 
 const Styled = {
   SearchWrapper: styled.div`
@@ -23,7 +23,7 @@ const Styled = {
     outline: none;
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.grey2};
-    margin-left: 0.25;
+    margin-left: 0.25rem;
   `,
 
   ClearSearchIcon: styled(ClearIcon)`
@@ -39,6 +39,11 @@ export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
     const value = event.target.value;
     setSearchTerm(value);
 
+    if (!value.trim()) {
+      onSearch(singleOrdersWithDependencies);
+      return;
+    }
+
     const fuse = new Fuse(singleOrdersWithDependencies, {
       keys: [
         "firstName",
@@ -53,10 +58,12 @@ export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
       threshold: 0.1,
     });
 
-    const singleOrdersWithDependencies = value.trim()
-      ? fuse.search(value).map((result) => result.item)
-      : singleOrdersWithDependencies;
+    const searchResults = fuse.search(value).map((result) => result.item);
+    onSearch(searchResults);
+  };
 
+  const handleClearSearch = () => {
+    setSearchTerm("");
     onSearch(singleOrdersWithDependencies);
   };
 
@@ -69,14 +76,7 @@ export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
         value={searchTerm}
         onChange={handleSearch}
       />
-      {searchTerm && (
-        <Styled.ClearSearchIcon
-          onClick={() => {
-            setSearchTerm("");
-            onSearch(singleOrdersWithDependencies);
-          }}
-        />
-      )}
+      {searchTerm && <Styled.ClearSearchIcon onClick={handleClearSearch} />}
     </Styled.SearchWrapper>
   );
 }
