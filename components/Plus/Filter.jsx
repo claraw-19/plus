@@ -40,7 +40,6 @@ const Styled = {
     font-size: 1.2rem;
     cursor: pointer;
   `,
-
   AddCircleIcon: styled(AddCircleIcon)`
     font-size: 2rem;
     cursor: pointer;
@@ -49,9 +48,26 @@ const Styled = {
 };
 
 export default function Filter() {
+  const [filters, setFilters] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleAddFilter = () => {
+    setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
+  };
+
+  const handleFilterChange = (index, updatedFilter) => {
+    const newFilters = [...filters];
+    newFilters[index] = updatedFilter;
+    setFilters(newFilters);
+  };
+
+  const handleDeleteFilter = (index) => {
+    const newFilters = filters.filter((_, i) => i !== index);
+    setFilters(newFilters);
+  };
+
+  const handleOpen = () => {
+    setFilters([{ field: "", filterMethod: "", value: "" }]);
     setIsOpen(true);
   };
 
@@ -61,12 +77,29 @@ export default function Filter() {
 
   return (
     <>
-      <Styled.PlaylistAddIcon onClick={handleAddFilter} />
+      <Styled.PlaylistAddIcon onClick={handleOpen} />
       <Modal open={isOpen} onClose={handleClose}>
         <Styled.ModalContent>
           <h3>Neuer Filter</h3>
-          <FilterContainer />
-          <Styled.AddCircleIcon />
+          {filters.map((filter, index) => (
+            <FilterContainer
+              key={index}
+              field={filter.field}
+              setField={(value) =>
+                handleFilterChange(index, { ...filter, field: value })
+              }
+              filterMethod={filter.filterMethod}
+              setFilterMethod={(value) =>
+                handleFilterChange(index, { ...filter, filterMethod: value })
+              }
+              value={filter.value}
+              setValue={(value) =>
+                handleFilterChange(index, { ...filter, value })
+              }
+              onDelete={() => handleDeleteFilter(index)}
+            />
+          ))}
+          <Styled.AddCircleIcon onClick={handleAddFilter} />
           <Styled.ClearPopupIcon onClick={handleClose} />
         </Styled.ModalContent>
       </Modal>

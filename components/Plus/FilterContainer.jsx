@@ -5,13 +5,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useState } from "react";
 
-export default function FilterContainer() {
-  const [field, setField] = useState("");
-  const [filterMethod, setFilterMethod] = useState("");
-  const [value, setValue] = useState("");
-
+export default function FilterContainer({
+  field,
+  setField,
+  filterMethod,
+  setFilterMethod,
+  value,
+  setValue,
+  onDelete,
+}) {
   const Styled = {
     ClearFilterIcon: styled(ClearIcon)`
       font-size: 1.2rem;
@@ -65,7 +68,7 @@ export default function FilterContainer() {
         onChange={(e) => setValue(e.target.value)}
         fullWidth
       />
-      <Styled.ClearFilterIcon />
+      <Styled.ClearFilterIcon onClick={onDelete} />
     </Styled.Container>
   );
 }
