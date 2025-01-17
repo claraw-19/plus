@@ -22,17 +22,19 @@ const Styled = {
 
   InputContainer: styled.div`
     display: flex;
-    flex-direction: column;
     gap: 15px;
     margin-top: 20px;
   `,
 
   ModalContent: styled(Box)`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 600px;
     background-color: white;
     box-shadow: 24px;
     padding: 20px;
@@ -72,6 +74,7 @@ export default function Filter() {
               value={field}
               onChange={(e) => setField(e.target.value)}
               displayEmpty
+              fullWidth
             >
               <MenuItem value="" disabled style={{ display: "none" }}>
                 Feld
@@ -84,6 +87,7 @@ export default function Filter() {
               value={filterMethod}
               onChange={(e) => setFilterMethod(e.target.value)}
               displayEmpty
+              fullWidth
             >
               <MenuItem value="" disabled style={{ display: "none" }}>
                 Filtermethode
