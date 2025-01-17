@@ -48,10 +48,10 @@ const Styled = {
   `,
 };
 
-export default function UserDetails({ user }) {
-  const endDate = user.cancellationDate
-    ? new Date(user.endDate)
-    : new Date(user.nextPaymentDate);
+export default function SingleOrderDetails({ singleOrderWithDependencies }) {
+  const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
+    ? new Date(singleOrderWithDependencies.singleOrder.endDate)
+    : new Date(singleOrderWithDependencies.singleOrder.nextPaymentDate);
 
   const calcCostumerLifetime = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -67,53 +67,64 @@ export default function UserDetails({ user }) {
           <Styled.HoverEffect $description="Startdatum">
             <PlayArrowIcon />
           </Styled.HoverEffect>
-          {new Date(user.date).toLocaleDateString("de-DE")}
+          {new Date(
+            singleOrderWithDependencies.singleOrder.date
+          ).toLocaleDateString("de-DE")}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Preis">
             <SellIcon />
           </Styled.HoverEffect>
-          {user.price.toLocaleString("de-DE")} €
+          {singleOrderWithDependencies.singleOrder.price.toLocaleString(
+            "de-DE"
+          )}{" "}
+          €
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Zahlungsmethode">
             <PaymentIcon />
           </Styled.HoverEffect>
-          {user.payment}
+          {singleOrderWithDependencies.singleOrder.payment}
         </Styled.IconTextWrapper>
 
         <Styled.IconTextWrapper>
-          {user.status === "active" ? (
+          {singleOrderWithDependencies.singleOrder.status === "active" ? (
             <>
               <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
                 <EventIcon />
               </Styled.HoverEffect>
-              {new Date(user.nextPaymentDate).toLocaleDateString("de-DE")}
+              {new Date(
+                singleOrderWithDependencies.singleOrder.nextPaymentDate
+              ).toLocaleDateString("de-DE")}
             </>
           ) : (
             <>
               <Styled.HoverEffect $description="Enddatum">
                 <EventBusyIcon />
               </Styled.HoverEffect>
-              {new Date(user.endDate).toLocaleDateString("de-DE")}
+              {new Date(
+                singleOrderWithDependencies.singleOrder.endDate
+              ).toLocaleDateString("de-DE")}
             </>
           )}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
       <Styled.DetailsData>
         <Styled.IconTextWrapper>
-          {user.status === "active" ? (
+          {singleOrderWithDependencies.singleOrder.status === "active" ? (
             <CheckCircleIcon />
           ) : (
             <HighlightOffIcon />
           )}
-          {user.status === "active" ? "Aktiv" : "Inaktiv"}
+          {singleOrderWithDependencies.singleOrder.status === "active"
+            ? "Aktiv"
+            : "Inaktiv"}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="Costumer Lifetime">
             <HourglassEmptyIcon />
           </Styled.HoverEffect>
-          {`${calcCostumerLifetime(user.date, endDate)} Monate`}
+          {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} Monate`}
         </Styled.IconTextWrapper>
       </Styled.DetailsData>
     </Styled.DetailsContainer>

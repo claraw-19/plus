@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import Fuse from "fuse.js";
-import { ClearIcon } from "@mui/x-date-pickers";
 
 const Styled = {
   SearchWrapper: styled.div`
@@ -23,7 +23,7 @@ const Styled = {
     outline: none;
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.grey2};
-    margin-left: 0.25;
+    margin-left: 0.25rem;
   `,
 
   ClearSearchIcon: styled(ClearIcon)`
@@ -32,31 +32,39 @@ const Styled = {
   `,
 };
 
-export default function SearchBar({ users, onSearch }) {
+export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
 
-    const fuse = new Fuse(users, {
+    if (!value.trim()) {
+      onSearch(singleOrdersWithDependencies);
+      return;
+    }
+
+    const fuse = new Fuse(singleOrdersWithDependencies, {
       keys: [
-        "firstName",
-        "lastName",
+        "user.firstName",
+        "user.lastName",
         {
           name: "combinedName",
-          getFn: (user) => `${user.firstName} ${user.lastName}`,
+          getFn: (singleOrderWithDependencies) =>
+            `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`,
         },
         "accessCodesId",
       ],
       threshold: 0.1,
     });
 
-    const filteredUsers = value.trim()
-      ? fuse.search(value).map((result) => result.item)
-      : users;
+    const searchResults = fuse.search(value).map((result) => result.item);
+    onSearch(searchResults);
+  };
 
-    onSearch(filteredUsers);
+  const handleClearSearch = () => {
+    setSearchTerm("");
+    onSearch(singleOrdersWithDependencies);
   };
 
   return (
@@ -68,14 +76,7 @@ export default function SearchBar({ users, onSearch }) {
         value={searchTerm}
         onChange={handleSearch}
       />
-      {searchTerm && (
-        <Styled.ClearSearchIcon
-          onClick={() => {
-            setSearchTerm("");
-            onSearch(users);
-          }}
-        />
-      )}
+      {searchTerm && <Styled.ClearSearchIcon onClick={handleClearSearch} />}
     </Styled.SearchWrapper>
   );
 }

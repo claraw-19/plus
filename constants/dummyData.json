@@ -1,20 +1,5 @@
 [
   {
-    "id": "1",
-    "schoolId": "SCH-001",
-    "accessCodesId": "AC-101",
-    "firstName": "Anna",
-    "lastName": "Meyer",
-    "email": "anna.meyer@example.com",
-    "date": "2023-09-01",
-    "status": "active",
-    "payment": "Lastschrift",
-    "price": 24.99,
-    "endDate": null,
-    "cancellationDate": null,
-    "nextPaymentDate": "2025-01-15"
-  },
-  {
     "id": "2",
     "schoolId": "SCH-002",
     "accessCodesId": "AC-102",

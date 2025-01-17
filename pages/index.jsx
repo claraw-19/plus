@@ -1,13 +1,13 @@
-import users from "../constants/dummyData.json";
-import UserCard from "@/components/Plus/UserCard";
+import allSingleOrdersWithDependencies from "../constants/structuredDummyData.json";
+import SingleOrderCard from "@/components/Plus/SingleOrderCard";
 import styled from "styled-components";
-import UserListHeader from "@/components/Plus/UserListHeader";
+import SingleOrdersListHeader from "@/components/Plus/SingleOrderListHeader";
 import SearchBar from "@/components/Plus/SearchBar";
 import { useState } from "react";
 import KPI from "@/components/Plus/Kpi";
 
 const Styled = {
-  UserList: styled.ul`
+  singleOrdersList: styled.ul`
     list-style: none;
     margin: 0;
     padding: 0 16px;
@@ -32,30 +32,37 @@ const Styled = {
 };
 
 export default function Plus() {
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filteredSingleOrders, setFilteredSingleOrders] = useState(
+    allSingleOrdersWithDependencies
+  );
 
   return (
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
         <Styled.KPIAndSearchWrapper>
-          <KPI users={filteredUsers} />
-          <SearchBar users={users} onSearch={setFilteredUsers} />
+          <KPI singleOrdersWithDependencies={filteredSingleOrders} />
+          <SearchBar
+            singleOrdersWithDependencies={allSingleOrdersWithDependencies}
+            onSearch={setFilteredSingleOrders}
+          />
         </Styled.KPIAndSearchWrapper>
 
-        <UserListHeader />
+        <SingleOrdersListHeader />
       </Styled.Header>
-      <Styled.UserList>
-        {filteredUsers.length > 0 ? (
-          filteredUsers.map((user) => (
-            <li key={user.id}>
-              <UserCard user={user} />
+      <Styled.singleOrdersList>
+        {filteredSingleOrders.length > 0 ? (
+          filteredSingleOrders.map((singleOrderWithDependencies) => (
+            <li key={singleOrderWithDependencies.singleOrder.id}>
+              <SingleOrderCard
+                singleOrderWithDependencies={singleOrderWithDependencies}
+              />
             </li>
           ))
         ) : (
-          <p>Keine User gefunden.</p>
+          <p>Keine Bestellungen gefunden.</p>
         )}
-      </Styled.UserList>
+      </Styled.singleOrdersList>
     </>
   );
 }
