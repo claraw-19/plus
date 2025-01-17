@@ -34,19 +34,19 @@ export default function SingleOrderCard({ singleOrderWithDependencies }) {
     <>
       <Styled.SingleOrderContainer $isOpen={isOpen} onClick={toggleDetails}>
         <Styled.SingleOrderData>
-          {singleOrderWithDependencies.firstName}{" "}
-          {singleOrderWithDependencies.lastName}
+          {singleOrderWithDependencies.user.firstName}{" "}
+          {singleOrderWithDependencies.user.lastName}
         </Styled.SingleOrderData>
         <Styled.SingleOrderData>
-          {singleOrderWithDependencies.email}
+          {singleOrderWithDependencies.user.email}
         </Styled.SingleOrderData>
         <Styled.SingleOrderData>
-          {singleOrderWithDependencies.accessCodesId}
+          {singleOrderWithDependencies.singleOrder.accessCodesId}
         </Styled.SingleOrderData>
         <Styled.SingleOrderData>
-          {singleOrderWithDependencies.nextPaymentDate
+          {singleOrderWithDependencies.singleOrder.nextPaymentDate
             ? new Date(
-                singleOrderWithDependencies.nextPaymentDate
+                singleOrderWithDependencies.singleOrder.nextPaymentDate
               ).toLocaleDateString("de-DE")
             : ""}
         </Styled.SingleOrderData>

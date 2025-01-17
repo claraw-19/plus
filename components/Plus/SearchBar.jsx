@@ -46,12 +46,12 @@ export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
 
     const fuse = new Fuse(singleOrdersWithDependencies, {
       keys: [
-        "firstName",
-        "lastName",
+        "user.firstName",
+        "user.lastName",
         {
           name: "combinedName",
           getFn: (singleOrderWithDependencies) =>
-            `${singleOrderWithDependencies.firstName} ${singleOrderWithDependencies.lastName}`,
+            `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`,
         },
         "accessCodesId",
       ],

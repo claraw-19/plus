@@ -1,4 +1,4 @@
-import allSingleOrdersWithDependencies from "../constants/dummyData.json";
+import allSingleOrdersWithDependencies from "../constants/structuredDummyData.json";
 import SingleOrderCard from "@/components/Plus/SingleOrderCard";
 import styled from "styled-components";
 import SingleOrdersListHeader from "@/components/Plus/SingleOrderListHeader";
@@ -53,7 +53,7 @@ export default function Plus() {
       <Styled.singleOrdersList>
         {filteredSingleOrders.length > 0 ? (
           filteredSingleOrders.map((singleOrderWithDependencies) => (
-            <li key={singleOrderWithDependencies.id}>
+            <li key={singleOrderWithDependencies.singleOrder.id}>
               <SingleOrderCard
                 singleOrderWithDependencies={singleOrderWithDependencies}
               />

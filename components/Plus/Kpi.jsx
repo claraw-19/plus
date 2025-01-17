@@ -46,13 +46,13 @@ export default function KPI({ singleOrdersWithDependencies }) {
 
   const totalActiveSingleOrders = singleOrdersWithDependencies.filter(
     (singleOrderWithDependencies) =>
-      singleOrderWithDependencies.status === "active"
+      singleOrderWithDependencies.singleOrder.status === "active"
   ).length;
 
   const payingVolumeMonthly = singleOrdersWithDependencies.reduce(
     (total, singleOrderWithDependencies) => {
-      if (singleOrderWithDependencies.status === "active") {
-        const price = singleOrderWithDependencies.price;
+      if (singleOrderWithDependencies.singleOrder.status === "active") {
+        const price = singleOrderWithDependencies.singleOrder.price;
         return total + price;
       }
       return total;
@@ -63,10 +63,10 @@ export default function KPI({ singleOrdersWithDependencies }) {
   const calcAverageCostumerLifetime =
     singleOrdersWithDependencies.reduce(
       (total, singleOrderWithDependencies) => {
-        const start = new Date(singleOrderWithDependencies.date);
-        const endDate = singleOrderWithDependencies.cancellationDate
-          ? new Date(singleOrderWithDependencies.endDate)
-          : new Date(singleOrderWithDependencies.nextPaymentDate);
+        const start = new Date(singleOrderWithDependencies.singleOrder.date);
+        const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
+          ? new Date(singleOrderWithDependencies.singleOrder.endDate)
+          : new Date(singleOrderWithDependencies.singleOrder.nextPaymentDate);
         let yearsDiff = endDate.getFullYear() - start.getFullYear();
         let monthsDiff = endDate.getMonth() - start.getMonth();
         const costumerLifetime = yearsDiff * 12 + monthsDiff;
@@ -88,7 +88,9 @@ export default function KPI({ singleOrdersWithDependencies }) {
           <Styled.HoverEffect $description="⌀ Costumer Lifetime">
             <HourglassEmptyIcon />
           </Styled.HoverEffect>
-          {Math.round(calcAverageCostumerLifetime)} Monate
+          {singleOrdersWithDependencies.length > 0
+            ? `${Math.round(calcAverageCostumerLifetime)} Monate`
+            : "0 Monate"}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>
           <Styled.HoverEffect $description="monatlicher AE">
