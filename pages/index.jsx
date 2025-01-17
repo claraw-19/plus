@@ -62,7 +62,7 @@ export default function Plus() {
             </li>
           ))
         ) : (
-          <p>Keine Bestellungen gefunden.</p>
+          <p>Keine Lizenzen gefunden.</p>
         )}
       </Styled.singleOrdersList>
     </>

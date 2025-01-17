@@ -1,8 +1,12 @@
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { useState } from "react";
 import styled from "styled-components";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import ClearIcon from "@mui/icons-material/Clear";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import TextField from "@mui/material/TextField";
 
 const Styled = {
   PlaylistAddIcon: styled(PlaylistAddIcon)`
@@ -16,6 +20,13 @@ const Styled = {
     }
   `,
 
+  InputContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  `,
+
   ModalContent: styled(Box)`
     position: absolute;
     top: 50%;
@@ -27,10 +38,21 @@ const Styled = {
     padding: 20px;
     border-radius: 8px;
   `,
+
+  ClearPopupIcon: styled(ClearIcon)`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  `,
 };
 
 export default function Filter() {
   const [isOpen, setIsOpen] = useState(false);
+  const [field, setField] = useState("");
+  const [filterMethod, setFilterMethod] = useState("");
+  const [value, setValue] = useState("");
 
   const handleAddFilter = () => {
     setIsOpen(true);
@@ -45,8 +67,40 @@ export default function Filter() {
       <Styled.PlaylistAddIcon onClick={handleAddFilter} />
       <Modal open={isOpen} onClose={handleClose}>
         <Styled.ModalContent>
-          <h2>Popup geöffnet!</h2>
-          <button onClick={handleClose}>Schließen</button>
+          <Styled.InputContainer>
+            <Select
+              value={field}
+              onChange={(e) => setField(e.target.value)}
+              displayEmpty
+            >
+              <MenuItem value="" disabled style={{ display: "none" }}>
+                Feld
+              </MenuItem>
+              <MenuItem value="Name">Name</MenuItem>
+              <MenuItem value="Email">Email</MenuItem>
+              <MenuItem value="Status">Status</MenuItem>
+            </Select>
+            <Select
+              value={filterMethod}
+              onChange={(e) => setFilterMethod(e.target.value)}
+              displayEmpty
+            >
+              <MenuItem value="" disabled style={{ display: "none" }}>
+                Filtermethode
+              </MenuItem>
+              <MenuItem value="equals">Gleich</MenuItem>
+              <MenuItem value="contains">Enthält</MenuItem>
+              <MenuItem value="startsWith">Beginnt mit</MenuItem>
+            </Select>
+            <TextField
+              label="Wert"
+              variant="outlined"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              fullWidth
+            />
+          </Styled.InputContainer>
+          <Styled.ClearPopupIcon onClick={handleClose} />
         </Styled.ModalContent>
       </Modal>
     </>
