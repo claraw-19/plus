@@ -98,7 +98,7 @@ export default function KPI({ singleOrdersWithDependencies }) {
           </Styled.HoverEffect>
           {(Math.round(payingVolumeMonthly * 100) / 100)
             .toFixed(2)
-            .replace(".", ",")}
+            .replace(".", ",")}{" "}
           €
         </Styled.IconTextWrapper>
       </Styled.KpiWrapper>
