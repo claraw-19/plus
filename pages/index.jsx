@@ -5,6 +5,7 @@ import SingleOrdersListHeader from "@/components/Plus/SingleOrderListHeader";
 import SearchBar from "@/components/Plus/SearchBar";
 import { useState } from "react";
 import KPI from "@/components/Plus/Kpi";
+import Filter from "@/components/Plus/Filter";
 
 const Styled = {
   singleOrdersList: styled.ul`
@@ -40,6 +41,7 @@ export default function Plus() {
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
+        <Filter />
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={filteredSingleOrders} />
           <SearchBar
