@@ -12,6 +12,8 @@ export default function Plus() {
     allSingleOrdersWithDependencies
   );
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <>
       <Styled.Header>
@@ -20,6 +22,8 @@ export default function Plus() {
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={filteredSingleOrders} />
           <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
             singleOrdersWithDependencies={allSingleOrdersWithDependencies}
             onSearch={setFilteredSingleOrders}
           />

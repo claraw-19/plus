@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
+import filterFields from "@/constants/filterFields.json";
 
 export default function FilterContainer({
   field,
@@ -46,9 +47,11 @@ export default function FilterContainer({
           <MenuItem value="" disabled style={{ display: "none" }}>
             Feld
           </MenuItem>
-          <MenuItem value="Name">Name</MenuItem>
-          <MenuItem value="Email">Email</MenuItem>
-          <MenuItem value="Status">Status</MenuItem>
+          {filterFields.map((field) => (
+            <MenuItem key={field.name} value={field.name}>
+              {field.diplay}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl fullWidth>
@@ -61,9 +64,15 @@ export default function FilterContainer({
           <MenuItem value="" disabled style={{ display: "none" }}>
             Filtermethode
           </MenuItem>
-          <MenuItem value="equals">Gleich</MenuItem>
-          <MenuItem value="contains">Enthält</MenuItem>
-          <MenuItem value="startsWith">Beginnt mit</MenuItem>
+          <MenuItem value="notEmpty">ist nicht leer</MenuItem>
+          <MenuItem value="empty">ist leer</MenuItem>
+          <MenuItem value="notEqual">ist nicht gleich</MenuItem>
+          <MenuItem value="equals">ist gleich</MenuItem>
+          <MenuItem value="contains">enthält</MenuItem>
+          <MenuItem value="containsNot">enthält nicht</MenuItem>
+          <MenuItem value="startsWith">beginnt mit</MenuItem>
+          <MenuItem value="lessEqual">ist kleiner gleich</MenuItem>
+          <MenuItem value="greaterEqual">ist größer gleich</MenuItem>
         </Select>
       </FormControl>
       <TextField

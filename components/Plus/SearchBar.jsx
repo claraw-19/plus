@@ -4,9 +4,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import Fuse from "fuse.js";
 
-export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
-
+export default function SearchBar({
+  singleOrdersWithDependencies,
+  onSearch,
+  searchTerm,
+  setSearchTerm,
+}) {
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);

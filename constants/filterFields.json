@@ -1,24 +1,83 @@
 [
-  { "object": "user", "name": "firstname", "diplay": "Vorname" },
-  { "object": "user", "name": "lastname", "diplay": "Nachname" },
-  { "object": "user", "name": "email", "diplay": "E-Mail" },
-  { "object": "user", "name": "id", "diplay": "User-ID" },
+  {
+    "object": "user",
+    "name": "firstname",
+    "diplay": "Vorname",
+    "type": "string"
+  },
+  {
+    "object": "user",
+    "name": "lastname",
+    "diplay": "Nachname",
+    "type": "string"
+  },
+  { "object": "user", "name": "email", "diplay": "E-Mail", "type": "string" },
+  { "object": "user", "name": "id", "diplay": "User-ID", "type": "string" },
 
-  { "object": "singleOrder", "name": "id", "diplay": "Schul-ID" },
-  { "object": "singleOrder", "name": "accessCodesId", "diplay": "Lizenzcode" },
-  { "object": "singleOrder", "name": "date", "diplay": "Startdatum" },
-  { "object": "singleOrder", "name": "status", "diplay": "Status" },
-  { "object": "singleOrder", "name": "payment", "diplay": "Zahlungsart" },
-  { "object": "singleOrder", "name": "price", "diplay": "Preis" },
-  { "object": "singleOrder", "name": "enddate", "diplay": "Enddatum" },
+  {
+    "object": "singleOrder",
+    "name": "id",
+    "diplay": "ID",
+    "type": "string"
+  },
+  {
+    "object": "singleOrder",
+    "name": "accessCodesId",
+    "diplay": "Lizenzcode",
+    "type": "string"
+  },
+  {
+    "object": "singleOrder",
+    "name": "date",
+    "diplay": "Startdatum",
+    "type": "date"
+  },
+  {
+    "object": "singleOrder",
+    "name": "status",
+    "diplay": "Status",
+    "type": "string"
+  },
+  {
+    "object": "singleOrder",
+    "name": "payment",
+    "diplay": "Zahlungsart",
+    "type": "string"
+  },
+  {
+    "object": "singleOrder",
+    "name": "price",
+    "diplay": "Preis",
+    "type": "number"
+  },
+  {
+    "object": "singleOrder",
+    "name": "enddate",
+    "diplay": "Enddatum",
+    "type": "date"
+  },
   {
     "object": "singleOrder",
     "name": "cancellationDate",
-    "diplay": "Stornierungsdatum"
+    "diplay": "Stornierungsdatum",
+    "type": "date"
   },
   {
     "object": "singleOrder",
     "name": "nextPaymentDate",
-    "diplay": "Nächste Zahlungsdatum"
+    "diplay": "Nächste Zahlungsdatum",
+    "type": "date"
+  },
+  {
+    "object": "school",
+    "name": "name",
+    "diplay": "Schule",
+    "type": "string"
+  },
+  {
+    "object": "school",
+    "name": "id",
+    "diplay": "Schul-ID",
+    "type": "string"
   }
 ]
