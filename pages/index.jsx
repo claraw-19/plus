@@ -3,7 +3,7 @@ import SingleOrderCard from "@/components/Plus/SingleOrderCard";
 import styled from "styled-components";
 import SingleOrdersListHeader from "@/components/Plus/SingleOrderListHeader";
 import SearchBar from "@/components/Plus/SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import KPI from "@/components/Plus/Kpi";
 import Filter from "@/components/Plus/Filter";
 
@@ -13,12 +13,17 @@ export default function Plus() {
   );
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState([]);
+
+  useEffect(() => {
+    console.log("Filter changed");
+  }, [filters]);
 
   return (
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
-        <Filter />
+        <Filter filters={filters} setFilters={setFilters} />
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={filteredSingleOrders} />
           <SearchBar

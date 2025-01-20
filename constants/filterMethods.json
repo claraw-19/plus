@@ -1,58 +1,57 @@
 [
-    {
-      "name": "ist nicht leer",
-      "id": "isNotEmpty",
-      "supportedTypes": ["string", "number", "date", "time"],
-    },
-    {
-      "name": "ist leer",
-      "id": "isEmpty",
-      "supportedTypes": ["string", "number", "date", "time"],
-    },
-    {
-      "name": "ist nicht gleich",
-      "id": "notEquals",
-      "supportedTypes": ["string", "number", "date", "time"],
-    },
-    {
-      "name": "ist gleich",
-      "id": "equals",
-      "supportedTypes": ["string", "number", "date", "time"],
-    },
-    {
-      "name": "ist kleiner gleich",
-      "id": "lessOrEqual",
-      "supportedTypes": ["number", "date", "time"],
-    },
-    {
-      "name": "ist größer gleich",
-      "id": "greaterOrEqual",
-      "supportedTypes": ["number", "date", "time"],
-    },
-    {
-      "name": "enthält",
-      "id": "contains",
-      "supportedTypes": ["string"],
-    },
-    {
-      "name": "enthält nicht",
-      "id": "notContains",
-      "supportedTypes": ["string"],
-    },
-    {
-      "name": "beginnt mit",
-      "id": "startsWith",
-      "supportedTypes": ["string"],
-    },
-    {
-      "name": "Ja",
-      "id": "isTrue",
-      "supportedTypes": ["boolean"],
-    },
-    {
-      "name": "Nein",
-      "id": "isFalse",
-      "supportedTypes": ["boolean"],
-    },
-  ];
-  
+  {
+    "name": "ist nicht leer",
+    "id": "isNotEmpty",
+    "supportedTypes": ["string", "number", "date", "time"]
+  },
+  {
+    "name": "ist leer",
+    "id": "isEmpty",
+    "supportedTypes": ["string", "number", "date", "time"]
+  },
+  {
+    "name": "ist nicht gleich",
+    "id": "notEquals",
+    "supportedTypes": ["string", "number", "date", "time"]
+  },
+  {
+    "name": "ist gleich",
+    "id": "equals",
+    "supportedTypes": ["string", "number", "date", "time"]
+  },
+  {
+    "name": "ist kleiner gleich",
+    "id": "lessOrEqual",
+    "supportedTypes": ["number", "date", "time"]
+  },
+  {
+    "name": "ist größer gleich",
+    "id": "greaterOrEqual",
+    "supportedTypes": ["number", "date", "time"]
+  },
+  {
+    "name": "enthält",
+    "id": "contains",
+    "supportedTypes": ["string"]
+  },
+  {
+    "name": "enthält nicht",
+    "id": "notContains",
+    "supportedTypes": ["string"]
+  },
+  {
+    "name": "beginnt mit",
+    "id": "startsWith",
+    "supportedTypes": ["string"]
+  },
+  {
+    "name": "Ja",
+    "id": "isTrue",
+    "supportedTypes": ["boolean"]
+  },
+  {
+    "name": "Nein",
+    "id": "isFalse",
+    "supportedTypes": ["boolean"]
+  }
+]

@@ -9,13 +9,10 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { TextField, Button } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 
-export default function Filter() {
-  const [filters, setFilters] = useState([]);
+export default function Filter({ filters, setFilters }) {
   const [isOpen, setIsOpen] = useState(false);
   const [viewName, setViewName] = useState("");
   const [savedViews, setSavedViews] = useState([]);
-
-  console.log(filters);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -75,18 +72,8 @@ export default function Filter() {
           {filters.map((filter, index) => (
             <FilterContainer
               key={index}
-              field={filter.field}
-              setField={(value) =>
-                handleFilterChange(index, { ...filter, field: value })
-              }
-              filterMethod={filter.filterMethod}
-              setFilterMethod={(value) =>
-                handleFilterChange(index, { ...filter, filterMethod: value })
-              }
-              value={filter.value}
-              setValue={(value) =>
-                handleFilterChange(index, { ...filter, value })
-              }
+              filter={filter}
+              setFilter={(newFilter) => handleFilterChange(index, newFilter)}
               onDelete={() => handleDeleteFilter(index)}
             />
           ))}
