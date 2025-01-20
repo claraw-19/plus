@@ -1,0 +1,24 @@
+[
+  { "object": "user", "name": "firstname", "diplay": "Vorname" },
+  { "object": "user", "name": "lastname", "diplay": "Nachname" },
+  { "object": "user", "name": "email", "diplay": "E-Mail" },
+  { "object": "user", "name": "id", "diplay": "User-ID" },
+
+  { "object": "singleOrder", "name": "id", "diplay": "Schul-ID" },
+  { "object": "singleOrder", "name": "accessCodesId", "diplay": "Lizenzcode" },
+  { "object": "singleOrder", "name": "date", "diplay": "Startdatum" },
+  { "object": "singleOrder", "name": "status", "diplay": "Status" },
+  { "object": "singleOrder", "name": "payment", "diplay": "Zahlungsart" },
+  { "object": "singleOrder", "name": "price", "diplay": "Preis" },
+  { "object": "singleOrder", "name": "enddate", "diplay": "Enddatum" },
+  {
+    "object": "singleOrder",
+    "name": "cancellationDate",
+    "diplay": "Stornierungsdatum"
+  },
+  {
+    "object": "singleOrder",
+    "name": "nextPaymentDate",
+    "diplay": "Nächste Zahlungsdatum"
+  }
+]

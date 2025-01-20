@@ -4,34 +4,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import Fuse from "fuse.js";
 
-const Styled = {
-  SearchWrapper: styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    background-color: ${({ theme }) => theme.colors.white};
-    border: 1.5px solid ${({ theme }) => theme.colors.grey6};
-    flex: 1;
-    max-width: 100%;
-  `,
-
-  SearchInput: styled.input`
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    color: ${({ theme }) => theme.colors.grey2};
-    margin-left: 0.25rem;
-  `,
-
-  ClearSearchIcon: styled(ClearIcon)`
-    font-size: 1.2rem;
-    cursor: pointer;
-  `,
-};
-
 export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -80,3 +52,31 @@ export default function SearchBar({ singleOrdersWithDependencies, onSearch }) {
     </Styled.SearchWrapper>
   );
 }
+
+const Styled = {
+  SearchWrapper: styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 1.5px solid ${({ theme }) => theme.colors.grey6};
+    flex: 1;
+    max-width: 100%;
+  `,
+
+  SearchInput: styled.input`
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.colors.grey2};
+    margin-left: 0.25rem;
+  `,
+
+  ClearSearchIcon: styled(ClearIcon)`
+    font-size: 1.2rem;
+    cursor: pointer;
+  `,
+};

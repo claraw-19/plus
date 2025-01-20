@@ -19,6 +19,7 @@ export default function FilterContainer({
     ClearFilterIcon: styled(ClearIcon)`
       font-size: 1.2rem;
       cursor: pointer;
+      color: ${({ theme }) => theme.colors.grey2};
     `,
 
     Container: styled.div`
@@ -27,12 +28,16 @@ export default function FilterContainer({
       margin-top: 20px;
       align-items: center;
     `,
+
+    InputLabel: styled(InputLabel)`
+      color: ${({ theme }) => theme.colors.grey2};
+    `,
   };
 
   return (
     <Styled.Container>
       <FormControl fullWidth>
-        <InputLabel>Feld</InputLabel>
+        <Styled.InputLabel>Feld</Styled.InputLabel>
         <Select
           value={field}
           onChange={(e) => setField(e.target.value)}
@@ -47,7 +52,7 @@ export default function FilterContainer({
         </Select>
       </FormControl>
       <FormControl fullWidth>
-        <InputLabel>Filtermethode</InputLabel>
+        <Styled.InputLabel>Filtermethode</Styled.InputLabel>
         <Select
           value={filterMethod}
           onChange={(e) => setFilterMethod(e.target.value)}
