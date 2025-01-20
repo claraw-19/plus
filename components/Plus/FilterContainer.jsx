@@ -58,7 +58,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         label="Wert"
         variant="outlined"
         value={filter.value}
-        onChange={(e) => setValue({ ...filter, value: e.target.value })}
+        onChange={(e) => setFilter({ ...filter, value: e.target.value })}
         fullWidth
       />
       <Styled.ClearFilterIcon onClick={onDelete} />
