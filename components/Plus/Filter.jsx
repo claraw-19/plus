@@ -108,7 +108,7 @@ export default function Filter({ filters, setFilters }) {
         <Styled.PlaylistAddIcon onClick={handleOpenPopup} />
       </Styled.SalesViewPanel>
       <Menu
-        open={selectedView}
+        open={contextMenu !== null}
         onClose={handleCloseContextMenu}
         anchorReference="anchorPosition"
         anchorPosition={
