@@ -19,16 +19,39 @@ export default function Plus() {
   useEffect(() => {
     console.log("Filter or search changed");
 
-    //  starte mit allSingle.......
-
     // filterlogik
     let filterResult = allSingleOrdersWithDependencies;
     for (const filter of filters) {
+      console.log("filter: ", filter);
       if (filter.filterMethod.id === "equals") {
-        filterResult = filterResult.filter(
-          (singleOrder) =>
-            singleOrder[filter.field.object][filter.field.name] == filter.value
-        );
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          if (filter.field.type === "string") {
+            return fieldValue.toLowerCase() === filter.value.toLowerCase();
+          } else if (filter.field.type === "number") {
+            let filterValueAsNumber;
+            if (filter.value.includes(",")) {
+              filterValueAsNumber = Number(filter.value.replace(",", "."));
+            } else {
+              filterValueAsNumber = Number(filter.value);
+            }
+            return fieldValue === filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            let filterDate;
+            if (filter.value.toLowerCase() === "heute") {
+              const today = new Date();
+              filterDate = today.toISOString().split("T")[0];
+            } else {
+              const [day, month, year] = filter.value.split(".");
+              filterDate = `${year}-${month}-${day}`;
+            }
+            const fieldValueISO = new Date(fieldValue)
+              .toISOString()
+              .split("T")[0];
+            return fieldValueISO === filterDate;
+          }
+        });
       }
       console.log("result: ", filterResult);
       console.log("filterline: ", filter);

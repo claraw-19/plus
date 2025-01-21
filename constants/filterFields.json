@@ -52,7 +52,7 @@
   },
   {
     "object": "singleOrder",
-    "name": "enddate",
+    "name": "endDate",
     "display": "Enddatum",
     "type": "date"
   },

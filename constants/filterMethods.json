@@ -2,32 +2,32 @@
   {
     "name": "ist nicht leer",
     "id": "isNotEmpty",
-    "supportedTypes": ["string", "number", "date", "time"]
+    "supportedTypes": ["string", "number", "date"]
   },
   {
     "name": "ist leer",
     "id": "isEmpty",
-    "supportedTypes": ["string", "number", "date", "time"]
+    "supportedTypes": ["string", "number", "date"]
   },
   {
     "name": "ist nicht gleich",
     "id": "notEquals",
-    "supportedTypes": ["string", "number", "date", "time"]
+    "supportedTypes": ["string", "number", "date"]
   },
   {
     "name": "ist gleich",
     "id": "equals",
-    "supportedTypes": ["string", "number", "date", "time"]
+    "supportedTypes": ["string", "number", "date"]
   },
   {
     "name": "ist kleiner gleich",
     "id": "lessOrEqual",
-    "supportedTypes": ["number", "date", "time"]
+    "supportedTypes": ["number", "date"]
   },
   {
     "name": "ist größer gleich",
     "id": "greaterOrEqual",
-    "supportedTypes": ["number", "date", "time"]
+    "supportedTypes": ["number", "date"]
   },
   {
     "name": "enthält",
