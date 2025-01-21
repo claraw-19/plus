@@ -17,8 +17,7 @@ export default function Filter({ filters, setFilters }) {
   const [savedViews, setSavedViews] = useState([]);
   const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
-
-  console.log("savedViews: ", savedViews);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -50,9 +49,20 @@ export default function Filter({ filters, setFilters }) {
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
-    const newView = { name: viewName, id: uuidv4(), filters };
-    setSavedViews([...savedViews, newView]);
-    setSelectedView(newView);
+    if (isEditMode) {
+      const updatedViews = savedViews.map((view) =>
+        view.id === selectedView.id
+          ? { ...view, name: viewName, filters }
+          : view
+      );
+      setSavedViews(updatedViews);
+      setSelectedView({ ...selectedView, name: viewName, filters });
+    } else {
+      const newView = { name: viewName, id: uuidv4(), filters };
+      setSavedViews([...savedViews, newView]);
+      setSelectedView(newView);
+    }
+    setIsEditMode(false);
     setIsPopupOpen(false);
   };
 
@@ -66,14 +76,8 @@ export default function Filter({ filters, setFilters }) {
   };
 
   const handleCloseContextMenu = () => {
-    setSelectedView(null);
     setContextMenu(null);
   };
-
-  //   const handleEditView = () => {
-  //     console.log("Bearbeiten");
-  //     handleCloseContextMenu();
-  //   };
 
   const handleDeleteView = () => {
     const updatedSavedViews = savedViews.filter(
@@ -85,8 +89,6 @@ export default function Filter({ filters, setFilters }) {
   };
 
   function updateSelectedView(view) {
-    console.log("selectedView: ", selectedView);
-    console.log("view: ", view);
     if (!selectedView) {
       setSelectedView(view);
     } else if (selectedView.id === view.id) {
@@ -99,6 +101,14 @@ export default function Filter({ filters, setFilters }) {
   const handleDuplicateView = () => {
     setViewName(`${selectedView.name} - Copy`);
     setFilters(selectedView.filters);
+    setIsPopupOpen(true);
+    handleCloseContextMenu();
+  };
+
+  const handleEditView = () => {
+    setViewName(selectedView.name);
+    setFilters(selectedView.filters);
+    setIsEditMode(true);
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
@@ -128,6 +138,7 @@ export default function Filter({ filters, setFilters }) {
             : undefined
         }
       >
+        <MenuItem onClick={handleEditView}>Bearbeiten</MenuItem>
         <MenuItem onClick={handleDuplicateView}>Duplizieren</MenuItem>
         <MenuItem onClick={handleDeleteView}>Löschen</MenuItem>
       </Menu>
