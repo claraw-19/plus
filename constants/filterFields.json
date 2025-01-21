@@ -2,82 +2,82 @@
   {
     "object": "user",
     "name": "firstname",
-    "diplay": "Vorname",
+    "display": "Vorname",
     "type": "string"
   },
   {
     "object": "user",
     "name": "lastname",
-    "diplay": "Nachname",
+    "display": "Nachname",
     "type": "string"
   },
-  { "object": "user", "name": "email", "diplay": "E-Mail", "type": "string" },
-  { "object": "user", "name": "id", "diplay": "User-ID", "type": "string" },
+  { "object": "user", "name": "email", "display": "E-Mail", "type": "string" },
+  { "object": "user", "name": "id", "display": "User-ID", "type": "string" },
 
   {
     "object": "singleOrder",
     "name": "id",
-    "diplay": "ID",
+    "display": "ID",
     "type": "string"
   },
   {
     "object": "singleOrder",
     "name": "accessCodesId",
-    "diplay": "Lizenzcode",
+    "display": "Lizenzcode",
     "type": "string"
   },
   {
     "object": "singleOrder",
     "name": "date",
-    "diplay": "Startdatum",
+    "display": "Startdatum",
     "type": "date"
   },
   {
     "object": "singleOrder",
     "name": "status",
-    "diplay": "Status",
+    "display": "Status",
     "type": "string"
   },
   {
     "object": "singleOrder",
     "name": "payment",
-    "diplay": "Zahlungsart",
+    "display": "Zahlungsart",
     "type": "string"
   },
   {
     "object": "singleOrder",
     "name": "price",
-    "diplay": "Preis",
+    "display": "Preis",
     "type": "number"
   },
   {
     "object": "singleOrder",
     "name": "enddate",
-    "diplay": "Enddatum",
+    "display": "Enddatum",
     "type": "date"
   },
   {
     "object": "singleOrder",
     "name": "cancellationDate",
-    "diplay": "Stornierungsdatum",
+    "display": "Stornierungsdatum",
     "type": "date"
   },
   {
     "object": "singleOrder",
     "name": "nextPaymentDate",
-    "diplay": "Nächste Zahlungsdatum",
+    "display": "Nächste Zahlungsdatum",
     "type": "date"
   },
   {
     "object": "school",
     "name": "name",
-    "diplay": "Schule",
+    "display": "Schule",
     "type": "string"
   },
   {
     "object": "school",
     "name": "id",
-    "diplay": "Schul-ID",
+    "display": "Schul-ID",
     "type": "string"
   }
 ]

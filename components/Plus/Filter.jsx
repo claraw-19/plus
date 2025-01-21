@@ -8,11 +8,15 @@ import FilterContainer from "@/components/Plus/FilterContainer";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { TextField, Button } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
+import { Menu, MenuItem } from "@mui/material";
 
 export default function Filter({ filters, setFilters }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
   const [savedViews, setSavedViews] = useState([]);
+  const [selectedView, setSelectedView] = useState(null);
+  const [contextMenu, setContextMenu] = useState(null);
+  console.log(savedViews);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -29,37 +33,78 @@ export default function Filter({ filters, setFilters }) {
     setFilters(newFilters);
   };
 
-  const handleOpen = () => {
+  const handleOpenPopup = () => {
     setFilters([{ field: "", filterMethod: "", value: "" }]);
-    setIsOpen(true);
+    setIsPopupOpen(true);
     setViewName("");
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
   };
 
   const handleSaveView = () => {
     if (!viewName.trim()) {
-      alert("Bitte geben Sie einen Namen für die Ansicht ein.");
+      alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
     setSavedViews([...savedViews, { name: viewName, filters }]);
-    setIsOpen(false);
+    setIsPopupOpen(false);
+  };
+
+  const handleContextMenu = (event, view) => {
+    event.preventDefault();
+    setSelectedView(view);
+    setContextMenu({
+      mouseX: event.clientX,
+      mouseY: event.clientY,
+    });
+  };
+
+  const handleCloseContextMenu = () => {
+    setSelectedView(null);
+    setContextMenu(null);
+  };
+
+  const handleEditView = () => {
+    console.log("Bearbeiten");
+    handleCloseContextMenu();
+  };
+
+  const handleDeleteView = () => {
+    console.log("Löschen");
+    handleCloseContextMenu();
   };
 
   return (
     <>
       <Styled.SalesViewPanel>
         {savedViews.map((view, index) => (
-          <Styled.ViewButton $active={view.id === index} key={view.id}>
+          <Styled.ViewButton
+            $active={view.id === index}
+            key={view.id}
+            onContextMenu={(event) => handleContextMenu(event, view)}
+          >
             {view.name}
-          </Styled.ViewButton>
+          </Styled.ViewButton> //onclick für aktiv machen fehlt noch
         ))}
-        <Styled.PlaylistAddIcon onClick={handleOpen} />
+        <Styled.PlaylistAddIcon onClick={handleOpenPopup} />
       </Styled.SalesViewPanel>
+      <Menu
+        open={Boolean(selectedView)}
+        onClose={handleCloseContextMenu}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          contextMenu
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        <MenuItem onClick={handleEditView}>Bearbeiten</MenuItem>
+        <MenuItem onClick={handleDeleteView}>Löschen</MenuItem>
+      </Menu>
 
-      <Modal open={isOpen} onClose={handleClose}>
+      <Modal open={isPopupOpen} onClose={handleClosePopup}>
         <Styled.ModalContent>
           <TextField
             label="Ansicht"
@@ -81,7 +126,7 @@ export default function Filter({ filters, setFilters }) {
           <div style={{ marginTop: "20px", textAlign: "right" }}>
             <SaveButton title="Speichern" onClick={handleSaveView} />
           </div>
-          <Styled.ClearPopupIcon onClick={handleClose} />
+          <Styled.ClearPopupIcon onClick={handleClosePopup} />
         </Styled.ModalContent>
       </Modal>
     </>
