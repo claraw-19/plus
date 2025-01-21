@@ -70,10 +70,10 @@ export default function Filter({ filters, setFilters }) {
     setContextMenu(null);
   };
 
-  const handleEditView = () => {
-    console.log("Bearbeiten");
-    handleCloseContextMenu();
-  };
+  //   const handleEditView = () => {
+  //     console.log("Bearbeiten");
+  //     handleCloseContextMenu();
+  //   };
 
   const handleDeleteView = () => {
     const updatedSavedViews = savedViews.filter(
@@ -95,6 +95,13 @@ export default function Filter({ filters, setFilters }) {
       setSelectedView(view);
     }
   }
+
+  const handleDuplicateView = () => {
+    setViewName(`${selectedView.name} - Copy`);
+    setFilters(selectedView.filters);
+    setIsPopupOpen(true);
+    handleCloseContextMenu();
+  };
 
   return (
     <>
@@ -121,7 +128,7 @@ export default function Filter({ filters, setFilters }) {
             : undefined
         }
       >
-        <MenuItem onClick={handleEditView}>Bearbeiten</MenuItem>
+        <MenuItem onClick={handleDuplicateView}>Duplizieren</MenuItem>
         <MenuItem onClick={handleDeleteView}>Löschen</MenuItem>
       </Menu>
 
