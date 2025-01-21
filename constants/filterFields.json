@@ -1,13 +1,13 @@
 [
   {
     "object": "user",
-    "name": "firstname",
+    "name": "firstName",
     "display": "Vorname",
     "type": "string"
   },
   {
     "object": "user",
-    "name": "lastname",
+    "name": "lastName",
     "display": "Nachname",
     "type": "string"
   },

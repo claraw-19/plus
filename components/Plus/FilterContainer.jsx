@@ -20,11 +20,16 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
           onChange={(e) => setFilter({ ...filter, field: e.target.value })}
           displayEmpty
         >
-          <MenuItem value="" disabled style={{ display: "none" }}>
+          <MenuItem
+            value=""
+            key="placeholder-field"
+            disabled
+            style={{ display: "none" }}
+          >
             Feld
           </MenuItem>
           {filterFields.map((field) => (
-            <MenuItem key={field.name} value={field}>
+            <MenuItem key={field.name + field.object} value={field}>
               {field.display}
             </MenuItem>
           ))}
@@ -39,7 +44,12 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
           }
           displayEmpty
         >
-          <MenuItem value="" disabled style={{ display: "none" }}>
+          <MenuItem
+            value=""
+            key="placeholder-method"
+            disabled
+            style={{ display: "none" }}
+          >
             Filtermethode
           </MenuItem>
           {filter?.field?.type &&
@@ -48,7 +58,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
                 method.supportedTypes.includes(filter.field.type)
               )
               .map((method) => (
-                <MenuItem value={method} key={method}>
+                <MenuItem value={method} key={method.name}>
                   {method.name}
                 </MenuItem>
               ))}

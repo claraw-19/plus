@@ -91,10 +91,13 @@ export default function Filter({ filters, setFilters }) {
   function updateSelectedView(view) {
     if (!selectedView) {
       setSelectedView(view);
+      setFilters(view.filters);
     } else if (selectedView.id === view.id) {
       setSelectedView(null);
+      setFilters([]);
     } else {
       setSelectedView(view);
+      setFilters(view.filters);
     }
   }
 
@@ -161,6 +164,7 @@ export default function Filter({ filters, setFilters }) {
               onDelete={() => handleDeleteFilter(index)}
             />
           ))}
+
           <Styled.AddCircleIcon onClick={handleAddFilter} />
           <div style={{ marginTop: "20px", textAlign: "right" }}>
             <SaveButton title="Speichern" onClick={handleSaveView} />
