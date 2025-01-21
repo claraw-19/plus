@@ -25,7 +25,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
           </MenuItem>
           {filterFields.map((field) => (
             <MenuItem key={field.name} value={field}>
-              {field.diplay}
+              {field.display}
             </MenuItem>
           ))}
         </Select>

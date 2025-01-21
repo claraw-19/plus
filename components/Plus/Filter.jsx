@@ -76,7 +76,11 @@ export default function Filter({ filters, setFilters }) {
   };
 
   const handleDeleteView = () => {
-    console.log("Löschen");
+    const updatedSavedViews = savedViews.filter(
+      (view) => view.id !== selectedView.id
+    );
+    setSavedViews(updatedSavedViews);
+    setSelectedView(null);
     handleCloseContextMenu();
   };
 
