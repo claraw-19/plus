@@ -29,6 +29,7 @@
     "react-dom": "^18.3.1",
     "react-virtualized": "^9.22.5",
     "styled-components": "^6.1.13",
+    "uuid": "^11.0.5",
     "yup": "^1.6.1"
   },
   "devDependencies": {

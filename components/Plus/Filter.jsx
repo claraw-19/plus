@@ -9,6 +9,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { TextField, Button } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 import { Menu, MenuItem } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Filter({ filters, setFilters }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function Filter({ filters, setFilters }) {
   const [savedViews, setSavedViews] = useState([]);
   const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
-  console.log(savedViews);
+
+  console.log("savedViews: ", savedViews);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -48,7 +50,9 @@ export default function Filter({ filters, setFilters }) {
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
-    setSavedViews([...savedViews, { name: viewName, filters }]);
+    const newView = { name: viewName, id: uuidv4(), filters };
+    setSavedViews([...savedViews, newView]);
+    setSelectedView(newView);
     setIsPopupOpen(false);
   };
 
@@ -76,22 +80,35 @@ export default function Filter({ filters, setFilters }) {
     handleCloseContextMenu();
   };
 
+  function updateSelectedView(view) {
+    console.log("selectedView: ", selectedView);
+    console.log("view: ", view);
+    if (!selectedView) {
+      setSelectedView(view);
+    } else if (selectedView.id === view.id) {
+      setSelectedView(null);
+    } else {
+      setSelectedView(view);
+    }
+  }
+
   return (
     <>
       <Styled.SalesViewPanel>
         {savedViews.map((view, index) => (
           <Styled.ViewButton
-            $active={view.id === index}
+            $active={view.id === selectedView?.id}
             key={view.id}
+            onClick={() => updateSelectedView(view)}
             onContextMenu={(event) => handleContextMenu(event, view)}
           >
             {view.name}
-          </Styled.ViewButton> //onclick für aktiv machen fehlt noch
+          </Styled.ViewButton>
         ))}
         <Styled.PlaylistAddIcon onClick={handleOpenPopup} />
       </Styled.SalesViewPanel>
       <Menu
-        open={Boolean(selectedView)}
+        open={selectedView}
         onClose={handleCloseContextMenu}
         anchorReference="anchorPosition"
         anchorPosition={
