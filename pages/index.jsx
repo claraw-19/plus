@@ -124,6 +124,13 @@ export default function Plus() {
           return fieldValue.toLowerCase().includes(filter.value.toLowerCase());
         });
       }
+      if (filter.filterMethod.id === "notContains") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          return !fieldValue.toLowerCase().includes(filter.value.toLowerCase());
+        });
+      }
       console.log("result: ", filterResult);
       console.log("filterline: ", filter);
     }
