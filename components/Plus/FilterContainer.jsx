@@ -32,7 +32,14 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
             Feld
           </MenuItem>
           {filterFields.map((field) => (
-            <MenuItem key={field.name + field.object} value={field}>
+            <MenuItem
+              key={field.name + field.object}
+              value={field}
+              sx={{
+                color: "#5A5A5A",
+                fontFamily: theme.typography.fontFamily.regular,
+              }}
+            >
               {field.display}
             </MenuItem>
           ))}
@@ -64,7 +71,14 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
                 method.supportedTypes.includes(filter.field.type)
               )
               .map((method) => (
-                <MenuItem value={method} key={method.name}>
+                <MenuItem
+                  value={method}
+                  key={method.name}
+                  sx={{
+                    color: "#5A5A5A",
+                    fontFamily: theme.typography.fontFamily.regular,
+                  }}
+                >
                   {method.name}
                 </MenuItem>
               ))}

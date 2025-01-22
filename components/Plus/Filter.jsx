@@ -150,9 +150,33 @@ export default function Filter({
             : undefined
         }
       >
-        <MenuItem onClick={handleEditView}>Bearbeiten</MenuItem>
-        <MenuItem onClick={handleDuplicateView}>Duplizieren</MenuItem>
-        <MenuItem onClick={handleDeleteView}>Löschen</MenuItem>
+        <MenuItem
+          onClick={handleEditView}
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
+        >
+          Bearbeiten
+        </MenuItem>
+        <MenuItem
+          onClick={handleDuplicateView}
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
+        >
+          Duplizieren
+        </MenuItem>
+        <MenuItem
+          onClick={handleDeleteView}
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
+        >
+          Löschen
+        </MenuItem>
       </Menu>
 
       <Modal open={isPopupOpen} onClose={handleClosePopup}>
