@@ -116,6 +116,9 @@ export default function Plus() {
               const [day, month, year] = filter.value.split(".");
               filterDate = `${year}-${month}-${day}`;
             }
+            if (!fieldValue) {
+              return false;
+            }
             const fieldValueISO = new Date(fieldValue)
               .toISOString()
               .split("T")[0];
@@ -143,6 +146,9 @@ export default function Plus() {
             } else {
               const [day, month, year] = filter.value.split(".");
               filterDate = `${year}-${month}-${day}`;
+            }
+            if (!fieldValue) {
+              return false;
             }
             const fieldValueISO = new Date(fieldValue)
               .toISOString()
