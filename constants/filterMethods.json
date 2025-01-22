@@ -43,15 +43,5 @@
     "name": "beginnt mit",
     "id": "startsWith",
     "supportedTypes": ["string"]
-  },
-  {
-    "name": "Ja",
-    "id": "isTrue",
-    "supportedTypes": ["boolean"]
-  },
-  {
-    "name": "Nein",
-    "id": "isFalse",
-    "supportedTypes": ["boolean"]
   }
 ]

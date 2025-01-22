@@ -83,6 +83,47 @@ export default function Plus() {
           }
         });
       }
+      if (filter.filterMethod.id === "lessOrEqual") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          if (filter.field.type === "number") {
+            let filterValueAsNumber;
+            if (filter.value.includes(",")) {
+              filterValueAsNumber = Number(filter.value.replace(",", "."));
+            } else {
+              filterValueAsNumber = Number(filter.value);
+            }
+            return fieldValue <= filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            //fehlt noch
+          }
+        });
+      }
+      if (filter.filterMethod.id === "greaterOrEqual") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          if (filter.field.type === "number") {
+            let filterValueAsNumber;
+            if (filter.value.includes(",")) {
+              filterValueAsNumber = Number(filter.value.replace(",", "."));
+            } else {
+              filterValueAsNumber = Number(filter.value);
+            }
+            return fieldValue >= filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            //fehlt noch
+          }
+        });
+      }
+      if (filter.filterMethod.id === "contains") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          return fieldValue.toLowerCase().includes(filter.value.toLowerCase());
+        });
+      }
       console.log("result: ", filterResult);
       console.log("filterline: ", filter);
     }
