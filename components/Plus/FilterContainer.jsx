@@ -3,20 +3,25 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import filterFields from "@/constants/filterFields.json";
 import filterMethods from "@/constants/filterMethods.json";
+import { useContext } from "react";
 
 export default function FilterContainer({ filter, setFilter, onDelete }) {
+  const theme = useContext(ThemeContext);
   return (
     <Styled.Container>
       <FormControl fullWidth>
-        <Styled.InputLabel>Feld</Styled.InputLabel>
         <Select
           value={filter.field}
           onChange={(e) => setFilter({ ...filter, field: e.target.value })}
           displayEmpty
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
         >
           <MenuItem
             value=""
@@ -34,13 +39,16 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         </Select>
       </FormControl>
       <FormControl fullWidth>
-        <Styled.InputLabel>Filtermethode</Styled.InputLabel>
         <Select
           value={filter.filterMethod}
           onChange={(e) =>
             setFilter({ ...filter, filterMethod: e.target.value })
           }
           displayEmpty
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
         >
           <MenuItem
             value=""

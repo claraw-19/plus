@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -10,6 +10,7 @@ import { TextField, Button } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 import { Menu, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
 
 export default function Filter({
   filters,
@@ -23,6 +24,8 @@ export default function Filter({
   const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const theme = useContext(ThemeContext);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
