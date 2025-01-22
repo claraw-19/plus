@@ -71,12 +71,25 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         </Select>
       </FormControl>
       <TextField
+        InputProps={{
+          sx: {
+            color: "#5a5a5a",
+            fontFamily: theme.typography.fontFamily.regular,
+          },
+        }}
+        InputLabelProps={{
+          sx: {
+            color: "#5a5a5a",
+            fontFamily: theme.typography.fontFamily.regular,
+          },
+        }}
         label="Wert"
         variant="outlined"
         value={filter.value}
         onChange={(e) => setFilter({ ...filter, value: e.target.value })}
         fullWidth
       />
+
       <Styled.ClearFilterIcon onClick={onDelete} />
     </Styled.Container>
   );

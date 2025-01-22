@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import FilterContainer from "@/components/Plus/FilterContainer";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Input } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 import { Menu, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
@@ -157,14 +157,20 @@ export default function Filter({
 
       <Modal open={isPopupOpen} onClose={handleClosePopup}>
         <Styled.ModalContent>
-          <TextField
+          <Input
             label="Ansicht"
             variant="outlined"
             value={viewName}
             onChange={(e) => setViewName(e.target.value)}
             size="small"
-            style={{ width: "300px", marginBottom: "20px" }}
+            style={{
+              width: "300px",
+              marginBottom: "20px",
+              color: "#5a5a5a",
+              fontFamily: theme.typography.fontFamily.regular,
+            }}
           />
+
           {filters.map((filter, index) => (
             <FilterContainer
               key={index}
