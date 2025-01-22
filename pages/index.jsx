@@ -23,6 +23,24 @@ export default function Plus() {
     let filterResult = allSingleOrdersWithDependencies;
     for (const filter of filters) {
       console.log("filter: ", filter);
+      if (filter.filterMethod.id === "isNotEmpty") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          if (filter.field.type === "string") {
+            return fieldValue;
+          }
+        });
+      }
+      if (filter.filterMethod.id === "isEmpty") {
+        filterResult = filterResult.filter((singleOrder) => {
+          const fieldValue =
+            singleOrder[filter.field.object][filter.field.name];
+          if (filter.field.type === "string") {
+            return !fieldValue;
+          }
+        });
+      }
       if (filter.filterMethod.id === "equals") {
         filterResult = filterResult.filter((singleOrder) => {
           const fieldValue =
