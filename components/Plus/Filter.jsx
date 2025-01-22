@@ -11,7 +11,12 @@ import SaveButton from "@/components/common/buttons/PrimaryButton";
 import { Menu, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Filter({ filters, setFilters }) {
+export default function Filter({
+  filters,
+  setFilters,
+  setSingleOrders,
+  allSingleOrdersWithDependencies,
+}) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
   const [savedViews, setSavedViews] = useState([]);
@@ -86,6 +91,7 @@ export default function Filter({ filters, setFilters }) {
     setSavedViews(updatedSavedViews);
     setSelectedView(null);
     handleCloseContextMenu();
+    setSingleOrders(allSingleOrdersWithDependencies);
   };
 
   function updateSelectedView(view) {

@@ -30,7 +30,12 @@ export default function Plus() {
     <>
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
-        <Filter filters={filters} setFilters={setFilters} />
+        <Filter
+          filters={filters}
+          setFilters={setFilters}
+          setSingleOrders={setSingleOrders}
+          allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
+        />
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={singleOrders} />
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
