@@ -17,8 +17,6 @@ export default function Plus() {
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
-    console.log("Filter or search changed");
-
     // filterlogik
     let filterResult = allSingleOrdersWithDependencies;
     for (const filter of filters) {
@@ -27,18 +25,14 @@ export default function Plus() {
         filterResult = filterResult.filter((singleOrder) => {
           const fieldValue =
             singleOrder[filter.field.object][filter.field.name];
-          if (filter.field.type === "string") {
-            return fieldValue;
-          }
+          return fieldValue;
         });
       }
       if (filter.filterMethod.id === "isEmpty") {
         filterResult = filterResult.filter((singleOrder) => {
           const fieldValue =
             singleOrder[filter.field.object][filter.field.name];
-          if (filter.field.type === "string") {
-            return !fieldValue;
-          }
+          return !fieldValue;
         });
       }
       if (filter.filterMethod.id === "equals") {
@@ -114,7 +108,18 @@ export default function Plus() {
             }
             return fieldValue <= filterValueAsNumber;
           } else if (filter.field.type === "date") {
-            //fehlt noch
+            let filterDate;
+            if (filter.value.toLowerCase() === "heute") {
+              const today = new Date();
+              filterDate = today.toISOString().split("T")[0];
+            } else {
+              const [day, month, year] = filter.value.split(".");
+              filterDate = `${year}-${month}-${day}`;
+            }
+            const fieldValueISO = new Date(fieldValue)
+              .toISOString()
+              .split("T")[0];
+            return fieldValueISO <= filterDate;
           }
         });
       }
@@ -131,7 +136,18 @@ export default function Plus() {
             }
             return fieldValue >= filterValueAsNumber;
           } else if (filter.field.type === "date") {
-            //fehlt noch
+            let filterDate;
+            if (filter.value.toLowerCase() === "heute") {
+              const today = new Date();
+              filterDate = today.toISOString().split("T")[0];
+            } else {
+              const [day, month, year] = filter.value.split(".");
+              filterDate = `${year}-${month}-${day}`;
+            }
+            const fieldValueISO = new Date(fieldValue)
+              .toISOString()
+              .split("T")[0];
+            return fieldValueISO >= filterDate;
           }
         });
       }
