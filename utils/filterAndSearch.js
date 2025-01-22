@@ -1,11 +1,8 @@
-export default function filterAndSearch({
-  allSingleOrdersWithDependencies,
-  filters,
-}) {
-  // filterlogik
+import Fuse from "fuse.js";
+
+export function filter(allSingleOrdersWithDependencies, filters) {
   let filterResult = allSingleOrdersWithDependencies;
   for (const filter of filters) {
-    console.log("filter: ", filter);
     if (filter.filterMethod.id === "isNotEmpty") {
       filterResult = filterResult.filter((singleOrder) => {
         const fieldValue = singleOrder[filter.field.object][filter.field.name];
@@ -154,11 +151,11 @@ export default function filterAndSearch({
         return fieldValue.toLowerCase().startsWith(filter.value.toLowerCase());
       });
     }
-    console.log("result: ", filterResult);
-    console.log("filterline: ", filter);
   }
+  return filterResult;
+}
 
-  // suchlogik
+export function search(searchTerm, filterResult) {
   let searchResult = filterResult;
   if (searchTerm) {
     const fuse = new Fuse(filterResult, {
@@ -178,6 +175,5 @@ export default function filterAndSearch({
     searchResult = fuse.search(searchTerm).map((result) => result.item);
   }
 
-  // setFilteredS......
-  setFilteredSingleOrders(searchResult);
+  return searchResult;
 }
