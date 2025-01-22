@@ -9,8 +9,6 @@ import filterFields from "@/constants/filterFields.json";
 import filterMethods from "@/constants/filterMethods.json";
 
 export default function FilterContainer({ filter, setFilter, onDelete }) {
-  console.log(filter);
-
   return (
     <Styled.Container>
       <FormControl fullWidth>
