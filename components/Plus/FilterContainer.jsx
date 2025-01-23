@@ -13,24 +13,27 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
   const theme = useContext(ThemeContext);
   return (
     <Styled.Container>
-      <FormControl fullWidth>
+      <FormControl fullWidth variant="outlined">
+        <InputLabel
+          id="select-label"
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
+          shrink={Boolean(filter.field)}
+        >
+          Feld
+        </InputLabel>
         <Select
+          labelId="select-label"
           value={filter.field}
           onChange={(e) => setFilter({ ...filter, field: e.target.value })}
-          displayEmpty
+          label="Feld"
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
           }}
         >
-          <MenuItem
-            value=""
-            key="placeholder-field"
-            disabled
-            style={{ display: "none" }}
-          >
-            Feld
-          </MenuItem>
           {filterFields.map((field) => (
             <MenuItem
               key={field.name + field.object}
@@ -45,13 +48,24 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth>
+
+      <FormControl fullWidth variant="outlined">
+        <InputLabel
+          id="filter-method-label"
+          sx={{
+            color: "#5A5A5A",
+            fontFamily: theme.typography.fontFamily.regular,
+          }}
+        >
+          Filtermethode
+        </InputLabel>
         <Select
+          labelId="filter-method-label"
           value={filter.filterMethod}
           onChange={(e) =>
             setFilter({ ...filter, filterMethod: e.target.value })
           }
-          displayEmpty
+          label="Filtermethode"
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
@@ -84,6 +98,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
               ))}
         </Select>
       </FormControl>
+
       <TextField
         InputProps={{
           sx: {
