@@ -3,8 +3,62 @@ import SingleOrderCard from "@/components/Plus/SingleOrderCard";
 import styled from "styled-components";
 import SingleOrdersListHeader from "@/components/Plus/SingleOrderListHeader";
 import SearchBar from "@/components/Plus/SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import KPI from "@/components/Plus/Kpi";
+import Filter from "@/components/Plus/Filter";
+import { filter, search } from "@/utils/filterAndSearch";
+
+export default function Plus() {
+  const [singleOrders, setSingleOrders] = useState(
+    allSingleOrdersWithDependencies
+  );
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState([]);
+
+  useEffect(() => {
+    const filteredSingleOrders = filter(
+      allSingleOrdersWithDependencies,
+      filters
+    );
+
+    const searchedSingleOrders = search(searchTerm, filteredSingleOrders);
+    setSingleOrders(searchedSingleOrders);
+  }, [filters, searchTerm]);
+
+  return (
+    <>
+      <Styled.Header>
+        <h1>PLUS-Lizenzen</h1>
+        <Filter
+          filters={filters}
+          setFilters={setFilters}
+          setSingleOrders={setSingleOrders}
+          allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
+        />
+        <Styled.KPIAndSearchWrapper>
+          <KPI singleOrdersWithDependencies={singleOrders} />
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        </Styled.KPIAndSearchWrapper>
+
+        <SingleOrdersListHeader />
+      </Styled.Header>
+      <Styled.singleOrdersList>
+        {singleOrders.length > 0 ? (
+          singleOrders.map((singleOrderWithDependencies) => (
+            <li key={singleOrderWithDependencies.singleOrder.id}>
+              <SingleOrderCard
+                singleOrderWithDependencies={singleOrderWithDependencies}
+              />
+            </li>
+          ))
+        ) : (
+          <p>Keine Lizenzen gefunden.</p>
+        )}
+      </Styled.singleOrdersList>
+    </>
+  );
+}
 
 const Styled = {
   singleOrdersList: styled.ul`
@@ -12,7 +66,7 @@ const Styled = {
     margin: 0;
     padding: 0 16px;
     overflow-y: auto;
-    height: calc(100vh - 247px);
+    height: calc(100vh - 320px);
   `,
 
   Header: styled.div`
@@ -30,39 +84,3 @@ const Styled = {
     gap: 1rem;
   `,
 };
-
-export default function Plus() {
-  const [filteredSingleOrders, setFilteredSingleOrders] = useState(
-    allSingleOrdersWithDependencies
-  );
-
-  return (
-    <>
-      <Styled.Header>
-        <h1>PLUS-Lizenzen</h1>
-        <Styled.KPIAndSearchWrapper>
-          <KPI singleOrdersWithDependencies={filteredSingleOrders} />
-          <SearchBar
-            singleOrdersWithDependencies={allSingleOrdersWithDependencies}
-            onSearch={setFilteredSingleOrders}
-          />
-        </Styled.KPIAndSearchWrapper>
-
-        <SingleOrdersListHeader />
-      </Styled.Header>
-      <Styled.singleOrdersList>
-        {filteredSingleOrders.length > 0 ? (
-          filteredSingleOrders.map((singleOrderWithDependencies) => (
-            <li key={singleOrderWithDependencies.singleOrder.id}>
-              <SingleOrderCard
-                singleOrderWithDependencies={singleOrderWithDependencies}
-              />
-            </li>
-          ))
-        ) : (
-          <p>Keine Bestellungen gefunden.</p>
-        )}
-      </Styled.singleOrdersList>
-    </>
-  );
-}

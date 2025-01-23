@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.2.1",
     "@mui/lab": "^5.0.0-alpha.175",
-    "@mui/material": "^6.2.1",
+    "@mui/material": "^6.4.0",
     "@mui/styles": "^6.2.1",
     "@mui/x-date-pickers": "^7.23.3",
     "@tanstack/react-query": "^5.62.8",
@@ -29,6 +29,7 @@
     "react-dom": "^18.3.1",
     "react-virtualized": "^9.22.5",
     "styled-components": "^6.1.13",
+    "uuid": "^11.0.5",
     "yup": "^1.6.1"
   },
   "devDependencies": {

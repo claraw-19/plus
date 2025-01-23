@@ -1,0 +1,108 @@
+[
+  {
+    "key": 1,
+    "object": "user",
+    "name": "firstName",
+    "display": "Vorname",
+    "type": "string"
+  },
+  {
+    "key": 2,
+    "object": "user",
+    "name": "lastName",
+    "display": "Nachname",
+    "type": "string"
+  },
+  {
+    "key": 3,
+    "object": "user",
+    "name": "email",
+    "display": "E-Mail",
+    "type": "string"
+  },
+  {
+    "key": 4,
+    "object": "user",
+    "name": "id",
+    "display": "User-ID",
+    "type": "string"
+  },
+
+  {
+    "key": 5,
+    "object": "singleOrder",
+    "name": "id",
+    "display": "ID",
+    "type": "string"
+  },
+  {
+    "key": 6,
+    "object": "singleOrder",
+    "name": "accessCodesId",
+    "display": "Lizenzcode",
+    "type": "string"
+  },
+  {
+    "key": 7,
+    "object": "singleOrder",
+    "name": "date",
+    "display": "Startdatum",
+    "type": "date"
+  },
+  {
+    "key": 8,
+    "object": "singleOrder",
+    "name": "status",
+    "display": "Status",
+    "type": "string"
+  },
+  {
+    "key": 9,
+    "object": "singleOrder",
+    "name": "payment",
+    "display": "Zahlungsart",
+    "type": "string"
+  },
+  {
+    "key": 10,
+    "object": "singleOrder",
+    "name": "price",
+    "display": "Preis",
+    "type": "number"
+  },
+  {
+    "key": 11,
+    "object": "singleOrder",
+    "name": "endDate",
+    "display": "Enddatum",
+    "type": "date"
+  },
+  {
+    "key": 12,
+    "object": "singleOrder",
+    "name": "cancellationDate",
+    "display": "Stornierungsdatum",
+    "type": "date"
+  },
+  {
+    "key": 13,
+    "object": "singleOrder",
+    "name": "nextPaymentDate",
+    "display": "Nächste Zahlungsdatum",
+    "type": "date"
+  },
+  {
+    "key": 14,
+    "object": "school",
+    "name": "name",
+    "display": "Schule",
+    "type": "string"
+  },
+  {
+    "key": 15,
+    "object": "school",
+    "name": "id",
+    "display": "Schul-ID",
+    "type": "string"
+  }
+]

@@ -8,46 +8,6 @@ import EventIcon from "@mui/icons-material/Event";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import EventBusyIcon from "@mui/icons-material/EventBusy";
 
-const Styled = {
-  DetailsContainer: styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 20px 0 20px;
-    border-bottom: 1px solid #ccc;
-  `,
-
-  DetailsData: styled.p`
-    flex: 1;
-  `,
-
-  IconTextWrapper: styled.div`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
-  `,
-
-  HoverEffect: styled.div`
-    position: relative;
-    display: inline-block;
-    &:hover::after {
-      content: "${(props) => props.$description}";
-      position: absolute;
-      bottom: -25px;
-      transform: translateX(-40%);
-      background-color: ${({ theme }) => theme.colors.grey2};
-      color: ${({ theme }) => theme.colors.white};
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 12px;
-      z-index: 1;
-    }
-  `,
-};
-
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
     ? new Date(singleOrderWithDependencies.singleOrder.endDate)
@@ -130,3 +90,43 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
     </Styled.DetailsContainer>
   );
 }
+
+const Styled = {
+  DetailsContainer: styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 20px 0 20px;
+    border-bottom: 1px solid #ccc;
+  `,
+
+  DetailsData: styled.p`
+    flex: 1;
+  `,
+
+  IconTextWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  `,
+
+  HoverEffect: styled.div`
+    position: relative;
+    display: inline-block;
+    &:hover::after {
+      content: "${(props) => props.$description}";
+      position: absolute;
+      bottom: -25px;
+      transform: translateX(-40%);
+      background-color: ${({ theme }) => theme.colors.grey2};
+      color: ${({ theme }) => theme.colors.white};
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 1;
+    }
+  `,
+};
