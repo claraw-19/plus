@@ -12,6 +12,8 @@ import { Menu, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
+import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
+import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
 
 export default function Filter({
   filters,
@@ -156,8 +158,10 @@ export default function Filter({
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
+            gap: 1,
           }}
         >
+          <EditSharpIcon />
           Bearbeiten
         </MenuItem>
         <MenuItem
@@ -165,24 +169,27 @@ export default function Filter({
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
+            gap: 1,
           }}
         >
-          Duplizieren
+          <FileCopySharpIcon /> Duplizieren
         </MenuItem>
         <MenuItem
           onClick={handleDeleteView}
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
+            gap: 1,
           }}
         >
+          <DeleteForeverSharpIcon />
           Löschen
         </MenuItem>
       </Menu>
 
       <Modal open={isPopupOpen} onClose={handleClosePopup}>
         <Styled.ModalContent>
-          <Styled.InputContainer>
+          <Styled.IconWrapper>
             <Input
               label="Ansicht"
               variant="outlined"
@@ -201,7 +208,7 @@ export default function Filter({
                 color: "#5a5a5a",
               }}
             />
-          </Styled.InputContainer>
+          </Styled.IconWrapper>
 
           {filters.map((filter, index) => (
             <FilterContainer
@@ -224,7 +231,7 @@ export default function Filter({
 }
 
 const Styled = {
-  InputContainer: styled.div`
+  IconWrapper: styled.div`
     display: flex;
   `,
 
