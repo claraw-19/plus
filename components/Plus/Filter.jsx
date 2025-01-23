@@ -11,6 +11,7 @@ import SaveButton from "@/components/common/buttons/PrimaryButton";
 import { Menu, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
 
 export default function Filter({
   filters,
@@ -181,19 +182,26 @@ export default function Filter({
 
       <Modal open={isPopupOpen} onClose={handleClosePopup}>
         <Styled.ModalContent>
-          <Input
-            label="Ansicht"
-            variant="outlined"
-            value={viewName}
-            onChange={(e) => setViewName(e.target.value)}
-            size="small"
-            style={{
-              width: "300px",
-              marginBottom: "20px",
-              color: "#5a5a5a",
-              fontFamily: theme.typography.fontFamily.regular,
-            }}
-          />
+          <Styled.InputContainer>
+            <Input
+              label="Ansicht"
+              variant="outlined"
+              value={viewName}
+              onChange={(e) => setViewName(e.target.value)}
+              size="small"
+              style={{
+                width: "300px",
+                marginBottom: "20px",
+                color: "#5a5a5a",
+                fontFamily: theme.typography.fontFamily.regular,
+              }}
+            />
+            <EditSharpIcon
+              style={{
+                color: "#5a5a5a",
+              }}
+            />
+          </Styled.InputContainer>
 
           {filters.map((filter, index) => (
             <FilterContainer
@@ -216,6 +224,10 @@ export default function Filter({
 }
 
 const Styled = {
+  InputContainer: styled.div`
+    display: flex;
+  `,
+
   PlaylistAddIcon: styled(PlaylistAddIcon)`
     font-size: 2rem;
     padding: 10px;
