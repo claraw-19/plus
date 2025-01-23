@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
+import FilterContainer from "@/components/Plus/FilterContainer";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { v4 as uuidv4 } from "uuid";
+import { Button, Input, Menu, MenuItem } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import ClearIcon from "@mui/icons-material/Clear";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import FilterContainer from "@/components/Plus/FilterContainer";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { TextField, Button, Input } from "@mui/material";
-import SaveButton from "@/components/common/buttons/PrimaryButton";
-import { Menu, MenuItem } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
-import { useContext } from "react";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
 import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
+import SaveButton from "@/components/common/buttons/PrimaryButton";
 
 export default function Filter({
   filters,
@@ -27,6 +25,31 @@ export default function Filter({
   const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  useEffect(() => {
+    const savedViewsFromStorage = localStorage.getItem("savedViews");
+    const selectedViewFromStorage = localStorage.getItem("selectedView");
+
+    if (savedViewsFromStorage) {
+      setSavedViews(JSON.parse(savedViewsFromStorage));
+    }
+    if (selectedViewFromStorage) {
+      setSelectedView(JSON.parse(selectedViewFromStorage));
+      setFilters(JSON.parse(selectedViewFromStorage).filters);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("savedViews", JSON.stringify(savedViews));
+  }, [savedViews]);
+
+  useEffect(() => {
+    if (selectedView) {
+      localStorage.setItem("selectedView", JSON.stringify(selectedView));
+    } else {
+      localStorage.removeItem("selectedView");
+    }
+  }, [selectedView]);
 
   const theme = useContext(ThemeContext);
 
