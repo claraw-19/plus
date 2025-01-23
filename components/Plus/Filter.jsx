@@ -40,8 +40,6 @@ export default function Filter({
     }
   }, []);
 
-  console.log("Filters:", filters);
-
   useEffect(() => {
     localStorage.setItem("savedViews", JSON.stringify(savedViews));
   }, [savedViews]);
