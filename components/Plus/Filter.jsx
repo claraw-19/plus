@@ -1,17 +1,17 @@
 import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import FilterContainer from "@/components/Plus/FilterContainer";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { v4 as uuidv4 } from "uuid";
-import { Button, Input, Menu, MenuItem } from "@mui/material";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import ClearIcon from "@mui/icons-material/Clear";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import EditSharpIcon from "@mui/icons-material/EditSharp";
-import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
-import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
+import { Button, Input, Menu, MenuItem, Modal, Box } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
+import {
+  AddCircle as AddCircleIcon,
+  Clear as ClearIcon,
+  PlaylistAdd as PlaylistAddIcon,
+  EditSharp as EditSharpIcon,
+  DeleteForeverSharp as DeleteForeverSharpIcon,
+  FileCopySharp as FileCopySharpIcon,
+} from "@mui/icons-material";
 
 export default function Filter({
   filters,
