@@ -2,156 +2,88 @@ import Fuse from "fuse.js";
 
 export function filter(allSingleOrdersWithDependencies, filters) {
   let filterResult = allSingleOrdersWithDependencies;
+
   for (const filter of filters) {
-    if (filter.filterMethod.id === "isNotEmpty") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        return fieldValue;
-      });
+    if (!filter.field || !filter.field.object || !filter.field.name) {
+      continue;
     }
-    if (filter.filterMethod.id === "isEmpty") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        return !fieldValue;
-      });
-    }
-    if (filter.filterMethod.id === "equals") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        if (filter.field.type === "string") {
-          return fieldValue.toLowerCase() === filter.value.toLowerCase();
-        } else if (filter.field.type === "number") {
-          let filterValueAsNumber;
-          if (filter.value.includes(",")) {
-            filterValueAsNumber = Number(filter.value.replace(",", "."));
-          } else {
-            filterValueAsNumber = Number(filter.value);
+
+    filterResult = filterResult.filter((singleOrder) => {
+      const fieldValue =
+        singleOrder?.[filter.field.object]?.[filter.field.name];
+
+      switch (filter.filterMethod.id) {
+        case "isNotEmpty":
+          return fieldValue;
+        case "isEmpty":
+          return !fieldValue;
+        case "equals":
+          if (filter.field.type === "string") {
+            return fieldValue?.toLowerCase() === filter.value.toLowerCase();
+          } else if (filter.field.type === "number") {
+            const filterValueAsNumber = parseNumber(filter.value);
+            return fieldValue === filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            const filterDate = parseDate(filter.value);
+            return (
+              new Date(fieldValue).toISOString().split("T")[0] === filterDate
+            );
           }
-          return fieldValue === filterValueAsNumber;
-        } else if (filter.field.type === "date") {
-          let filterDate;
-          if (filter.value.toLowerCase() === "heute") {
-            const today = new Date();
-            filterDate = today.toISOString().split("T")[0];
-          } else {
-            const [day, month, year] = filter.value.split(".");
-            filterDate = `${year}-${month}-${day}`;
+          break;
+
+        case "notEquals":
+          if (filter.field.type === "string") {
+            return fieldValue?.toLowerCase() !== filter.value.toLowerCase();
+          } else if (filter.field.type === "number") {
+            const filterValueAsNumber = parseNumber(filter.value);
+            return fieldValue !== filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            const filterDate = parseDate(filter.value);
+            return (
+              new Date(fieldValue).toISOString().split("T")[0] !== filterDate
+            );
           }
-          const fieldValueISO = new Date(fieldValue)
-            .toISOString()
-            .split("T")[0];
-          return fieldValueISO === filterDate;
-        }
-      });
-    }
-    if (filter.filterMethod.id === "notEquals") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        if (filter.field.type === "string") {
-          return fieldValue.toLowerCase() !== filter.value.toLowerCase();
-        } else if (filter.field.type === "number") {
-          let filterValueAsNumber;
-          if (filter.value.includes(",")) {
-            filterValueAsNumber = Number(filter.value.replace(",", "."));
-          } else {
-            filterValueAsNumber = Number(filter.value);
+          break;
+
+        case "lessOrEqual":
+          if (filter.field.type === "number") {
+            const filterValueAsNumber = parseNumber(filter.value);
+            return fieldValue <= filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            const filterDate = parseDate(filter.value);
+            if (!fieldValue) {
+              return false;
+            }
+            return new Date(fieldValue) <= new Date(filterDate);
           }
-          return fieldValue !== filterValueAsNumber;
-        } else if (filter.field.type === "date") {
-          let filterDate;
-          if (filter.value.toLowerCase() === "heute") {
-            const today = new Date();
-            filterDate = today.toISOString().split("T")[0];
-          } else {
-            const [day, month, year] = filter.value.split(".");
-            filterDate = `${year}-${month}-${day}`;
+          break;
+
+        case "greaterOrEqual":
+          if (filter.field.type === "number") {
+            const filterValueAsNumber = parseNumber(filter.value);
+            return fieldValue >= filterValueAsNumber;
+          } else if (filter.field.type === "date") {
+            const filterDate = parseDate(filter.value);
+            return new Date(fieldValue) >= new Date(filterDate);
           }
-          const fieldValueISO = new Date(fieldValue)
-            .toISOString()
-            .split("T")[0];
-          return fieldValueISO !== filterDate;
-        }
-      });
-    }
-    if (filter.filterMethod.id === "lessOrEqual") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        if (filter.field.type === "number") {
-          let filterValueAsNumber;
-          if (filter.value.includes(",")) {
-            filterValueAsNumber = Number(filter.value.replace(",", "."));
-          } else {
-            filterValueAsNumber = Number(filter.value);
-          }
-          return fieldValue <= filterValueAsNumber;
-        } else if (filter.field.type === "date") {
-          let filterDate;
-          if (filter.value.toLowerCase() === "heute") {
-            const today = new Date();
-            filterDate = today.toISOString().split("T")[0];
-          } else {
-            const [day, month, year] = filter.value.split(".");
-            filterDate = `${year}-${month}-${day}`;
-          }
-          if (!fieldValue) {
-            return false;
-          }
-          const fieldValueISO = new Date(fieldValue)
-            .toISOString()
-            .split("T")[0];
-          return fieldValueISO <= filterDate;
-        }
-      });
-    }
-    if (filter.filterMethod.id === "greaterOrEqual") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        if (filter.field.type === "number") {
-          let filterValueAsNumber;
-          if (filter.value.includes(",")) {
-            filterValueAsNumber = Number(filter.value.replace(",", "."));
-          } else {
-            filterValueAsNumber = Number(filter.value);
-          }
-          return fieldValue >= filterValueAsNumber;
-        } else if (filter.field.type === "date") {
-          let filterDate;
-          if (filter.value.toLowerCase() === "heute") {
-            const today = new Date();
-            filterDate = today.toISOString().split("T")[0];
-          } else {
-            const [day, month, year] = filter.value.split(".");
-            filterDate = `${year}-${month}-${day}`;
-          }
-          if (!fieldValue) {
-            return false;
-          }
-          const fieldValueISO = new Date(fieldValue)
-            .toISOString()
-            .split("T")[0];
-          return fieldValueISO >= filterDate;
-        }
-      });
-    }
-    if (filter.filterMethod.id === "contains") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        return fieldValue.toLowerCase().includes(filter.value.toLowerCase());
-      });
-    }
-    if (filter.filterMethod.id === "notContains") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        return !fieldValue.toLowerCase().includes(filter.value.toLowerCase());
-      });
-    }
-    if (filter.filterMethod.id === "startsWith") {
-      filterResult = filterResult.filter((singleOrder) => {
-        const fieldValue = singleOrder[filter.field.object][filter.field.name];
-        return fieldValue.toLowerCase().startsWith(filter.value.toLowerCase());
-      });
-    }
+          break;
+
+        case "contains":
+          return fieldValue?.toLowerCase().includes(filter.value.toLowerCase());
+        case "notContains":
+          return !fieldValue
+            ?.toLowerCase()
+            .includes(filter.value.toLowerCase());
+        case "startsWith":
+          return fieldValue
+            ?.toLowerCase()
+            .startsWith(filter.value.toLowerCase());
+        default:
+          return true;
+      }
+    });
   }
+
   return filterResult;
 }
 
@@ -176,4 +108,15 @@ export function search(searchTerm, filterResult) {
   }
 
   return searchResult;
+}
+
+function parseDate(value) {
+  if (value.toLowerCase() === "heute") {
+    return new Date().toISOString().split("T")[0];
+  }
+  const [day, month, year] = value.split(".");
+  return `${year}-${month}-${day}`;
+}
+function parseNumber(value) {
+  return Number(value.replace(",", "."));
 }
