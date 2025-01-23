@@ -7,10 +7,12 @@ import styled, { ThemeContext } from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import filterFields from "@/constants/filterFields.json";
 import filterMethods from "@/constants/filterMethods.json";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function FilterContainer({ filter, setFilter, onDelete }) {
+  console.log("Filter:", filter);
   const theme = useContext(ThemeContext);
+  const [field, setField] = useState(1);
   return (
     <Styled.Container>
       <FormControl fullWidth variant="outlined">
@@ -26,8 +28,13 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         </InputLabel>
         <Select
           labelId="select-label"
-          value={filter.field}
-          onChange={(e) => setFilter({ ...filter, field: e.target.value })}
+          value={filter.field.key}
+          onChange={(e) => {
+            const field = filterFields.filter(
+              (field) => field.key === e.target.value
+            )[0];
+            setFilter({ ...filter, field });
+          }}
           label="Feld"
           sx={{
             color: "#5A5A5A",
@@ -36,8 +43,8 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         >
           {filterFields.map((field) => (
             <MenuItem
-              key={field.name + field.object}
-              value={field}
+              key={field.key}
+              value={field.key}
               sx={{
                 color: "#5A5A5A",
                 fontFamily: theme.typography.fontFamily.regular,
@@ -61,24 +68,19 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         </InputLabel>
         <Select
           labelId="filter-method-label"
-          value={filter.filterMethod}
-          onChange={(e) =>
-            setFilter({ ...filter, filterMethod: e.target.value })
-          }
+          value={filter.filterMethod.key}
+          onChange={(e) => {
+            const filterMethod = filterMethods.filter(
+              (method) => method.key === e.target.value
+            )[0];
+            setFilter({ ...filter, filterMethod });
+          }}
           label="Filtermethode"
           sx={{
             color: "#5A5A5A",
             fontFamily: theme.typography.fontFamily.regular,
           }}
         >
-          <MenuItem
-            value=""
-            key="placeholder-method"
-            disabled
-            style={{ display: "none" }}
-          >
-            Filtermethode
-          </MenuItem>
           {filter?.field?.type &&
             filterMethods
               .filter((method) =>
@@ -86,7 +88,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
               )
               .map((method) => (
                 <MenuItem
-                  value={method}
+                  value={method.key}
                   key={method.name}
                   sx={{
                     color: "#5A5A5A",

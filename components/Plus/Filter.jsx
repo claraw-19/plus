@@ -34,10 +34,13 @@ export default function Filter({
       setSavedViews(JSON.parse(savedViewsFromStorage));
     }
     if (selectedViewFromStorage) {
-      setSelectedView(JSON.parse(selectedViewFromStorage));
-      setFilters(JSON.parse(selectedViewFromStorage).filters);
+      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
+      setSelectedView(parsedSelectedViewFromStorage);
+      setFilters(parsedSelectedViewFromStorage.filters);
     }
   }, []);
+
+  console.log("Filters:", filters);
 
   useEffect(() => {
     localStorage.setItem("savedViews", JSON.stringify(savedViews));

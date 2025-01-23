@@ -1,45 +1,54 @@
 [
   {
+    "key": 1,
     "name": "ist nicht leer",
     "id": "isNotEmpty",
     "supportedTypes": ["string", "number", "date"]
   },
   {
+    "key": 2,
     "name": "ist leer",
     "id": "isEmpty",
     "supportedTypes": ["string", "number", "date"]
   },
   {
+    "key": 3,
     "name": "ist nicht gleich",
     "id": "notEquals",
     "supportedTypes": ["string", "number", "date"]
   },
   {
+    "key": 4,
     "name": "ist gleich",
     "id": "equals",
     "supportedTypes": ["string", "number", "date"]
   },
   {
+    "key": 5,
     "name": "ist kleiner gleich",
     "id": "lessOrEqual",
     "supportedTypes": ["number", "date"]
   },
   {
+    "key": 6,
     "name": "ist größer gleich",
     "id": "greaterOrEqual",
     "supportedTypes": ["number", "date"]
   },
   {
+    "key": 7,
     "name": "enthält",
     "id": "contains",
     "supportedTypes": ["string"]
   },
   {
+    "key": 8,
     "name": "enthält nicht",
     "id": "notContains",
     "supportedTypes": ["string"]
   },
   {
+    "key": 9,
     "name": "beginnt mit",
     "id": "startsWith",
     "supportedTypes": ["string"]
