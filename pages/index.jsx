@@ -12,9 +12,18 @@ export default function Plus() {
   const [singleOrders, setSingleOrders] = useState(
     allSingleOrdersWithDependencies
   );
-
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
+  const [columns, setColumns] = useState([
+    { id: "name", title: "Name", width: 25 },
+    { id: "email", title: "E-Mail", width: 25 },
+    { id: "license", title: "Lizenzcode", width: 25 },
+    {
+      id: "paymentDate",
+      title: "Nächstes Zahlungsdatum",
+      width: 25,
+    },
+  ]);
 
   useEffect(() => {
     const filteredSingleOrders = filter(
@@ -40,8 +49,7 @@ export default function Plus() {
           <KPI singleOrdersWithDependencies={singleOrders} />
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </Styled.KPIAndSearchWrapper>
-
-        <SingleOrdersListHeader />
+        <SingleOrdersListHeader columns={columns} setColumns={setColumns} />
       </Styled.Header>
       <Styled.singleOrdersList>
         {singleOrders.length > 0 ? (
