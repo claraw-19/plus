@@ -7,6 +7,10 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import EventIcon from "@mui/icons-material/Event";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import EventBusyIcon from "@mui/icons-material/EventBusy";
+import EmailIcon from "@mui/icons-material/Email";
+import PersonIcon from "@mui/icons-material/Person";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import { Details } from "@mui/icons-material";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
@@ -21,96 +25,116 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   };
 
   return (
-    <Styled.DetailsContainer>
-      <Styled.DetailsData>
-        <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Startdatum">
-            <PlayArrowIcon />
-          </Styled.HoverEffect>
-          {new Date(
-            singleOrderWithDependencies.singleOrder.date
-          ).toLocaleDateString("de-DE")}
-        </Styled.IconTextWrapper>
-        <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Preis">
-            <SellIcon />
-          </Styled.HoverEffect>
-          {singleOrderWithDependencies.singleOrder.price.toLocaleString(
-            "de-DE"
-          )}{" "}
-          €
-        </Styled.IconTextWrapper>
-        <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Zahlungsmethode">
-            <PaymentIcon />
-          </Styled.HoverEffect>
-          {singleOrderWithDependencies.singleOrder.payment}
-        </Styled.IconTextWrapper>
+    <Styled.DetailsNameContainer>
+      <Styled.IconTextWrapper>
+        <PersonIcon />
+        <Styled.UserName>
+          {singleOrderWithDependencies.user.firstName}{" "}
+          {singleOrderWithDependencies.user.lastName}
+        </Styled.UserName>
+      </Styled.IconTextWrapper>
+      <Styled.DetailsContainer>
+        <Styled.DetailsData>
+          <Styled.IconTextWrapper>
+            {singleOrderWithDependencies.singleOrder.status === "active" ? (
+              <CheckCircleIcon />
+            ) : (
+              <HighlightOffIcon />
+            )}
+            {singleOrderWithDependencies.singleOrder.status === "active"
+              ? "Aktiv"
+              : "Inaktiv"}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <EmailIcon />
+            {singleOrderWithDependencies.user.email}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <VpnKeyIcon />
+            {singleOrderWithDependencies.singleOrder.accessCodesId}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Costumer Lifetime">
+              <HourglassEmptyIcon />
+            </Styled.HoverEffect>
+            {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} Monate`}
+          </Styled.IconTextWrapper>
+        </Styled.DetailsData>
+        <Styled.DetailsData>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Startdatum">
+              <PlayArrowIcon />
+            </Styled.HoverEffect>
+            {new Date(
+              singleOrderWithDependencies.singleOrder.date
+            ).toLocaleDateString("de-DE")}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Preis">
+              <SellIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.singleOrder.price.toLocaleString(
+              "de-DE"
+            )}{" "}
+            €
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Zahlungsmethode">
+              <PaymentIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.singleOrder.payment}
+          </Styled.IconTextWrapper>
 
-        <Styled.IconTextWrapper>
-          {singleOrderWithDependencies.singleOrder.status === "active" ? (
-            <>
-              <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
-                <EventIcon />
-              </Styled.HoverEffect>
-              {new Date(
-                singleOrderWithDependencies.singleOrder.nextPaymentDate
-              ).toLocaleDateString("de-DE")}
-            </>
-          ) : (
-            <>
-              <Styled.HoverEffect $description="Enddatum">
-                <EventBusyIcon />
-              </Styled.HoverEffect>
-              {new Date(
-                singleOrderWithDependencies.singleOrder.endDate
-              ).toLocaleDateString("de-DE")}
-            </>
-          )}
-        </Styled.IconTextWrapper>
-      </Styled.DetailsData>
-      <Styled.DetailsData>
-        <Styled.IconTextWrapper>
-          {singleOrderWithDependencies.singleOrder.status === "active" ? (
-            <CheckCircleIcon />
-          ) : (
-            <HighlightOffIcon />
-          )}
-          {singleOrderWithDependencies.singleOrder.status === "active"
-            ? "Aktiv"
-            : "Inaktiv"}
-        </Styled.IconTextWrapper>
-        <Styled.IconTextWrapper>
-          <Styled.HoverEffect $description="Costumer Lifetime">
-            <HourglassEmptyIcon />
-          </Styled.HoverEffect>
-          {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} Monate`}
-        </Styled.IconTextWrapper>
-      </Styled.DetailsData>
-    </Styled.DetailsContainer>
+          <Styled.IconTextWrapper>
+            {singleOrderWithDependencies.singleOrder.status === "active" ? (
+              <>
+                <Styled.HoverEffect $description="Nächstes Zahlungsdatum">
+                  <EventIcon />
+                </Styled.HoverEffect>
+                {new Date(
+                  singleOrderWithDependencies.singleOrder.nextPaymentDate
+                ).toLocaleDateString("de-DE")}
+              </>
+            ) : (
+              <>
+                <Styled.HoverEffect $description="Enddatum">
+                  <EventBusyIcon />
+                </Styled.HoverEffect>
+                {new Date(
+                  singleOrderWithDependencies.singleOrder.endDate
+                ).toLocaleDateString("de-DE")}
+              </>
+            )}
+          </Styled.IconTextWrapper>
+        </Styled.DetailsData>
+      </Styled.DetailsContainer>
+    </Styled.DetailsNameContainer>
   );
 }
 
 const Styled = {
-  DetailsContainer: styled.div`
+  DetailsNameContainer: styled.div`
     display: flex;
-    justify-content: space-between;
-    padding: 8px 20px 0 20px;
+    flex-direction: column;
+    padding: 10px 20px 10px 20px;
     border-bottom: 1px solid #ccc;
   `,
 
-  DetailsData: styled.p`
+  DetailsContainer: styled.div`
+    display: flex;
+    flex-direction: row;
+  `,
+
+  DetailsData: styled.div`
     flex: 1;
   `,
 
   IconTextWrapper: styled.div`
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
+    gap: 10px;
+    height: 40px;
+    padding-bottom: 10px;
   `,
 
   HoverEffect: styled.div`
@@ -128,5 +152,9 @@ const Styled = {
       font-size: 12px;
       z-index: 1;
     }
+  `,
+
+  UserName: styled.p`
+    font-family: roboto-bold;
   `,
 };

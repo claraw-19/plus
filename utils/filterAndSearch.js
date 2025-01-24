@@ -99,9 +99,10 @@ export function search(searchTerm, filterResult) {
           getFn: (singleOrderWithDependencies) =>
             `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`,
         },
-        "accessCodesId",
+        "singleOrder.accessCodesId",
+        "user.email",
       ],
-      threshold: 0.1,
+      threshold: 0.2,
     });
 
     searchResult = fuse.search(searchTerm).map((result) => result.item);

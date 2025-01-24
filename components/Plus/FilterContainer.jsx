@@ -10,7 +10,6 @@ import filterMethods from "@/constants/filterMethods.json";
 import { useContext, useState } from "react";
 
 export default function FilterContainer({ filter, setFilter, onDelete }) {
-  console.log("Filter:", filter);
   const theme = useContext(ThemeContext);
   const [field, setField] = useState(1);
   return (

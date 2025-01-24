@@ -7,14 +7,37 @@ import { useEffect, useState } from "react";
 import KPI from "@/components/Plus/Kpi";
 import Filter from "@/components/Plus/Filter";
 import { filter, search } from "@/utils/filterAndSearch";
+import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 
 export default function Plus() {
   const [singleOrders, setSingleOrders] = useState(
     allSingleOrdersWithDependencies
   );
-
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
+  const [columns, setColumns] = useState([
+    { id: "name", title: "Name", width: 25 },
+    { id: "email", title: "E-Mail", width: 25 },
+    { id: "license", title: "Lizenzcode", width: 25 },
+    {
+      id: "paymentDate",
+      title: "Nächstes Zahlungsdatum",
+      width: 25,
+    },
+  ]);
+
+  useEffect(() => {
+    const savedColumnWidths = localStorage.getItem("columnWidths");
+    if (savedColumnWidths) {
+      setColumns(JSON.parse(savedColumnWidths));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (columns) {
+      localStorage.setItem("columnWidths", JSON.stringify(columns));
+    }
+  }, [columns]);
 
   useEffect(() => {
     const filteredSingleOrders = filter(
@@ -26,6 +49,15 @@ export default function Plus() {
     setSingleOrders(searchedSingleOrders);
   }, [filters, searchTerm]);
 
+  const resetColumnWidths = () => {
+    const equalWidth = 100 / columns.length;
+    const resetColumns = columns.map((column) => ({
+      ...column,
+      width: equalWidth,
+    }));
+    setColumns(resetColumns);
+  };
+
   return (
     <>
       <Styled.Header>
@@ -36,18 +68,20 @@ export default function Plus() {
           setSingleOrders={setSingleOrders}
           allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
         />
+
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={singleOrders} />
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Styled.ViewColumnIcon onClick={resetColumnWidths} />
         </Styled.KPIAndSearchWrapper>
-
-        <SingleOrdersListHeader />
+        <SingleOrdersListHeader columns={columns} setColumns={setColumns} />
       </Styled.Header>
       <Styled.singleOrdersList>
         {singleOrders.length > 0 ? (
           singleOrders.map((singleOrderWithDependencies) => (
             <li key={singleOrderWithDependencies.singleOrder.id}>
               <SingleOrderCard
+                columns={columns}
                 singleOrderWithDependencies={singleOrderWithDependencies}
               />
             </li>
@@ -61,6 +95,15 @@ export default function Plus() {
 }
 
 const Styled = {
+  ViewColumnIcon: styled(ViewColumnIcon)`
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      border-radius: 100%;
+      background-color: ${({ theme }) => theme.colors.grey7};
+    }
+  `,
   singleOrdersList: styled.ul`
     list-style: none;
     margin: 0;
