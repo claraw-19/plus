@@ -26,6 +26,19 @@ export default function Plus() {
   ]);
 
   useEffect(() => {
+    const savedColumnWidths = localStorage.getItem("columnWidths");
+    if (savedColumnWidths) {
+      setColumns(JSON.parse(savedColumnWidths));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (columns) {
+      localStorage.setItem("columnWidths", JSON.stringify(columns));
+    }
+  }, [columns]);
+
+  useEffect(() => {
     const filteredSingleOrders = filter(
       allSingleOrdersWithDependencies,
       filters
