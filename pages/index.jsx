@@ -63,6 +63,7 @@ export default function Plus() {
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
         <Filter
+          columns={columns}
           filters={filters}
           setFilters={setFilters}
           setSingleOrders={setSingleOrders}

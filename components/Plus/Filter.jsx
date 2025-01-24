@@ -11,6 +11,10 @@ import {
   Tabs,
   Tab,
   Box,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
 } from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 import {
@@ -21,12 +25,15 @@ import {
   DeleteForeverSharp as DeleteForeverSharpIcon,
   FileCopySharp as FileCopySharpIcon,
 } from "@mui/icons-material";
+import { red } from "@mui/material/colors";
+import { ColumnSizer } from "react-virtualized";
 
 export default function Filter({
   filters,
   setFilters,
   setSingleOrders,
   allSingleOrdersWithDependencies,
+  columns,
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
@@ -82,6 +89,7 @@ export default function Filter({
   const handleOpenPopup = () => {
     setFilters([{ field: "", filterMethod: "", value: "" }]);
     setIsPopupOpen(true);
+    setActiveTab(0);
     setViewName("");
   };
 
@@ -256,16 +264,61 @@ export default function Filter({
             <Styled.Tab label="Spalten" />
           </Styled.Tabs>
 
-          {filters.map((filter, index) => (
-            <FilterContainer
-              key={index}
-              filter={filter}
-              setFilter={(newFilter) => handleFilterChange(index, newFilter)}
-              onDelete={() => handleDeleteFilter(index)}
-            />
-          ))}
+          {activeTab === 0 && (
+            <>
+              {filters.map((filter, index) => (
+                <FilterContainer
+                  key={index}
+                  filter={filter}
+                  setFilter={(newFilter) =>
+                    handleFilterChange(index, newFilter)
+                  }
+                  onDelete={() => handleDeleteFilter(index)}
+                />
+              ))}
+              <Styled.AddCircleIcon onClick={handleAddFilter} />
+            </>
+          )}
+          {activeTab === 1 && (
+            <Styled.ColumnContainer>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel
+                  id="select-label"
+                  sx={{
+                    color: "#5A5A5A",
+                    fontFamily: theme.typography.fontFamily.regular,
+                  }}
+                >
+                  Spalte
+                </InputLabel>
+                <Select
+                  labelId="select-label"
+                  value={columns} // noch schauen was sinnvoll
+                  // onChange={(e) => setSelectedColumn(e.target.value)}
+                  label="Spalten"
+                  sx={{
+                    color: "#5A5A5A",
+                    fontFamily: theme.typography.fontFamily.regular,
+                  }}
+                >
+                  {columns.map((column) => (
+                    <MenuItem
+                      key={column.id}
+                      value={column.id}
+                      style={{
+                        color: theme?.colors.grey2,
+                        fontFamily: theme.typography.fontFamily.regular,
+                      }}
+                    >
+                      <Checkbox />
+                      {column.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Styled.ColumnContainer>
+          )}
 
-          <Styled.AddCircleIcon onClick={handleAddFilter} />
           <div style={{ marginTop: "20px", textAlign: "right" }}>
             <SaveButton title="Speichern" onClick={handleSaveView} />
           </div>
@@ -277,6 +330,10 @@ export default function Filter({
 }
 
 const Styled = {
+  ColumnContainer: styled.div`
+    padding-top: 30px;
+  `,
+
   Tabs: styled(Tabs)`
     .MuiTab-root {
       font-size: 1rem !important;
