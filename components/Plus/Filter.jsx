@@ -2,7 +2,16 @@ import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import FilterContainer from "@/components/Plus/FilterContainer";
 import { v4 as uuidv4 } from "uuid";
-import { Button, Input, Menu, MenuItem, Modal, Box } from "@mui/material";
+import {
+  Button,
+  Input,
+  Menu,
+  MenuItem,
+  Modal,
+  Tabs,
+  Tab,
+  Box,
+} from "@mui/material";
 import SaveButton from "@/components/common/buttons/PrimaryButton";
 import {
   AddCircle as AddCircleIcon,
@@ -25,6 +34,7 @@ export default function Filter({
   const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     const savedViewsFromStorage = localStorage.getItem("savedViews");
@@ -152,6 +162,10 @@ export default function Filter({
     handleCloseContextMenu();
   };
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <>
       <Styled.SalesViewPanel>
@@ -234,6 +248,14 @@ export default function Filter({
             />
           </Styled.IconWrapper>
 
+          <Styled.Tabs
+            value={activeTab}
+            onChange={(event, newValue) => setActiveTab(newValue)}
+          >
+            <Styled.Tab label="Filter" />
+            <Styled.Tab label="Spalten" />
+          </Styled.Tabs>
+
           {filters.map((filter, index) => (
             <FilterContainer
               key={index}
@@ -255,6 +277,51 @@ export default function Filter({
 }
 
 const Styled = {
+  Tabs: styled(Tabs)`
+    .MuiTab-root {
+      font-size: 1rem !important;
+      text-transform: none !important;
+      color: ${({ theme }) => theme.colors.grey2} !important;
+      font-family: ${({ theme }) =>
+        theme.typography.fontFamily.regular} !important;
+      max-width: 900px !important;
+      ${({ theme }) => theme.breakpoints.l.mediaQuery} {
+        max-width: 600px !important;
+      }
+      ${({ theme }) => theme.breakpoints.s.mediaQuery} {
+        max-width: calc(100% - 100px) !important;
+      }
+    }
+    .Mui-selected {
+      font-family: ${({ theme }) =>
+        theme.typography.fontFamily.bold} !important;
+      color: ${({ theme }) => theme.colors.schullv1} !important;
+    }
+    .MuiAppBar-colorDefault {
+      background-color: none !important;
+    }
+    .MuiTab-wrapper {
+      text-transform: none !important;
+      font-size: 1rem !important;
+    }
+    .Mui-disabled {
+      display: none !important;
+    }
+    .MuiTouchRipple-root {
+      display: none !important;
+    }
+  `,
+
+  Tab: styled(Tab)`
+    min-width: 92px !important;
+  `,
+
+  FilterOrColumns: styled.div`
+    display: "flex";
+    justify-content: "space-around";
+    margin-bottom: "20px";
+  `,
+
   IconWrapper: styled.div`
     display: flex;
   `,
