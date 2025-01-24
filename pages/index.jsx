@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import KPI from "@/components/Plus/Kpi";
 import Filter from "@/components/Plus/Filter";
 import { filter, search } from "@/utils/filterAndSearch";
+import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 
 export default function Plus() {
   const [singleOrders, setSingleOrders] = useState(
@@ -48,6 +49,15 @@ export default function Plus() {
     setSingleOrders(searchedSingleOrders);
   }, [filters, searchTerm]);
 
+  const resetColumnWidths = () => {
+    const equalWidth = 100 / columns.length;
+    const resetColumns = columns.map((column) => ({
+      ...column,
+      width: equalWidth,
+    }));
+    setColumns(resetColumns);
+  };
+
   return (
     <>
       <Styled.Header>
@@ -58,9 +68,11 @@ export default function Plus() {
           setSingleOrders={setSingleOrders}
           allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
         />
+
         <Styled.KPIAndSearchWrapper>
           <KPI singleOrdersWithDependencies={singleOrders} />
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Styled.ViewColumnIcon onClick={resetColumnWidths} />
         </Styled.KPIAndSearchWrapper>
         <SingleOrdersListHeader columns={columns} setColumns={setColumns} />
       </Styled.Header>
@@ -83,6 +95,15 @@ export default function Plus() {
 }
 
 const Styled = {
+  ViewColumnIcon: styled(ViewColumnIcon)`
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      border-radius: 100%;
+      background-color: ${({ theme }) => theme.colors.grey7};
+    }
+  `,
   singleOrdersList: styled.ul`
     list-style: none;
     margin: 0;
