@@ -2,34 +2,44 @@ import styled from "styled-components";
 import SingleOrderDetails from "./SingleOrderDetails";
 import { useState } from "react";
 
-export default function SingleOrderCard({ singleOrderWithDependencies }) {
+export default function SingleOrderCard({
+  singleOrderWithDependencies,
+  columns,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDetails = () => {
     setIsOpen((prev) => !prev);
   };
 
+  console.log(columns);
+
   return (
     <>
-      <Styled.SingleOrderContainer $isOpen={isOpen} onClick={toggleDetails}>
-        <Styled.SingleOrderData>
-          {singleOrderWithDependencies.user.firstName}{" "}
-          {singleOrderWithDependencies.user.lastName}
-        </Styled.SingleOrderData>
-        <Styled.SingleOrderData>
-          {singleOrderWithDependencies.user.email}
-        </Styled.SingleOrderData>
-        <Styled.SingleOrderData>
-          {singleOrderWithDependencies.singleOrder.accessCodesId}
-        </Styled.SingleOrderData>
-        <Styled.SingleOrderData>
-          {singleOrderWithDependencies.singleOrder.nextPaymentDate
-            ? new Date(
-                singleOrderWithDependencies.singleOrder.nextPaymentDate
-              ).toLocaleDateString("de-DE")
-            : ""}
-        </Styled.SingleOrderData>
+      <Styled.SingleOrderContainer
+        columns={columns}
+        $isOpen={isOpen}
+        onClick={toggleDetails}
+      >
+        {columns.map((column) => (
+          <Styled.SingleOrderData key={column.id}>
+            {column.id === "name"
+              ? `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`
+              : column.id === "email"
+                ? singleOrderWithDependencies.user.email
+                : column.id === "license"
+                  ? singleOrderWithDependencies.singleOrder.accessCodesId
+                  : column.id === "paymentDate"
+                    ? singleOrderWithDependencies.singleOrder.nextPaymentDate
+                      ? new Date(
+                          singleOrderWithDependencies.singleOrder.nextPaymentDate
+                        ).toLocaleDateString("de-DE")
+                      : ""
+                    : ""}
+          </Styled.SingleOrderData>
+        ))}
       </Styled.SingleOrderContainer>
+
       {isOpen && (
         <SingleOrderDetails
           singleOrderWithDependencies={singleOrderWithDependencies}
@@ -42,8 +52,9 @@ export default function SingleOrderCard({ singleOrderWithDependencies }) {
 const Styled = {
   SingleOrderContainer: styled.button`
     all: unset;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: ${({ columns }) =>
+      columns.map((col) => `${col.width}%`).join(" ")};
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>
@@ -56,6 +67,7 @@ const Styled = {
   `,
 
   SingleOrderData: styled.p`
-    flex: 1;
+    padding: 0 8px;
+    word-wrap: break-word;
   `,
 };

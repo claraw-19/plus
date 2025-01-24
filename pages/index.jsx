@@ -56,6 +56,7 @@ export default function Plus() {
           singleOrders.map((singleOrderWithDependencies) => (
             <li key={singleOrderWithDependencies.singleOrder.id}>
               <SingleOrderCard
+                columns={columns}
                 singleOrderWithDependencies={singleOrderWithDependencies}
               />
             </li>
