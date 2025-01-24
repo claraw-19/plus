@@ -67,7 +67,10 @@ const Styled = {
   `,
 
   SingleOrderData: styled.p`
-    padding: 0 8px;
     word-wrap: break-word;
+    padding-right: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 };

@@ -74,5 +74,8 @@ const Styled = {
     position: relative;
     font-family: roboto-bold;
     padding: 20px 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 };
