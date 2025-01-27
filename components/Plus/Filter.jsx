@@ -25,8 +25,6 @@ import {
   DeleteForeverSharp as DeleteForeverSharpIcon,
   FileCopySharp as FileCopySharpIcon,
 } from "@mui/icons-material";
-import { red } from "@mui/material/colors";
-import { ColumnSizer } from "react-virtualized";
 
 export default function Filter({
   filters,
@@ -42,6 +40,7 @@ export default function Filter({
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedColumns, setSelectedColumns] = useState([]);
 
   useEffect(() => {
     const savedViewsFromStorage = localStorage.getItem("savedViews");
@@ -174,6 +173,11 @@ export default function Filter({
     setActiveTab(tab);
   };
 
+  const handleColumnChange = (selectedIds) => {
+    setSelectedColumns(selectedIds);
+    console.log(selectedColumns);
+  };
+
   return (
     <>
       <Styled.SalesViewPanel>
@@ -293,12 +297,21 @@ export default function Filter({
                 </InputLabel>
                 <Select
                   labelId="select-label"
-                  value={columns} // noch schauen was sinnvoll
-                  // onChange={(e) => setSelectedColumn(e.target.value)}
+                  value={selectedColumns}
+                  multiple
+                  renderValue={(selected) =>
+                    selected.length > 0
+                      ? `Spalten auswählen - ${selected.length} ausgewählt`
+                      : "Keine Spalte ausgewählt"
+                  }
+                  onChange={(e) => handleColumnChange(e.target.value)}
                   label="Spalten"
                   sx={{
                     color: "#5A5A5A",
                     fontFamily: theme.typography.fontFamily.regular,
+                  }}
+                  MenuProps={{
+                    PaperProps: { style: { maxHeight: 200 } },
                   }}
                 >
                   {columns.map((column) => (
@@ -310,7 +323,7 @@ export default function Filter({
                         fontFamily: theme.typography.fontFamily.regular,
                       }}
                     >
-                      <Checkbox />
+                      <Checkbox checked={selectedColumns.includes(column.id)} />
                       {column.title}
                     </MenuItem>
                   ))}

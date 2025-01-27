@@ -16,13 +16,14 @@ export default function Plus() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
   const [columns, setColumns] = useState([
-    { id: "name", title: "Name", width: 25 },
-    { id: "email", title: "E-Mail", width: 25 },
-    { id: "license", title: "Lizenzcode", width: 25 },
+    { id: "name", title: "Name", width: 25, selected: false },
+    { id: "email", title: "E-Mail", width: 25, selected: false },
+    { id: "license", title: "Lizenzcode", width: 25, selected: false },
     {
       id: "paymentDate",
       title: "Nächstes Zahlungsdatum",
       width: 25,
+      selected: false,
     },
   ]);
 
