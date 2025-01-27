@@ -8,7 +8,7 @@ import KPI from "@/components/Plus/Kpi";
 import Filter from "@/components/Plus/Filter";
 import { filter, search } from "@/utils/filterAndSearch";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
-import defaultColumns from "@/constants/defaultColumns";
+import defaultColumns from "@/constants/allColumns.json";
 
 export default function Plus() {
   const [singleOrders, setSingleOrders] = useState(
@@ -17,8 +17,6 @@ export default function Plus() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
   const [allColumns, setAllColumns] = useState(defaultColumns);
-
-  console.log("allColumns: ", allColumns);
 
   useEffect(() => {
     const savedColumnWidths = localStorage.getItem("columnWidths");
@@ -44,7 +42,8 @@ export default function Plus() {
   }, [filters, searchTerm]);
 
   const resetColumnWidths = () => {
-    const equalWidth = 100 / allColumns.length;
+    const equalWidth =
+      100 / allColumns.filter((column) => column.visible).length;
     const resetColumns = allColumns
       .filter((column) => column.visible)
       .map((column) => ({

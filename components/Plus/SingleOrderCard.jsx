@@ -19,23 +19,14 @@ export default function SingleOrderCard({
         $isOpen={isOpen}
         onClick={toggleDetails}
       >
-        {allColumns.map((column) => (
-          <Styled.SingleOrderData key={column.id}>
-            {column.id === "name"
-              ? `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`
-              : column.id === "email"
-                ? singleOrderWithDependencies.user.email
-                : column.id === "license"
-                  ? singleOrderWithDependencies.singleOrder.accessCodesId
-                  : column.id === "paymentDate"
-                    ? singleOrderWithDependencies.singleOrder.nextPaymentDate
-                      ? new Date(
-                          singleOrderWithDependencies.singleOrder.nextPaymentDate
-                        ).toLocaleDateString("de-DE")
-                      : ""
-                    : ""}
-          </Styled.SingleOrderData>
-        ))}
+        {allColumns
+          .filter((column) => column.visible)
+          .map((column) => (
+            <Styled.SingleOrderData key={column.key}>
+              {console.log("column: ", column)}
+              {singleOrderWithDependencies[column.object][column.name]}
+            </Styled.SingleOrderData>
+          ))}
       </Styled.SingleOrderContainer>
 
       {isOpen && (

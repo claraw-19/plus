@@ -91,17 +91,7 @@ export function search(searchTerm, filterResult) {
   let searchResult = filterResult;
   if (searchTerm) {
     const fuse = new Fuse(filterResult, {
-      keys: [
-        "user.firstName",
-        "user.lastName",
-        {
-          name: "combinedName",
-          getFn: (singleOrderWithDependencies) =>
-            `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`,
-        },
-        "singleOrder.accessCodesId",
-        "user.email",
-      ],
+      keys: ["user.name", "singleOrder.accessCodesId", "user.email"],
       threshold: 0.2,
     });
 

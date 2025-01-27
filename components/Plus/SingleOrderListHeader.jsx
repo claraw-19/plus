@@ -40,10 +40,10 @@ export default function SingleOrdersListListHeader({
         .filter((column) => column.visible)
         .map((column, index) => (
           <Styled.SingleOrderData
-            key={column.id}
+            key={column.key}
             style={{ width: `${column.width}%` }}
           >
-            {column.title}
+            {column.displayName}
             {index < allColumns.length - 1 && (
               <Styled.ResizeHandle
                 onMouseDown={(e) => handleResize(index, e)}

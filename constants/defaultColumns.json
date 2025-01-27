@@ -1,5 +1,5 @@
 [
-  { "id": "name", "title": "Name", "width": 25, "visible": true },
+  { "width": 25, "visible": true },
   { "id": "email", "title": "E-Mail", "width": 25, "visible": true },
   { "id": "license", "title": "Lizenzcode", "width": 25, "visible": true },
   {

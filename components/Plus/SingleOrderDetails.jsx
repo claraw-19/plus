@@ -29,8 +29,7 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
       <Styled.IconTextWrapper>
         <PersonIcon />
         <Styled.UserName>
-          {singleOrderWithDependencies.user.firstName}{" "}
-          {singleOrderWithDependencies.user.lastName}
+          {singleOrderWithDependencies.user.name}
         </Styled.UserName>
       </Styled.IconTextWrapper>
       <Styled.DetailsContainer>
