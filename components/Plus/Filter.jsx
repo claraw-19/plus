@@ -318,7 +318,7 @@ export default function Filter({
                   labelId="select-label"
                   value={allColumns
                     .filter((column) => column.visible)
-                    .map((column) => column.id)} // IDs der sichtbaren Spalten
+                    .map((column) => column.id)}
                   multiple
                   renderValue={(selected) => {
                     const visibleCount = allColumns.filter(
@@ -326,7 +326,7 @@ export default function Filter({
                     ).length;
                     return `Spalten auswählen - ${visibleCount} ausgewählt`;
                   }}
-                  onChange={(e) => handleColumnChange(e.target.value)} // Hier behandelst du die Änderung
+                  onChange={(e) => handleColumnChange(e.target.value)}
                   label="Spalten"
                   sx={{
                     color: "#5A5A5A",

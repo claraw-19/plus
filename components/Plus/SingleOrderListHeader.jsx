@@ -36,17 +36,21 @@ export default function SingleOrdersListListHeader({
   return (
     <Styled.SingleOrderContainer>
       {console.log(allColumns)}
-      {allColumns.map((column, index) => (
-        <Styled.SingleOrderData
-          key={column.id}
-          style={{ width: `${column.width}%` }}
-        >
-          {column.title}
-          {index < allColumns.length - 1 && (
-            <Styled.ResizeHandle onMouseDown={(e) => handleResize(index, e)} />
-          )}
-        </Styled.SingleOrderData>
-      ))}
+      {allColumns
+        .filter((column) => column.visible)
+        .map((column, index) => (
+          <Styled.SingleOrderData
+            key={column.id}
+            style={{ width: `${column.width}%` }}
+          >
+            {column.title}
+            {index < allColumns.length - 1 && (
+              <Styled.ResizeHandle
+                onMouseDown={(e) => handleResize(index, e)}
+              />
+            )}
+          </Styled.SingleOrderData>
+        ))}
     </Styled.SingleOrderContainer>
   );
 }

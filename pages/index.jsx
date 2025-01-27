@@ -45,10 +45,12 @@ export default function Plus() {
 
   const resetColumnWidths = () => {
     const equalWidth = 100 / allColumns.length;
-    const resetColumns = allColumns.map((column) => ({
-      ...column,
-      width: equalWidth,
-    }));
+    const resetColumns = allColumns
+      .filter((column) => column.visible)
+      .map((column) => ({
+        ...column,
+        width: equalWidth,
+      }));
     setAllColumns(resetColumns);
   };
 
