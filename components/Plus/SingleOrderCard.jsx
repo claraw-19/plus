@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function SingleOrderCard({
   singleOrderWithDependencies,
-  columns,
+  allColumns,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,16 +12,14 @@ export default function SingleOrderCard({
     setIsOpen((prev) => !prev);
   };
 
-  console.log(columns);
-
   return (
     <>
       <Styled.SingleOrderContainer
-        columns={columns}
+        $allColumns={allColumns}
         $isOpen={isOpen}
         onClick={toggleDetails}
       >
-        {columns.map((column) => (
+        {allColumns.map((column) => (
           <Styled.SingleOrderData key={column.id}>
             {column.id === "name"
               ? `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`
@@ -53,8 +51,8 @@ const Styled = {
   SingleOrderContainer: styled.button`
     all: unset;
     display: grid;
-    grid-template-columns: ${({ columns }) =>
-      columns.map((col) => `${col.width}%`).join(" ")};
+    grid-template-columns: ${({ $allColumns }) =>
+      $allColumns.map((col) => `${col.width}%`).join(" ")};
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
     background-color: ${({ $isOpen, theme }) =>

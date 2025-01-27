@@ -25,13 +25,15 @@ import {
   DeleteForeverSharp as DeleteForeverSharpIcon,
   FileCopySharp as FileCopySharpIcon,
 } from "@mui/icons-material";
+import defaultColumns from "@/constants/defaultColumns";
 
 export default function Filter({
   filters,
   setFilters,
   setSingleOrders,
   allSingleOrdersWithDependencies,
-  columns,
+  allColumns,
+  setAllColumns,
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
@@ -40,7 +42,6 @@ export default function Filter({
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [selectedColumns, setSelectedColumns] = useState([]);
 
   useEffect(() => {
     const savedViewsFromStorage = localStorage.getItem("savedViews");
@@ -87,6 +88,8 @@ export default function Filter({
 
   const handleOpenPopup = () => {
     setFilters([{ field: "", filterMethod: "", value: "" }]);
+    setAllColumns(defaultColumns);
+    // setSelectedView(null);
     setIsPopupOpen(true);
     setActiveTab(0);
     setViewName("");
@@ -97,6 +100,8 @@ export default function Filter({
   };
 
   const handleSaveView = () => {
+    console.log("selectedview: ", selectedView);
+    console.log("savedViews: ", savedViews);
     if (!viewName.trim()) {
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
@@ -104,13 +109,23 @@ export default function Filter({
     if (isEditMode) {
       const updatedViews = savedViews.map((view) =>
         view.id === selectedView.id
-          ? { ...view, name: viewName, filters }
+          ? { ...view, name: viewName, filters, allColumns }
           : view
       );
       setSavedViews(updatedViews);
-      setSelectedView({ ...selectedView, name: viewName, filters });
+      setSelectedView({
+        ...selectedView,
+        name: viewName,
+        filters,
+        allColumns,
+      });
     } else {
-      const newView = { name: viewName, id: uuidv4(), filters };
+      const newView = {
+        name: viewName,
+        id: uuidv4(),
+        filters,
+        allColumns,
+      };
       setSavedViews([...savedViews, newView]);
       setSelectedView(newView);
     }
@@ -145,12 +160,15 @@ export default function Filter({
     if (!selectedView) {
       setSelectedView(view);
       setFilters(view.filters);
+      setAllColumns(view.allColumns);
     } else if (selectedView.id === view.id) {
       setSelectedView(null);
       setFilters([]);
+      setAllColumns(defaultColumns);
     } else {
       setSelectedView(view);
       setFilters(view.filters);
+      setAllColumns(view.allColumns);
     }
   }
 
@@ -169,13 +187,14 @@ export default function Filter({
     handleCloseContextMenu();
   };
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
   const handleColumnChange = (selectedIds) => {
-    setSelectedColumns(selectedIds);
-    console.log(selectedColumns);
+    const updatedColumns = allColumns.map((column) => {
+      return {
+        ...column,
+        visible: selectedIds.includes(column.id),
+      };
+    });
+    setAllColumns(updatedColumns);
   };
 
   return (
@@ -297,14 +316,17 @@ export default function Filter({
                 </InputLabel>
                 <Select
                   labelId="select-label"
-                  value={selectedColumns}
+                  value={allColumns
+                    .filter((column) => column.visible)
+                    .map((column) => column.id)} // IDs der sichtbaren Spalten
                   multiple
-                  renderValue={(selected) =>
-                    selected.length > 0
-                      ? `Spalten auswählen - ${selected.length} ausgewählt`
-                      : "Keine Spalte ausgewählt"
-                  }
-                  onChange={(e) => handleColumnChange(e.target.value)}
+                  renderValue={(selected) => {
+                    const visibleCount = allColumns.filter(
+                      (column) => column.visible
+                    ).length;
+                    return `Spalten auswählen - ${visibleCount} ausgewählt`;
+                  }}
+                  onChange={(e) => handleColumnChange(e.target.value)} // Hier behandelst du die Änderung
                   label="Spalten"
                   sx={{
                     color: "#5A5A5A",
@@ -314,7 +336,7 @@ export default function Filter({
                     PaperProps: { style: { maxHeight: 200 } },
                   }}
                 >
-                  {columns.map((column) => (
+                  {allColumns.map((column) => (
                     <MenuItem
                       key={column.id}
                       value={column.id}
@@ -323,7 +345,7 @@ export default function Filter({
                         fontFamily: theme.typography.fontFamily.regular,
                       }}
                     >
-                      <Checkbox checked={selectedColumns.includes(column.id)} />
+                      <Checkbox checked={column.visible} />
                       {column.title}
                     </MenuItem>
                   ))}

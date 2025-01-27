@@ -1,0 +1,23 @@
+[
+  { "id": "name", "title": "Name", "width": 25, "visible": true },
+  { "id": "email", "title": "E-Mail", "width": 25, "visible": true },
+  { "id": "license", "title": "Lizenzcode", "width": 25, "visible": true },
+  {
+    "id": "paymentDate",
+    "title": "Nächstes Zahlungsdatum",
+    "width": 25,
+    "visible": true
+  },
+  { "id": "schoolName", "title": "Schulname", "width": 25, "visible": false },
+  { "id": "startDate", "title": "Startdatum", "width": 25, "visible": false },
+  { "id": "status", "title": "Stauts", "width": 25, "visible": false },
+  { "id": "payment", "title": "Zahlungsart", "width": 25, "visible": false },
+  { "id": "price", "title": "Preis", "width": 25, "visible": false },
+  { "id": "endDate", "title": "Enddatum", "width": 25, "visible": false },
+  {
+    "id": "cancellationDate",
+    "title": "Stornierungsdatum",
+    "width": 25,
+    "visible": false
+  }
+]
