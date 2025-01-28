@@ -44,13 +44,12 @@ export default function Plus() {
   const resetColumnWidths = () => {
     const equalWidth =
       100 / allColumns.filter((column) => column.visible).length;
-    const resetColumns = allColumns
-      .filter((column) => column.visible)
-      .map((column) => ({
-        ...column,
-        width: equalWidth,
-      }));
+    const resetColumns = allColumns.map((column) => ({
+      ...column,
+      width: column.visible ? equalWidth : 0,
+    }));
     setAllColumns(resetColumns);
+    console.log("allColumns: ", resetColumns);
   };
 
   return (

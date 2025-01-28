@@ -43,43 +43,31 @@ export default function Filter({
   const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
-  const resetColumnWidths = () => {
-    const equalWidth =
-      100 / allColumns.filter((column) => column.visible).length;
-    const resetColumns = allColumns
-      .filter((column) => column.visible)
-      .map((column) => ({
-        ...column,
-        width: equalWidth,
-      }));
-    setAllColumns(resetColumns);
-  };
+  useEffect(() => {
+    const savedViewsFromStorage = localStorage.getItem("savedViews");
+    const selectedViewFromStorage = localStorage.getItem("selectedView");
 
-  // useEffect(() => {
-  //   const savedViewsFromStorage = localStorage.getItem("savedViews");
-  //   const selectedViewFromStorage = localStorage.getItem("selectedView");
+    if (savedViewsFromStorage) {
+      setSavedViews(JSON.parse(savedViewsFromStorage));
+    }
+    if (selectedViewFromStorage) {
+      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
+      setSelectedView(parsedSelectedViewFromStorage);
+      setFilters(parsedSelectedViewFromStorage.filters);
+    }
+  }, []);
 
-  //   if (savedViewsFromStorage) {
-  //     setSavedViews(JSON.parse(savedViewsFromStorage));
-  //   }
-  //   if (selectedViewFromStorage) {
-  //     const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
-  //     setSelectedView(parsedSelectedViewFromStorage);
-  //     setFilters(parsedSelectedViewFromStorage.filters);
-  //   }
-  // }, []);
+  useEffect(() => {
+    localStorage.setItem("savedViews", JSON.stringify(savedViews));
+  }, [savedViews]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("savedViews", JSON.stringify(savedViews));
-  // }, [savedViews]);
-
-  // useEffect(() => {
-  //   if (selectedView) {
-  //     localStorage.setItem("selectedView", JSON.stringify(selectedView));
-  //   } else {
-  //     localStorage.removeItem("selectedView");
-  //   }
-  // }, [selectedView]);
+  useEffect(() => {
+    if (selectedView) {
+      localStorage.setItem("selectedView", JSON.stringify(selectedView));
+    } else {
+      localStorage.removeItem("selectedView");
+    }
+  }, [selectedView]);
 
   const theme = useContext(ThemeContext);
 
@@ -109,6 +97,9 @@ export default function Filter({
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
+    setSelectedView(null);
+    setAllColumns(defaultColumns);
+    setSingleOrders(allSingleOrdersWithDependencies);
   };
 
   const handleSaveView = () => {
@@ -168,7 +159,6 @@ export default function Filter({
   };
 
   function updateSelectedView(view) {
-    console.log("view: ", view);
     if (!selectedView) {
       setSelectedView(view);
       setFilters(view.filters);

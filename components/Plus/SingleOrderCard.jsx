@@ -26,7 +26,6 @@ export default function SingleOrderCard({
               key={column.key}
               style={{ width: `${column.width}%` }}
             >
-              {console.log("column: ", column)}
               {singleOrderWithDependencies[column.object][column.name]}
             </Styled.SingleOrderData>
           ))}
@@ -49,6 +48,12 @@ const Styled = {
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
     position: relative;
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.grey7};
+    }
+    background-color: ${({ $isOpen, theme }) =>
+      $isOpen ? theme.colors.grey7 : theme.colors.white};
+    cursor: pointer;
   `,
 
   SingleOrderData: styled.p`

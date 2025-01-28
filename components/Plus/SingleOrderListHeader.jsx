@@ -4,11 +4,24 @@ export default function SingleOrdersListListHeader({
   allColumns,
   setAllColumns,
 }) {
-  const handleResize = (index, event) => {
+  const handleResize = (column, event) => {
+    let indexInAllColumns;
+    let indexNextVisibleColumnInAllColumns;
+    for (let index = 0; index < allColumns.length; index++) {
+      if (indexInAllColumns !== undefined && allColumns[index].visible) {
+        indexNextVisibleColumnInAllColumns = index;
+        break;
+      }
+      if (allColumns[index].key === column.key) {
+        indexInAllColumns = index;
+      }
+    }
+
     event.preventDefault();
     const startX = event.clientX;
-    const startWidth = allColumns[index].width;
-    const nextStartWidth = allColumns[index + 1]?.width;
+    const startWidth = allColumns[indexInAllColumns].width;
+    const nextStartWidth =
+      allColumns[indexNextVisibleColumnInAllColumns]?.width;
 
     const onMouseMove = (moveEvent) => {
       const deltaX = moveEvent.clientX - startX;
@@ -18,8 +31,11 @@ export default function SingleOrdersListListHeader({
 
       if (newWidth > 10 && (!nextStartWidth || nextNewWidth > 10)) {
         const updatedColumns = [...allColumns];
-        updatedColumns[index].width = newWidth;
-        if (nextStartWidth) updatedColumns[index + 1].width = nextNewWidth;
+        updatedColumns[indexInAllColumns].width = newWidth;
+        if (nextStartWidth) {
+          updatedColumns[indexNextVisibleColumnInAllColumns].width =
+            nextNewWidth;
+        }
         setAllColumns(updatedColumns);
       }
     };
@@ -45,7 +61,7 @@ export default function SingleOrdersListListHeader({
             {column.displayName}
             {index < allColumns.length - 1 && (
               <Styled.ResizeHandle
-                onMouseDown={(e) => handleResize(index, e)}
+                onMouseDown={(e) => handleResize(column, e)}
               />
             )}
           </Styled.SingleOrderData>
