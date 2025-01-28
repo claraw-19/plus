@@ -55,31 +55,31 @@ export default function Filter({
     setAllColumns(resetColumns);
   };
 
-  useEffect(() => {
-    const savedViewsFromStorage = localStorage.getItem("savedViews");
-    const selectedViewFromStorage = localStorage.getItem("selectedView");
+  // useEffect(() => {
+  //   const savedViewsFromStorage = localStorage.getItem("savedViews");
+  //   const selectedViewFromStorage = localStorage.getItem("selectedView");
 
-    if (savedViewsFromStorage) {
-      setSavedViews(JSON.parse(savedViewsFromStorage));
-    }
-    if (selectedViewFromStorage) {
-      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
-      setSelectedView(parsedSelectedViewFromStorage);
-      setFilters(parsedSelectedViewFromStorage.filters);
-    }
-  }, []);
+  //   if (savedViewsFromStorage) {
+  //     setSavedViews(JSON.parse(savedViewsFromStorage));
+  //   }
+  //   if (selectedViewFromStorage) {
+  //     const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
+  //     setSelectedView(parsedSelectedViewFromStorage);
+  //     setFilters(parsedSelectedViewFromStorage.filters);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("savedViews", JSON.stringify(savedViews));
-  }, [savedViews]);
+  // useEffect(() => {
+  //   localStorage.setItem("savedViews", JSON.stringify(savedViews));
+  // }, [savedViews]);
 
-  useEffect(() => {
-    if (selectedView) {
-      localStorage.setItem("selectedView", JSON.stringify(selectedView));
-    } else {
-      localStorage.removeItem("selectedView");
-    }
-  }, [selectedView]);
+  // useEffect(() => {
+  //   if (selectedView) {
+  //     localStorage.setItem("selectedView", JSON.stringify(selectedView));
+  //   } else {
+  //     localStorage.removeItem("selectedView");
+  //   }
+  // }, [selectedView]);
 
   const theme = useContext(ThemeContext);
 
@@ -164,9 +164,11 @@ export default function Filter({
     setSelectedView(null);
     handleCloseContextMenu();
     setSingleOrders(allSingleOrdersWithDependencies);
+    setAllColumns(defaultColumns);
   };
 
   function updateSelectedView(view) {
+    console.log("view: ", view);
     if (!selectedView) {
       setSelectedView(view);
       setFilters(view.filters);
@@ -183,13 +185,16 @@ export default function Filter({
   }
 
   const handleDuplicateView = () => {
+    setActiveTab(0);
     setViewName(`${selectedView.name} - Copy`);
     setFilters(selectedView.filters);
+    setAllColumns(selectedView.allColumns);
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
 
   const handleEditView = () => {
+    setActiveTab(0);
     setViewName(selectedView.name);
     setFilters(selectedView.filters);
     setIsEditMode(true);
@@ -198,11 +203,14 @@ export default function Filter({
   };
 
   const handleColumnChange = (selectedIds) => {
-    console.log("selectedIds: ", selectedIds);
+    const visibleColumnCount = selectedIds.length;
+    const newWidth = 100 / visibleColumnCount;
     const updatedColumns = allColumns.map((column) => ({
       ...column,
       visible: selectedIds.includes(column.key),
+      width: selectedIds.includes(column.key) ? newWidth : column.width,
     }));
+
     setAllColumns(updatedColumns);
   };
 

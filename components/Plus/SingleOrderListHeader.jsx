@@ -35,7 +35,6 @@ export default function SingleOrdersListListHeader({
 
   return (
     <Styled.SingleOrderContainer>
-      {console.log(allColumns)}
       {allColumns
         .filter((column) => column.visible)
         .map((column, index) => (

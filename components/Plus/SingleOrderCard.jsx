@@ -22,7 +22,10 @@ export default function SingleOrderCard({
         {allColumns
           .filter((column) => column.visible)
           .map((column) => (
-            <Styled.SingleOrderData key={column.key}>
+            <Styled.SingleOrderData
+              key={column.key}
+              style={{ width: `${column.width}%` }}
+            >
               {console.log("column: ", column)}
               {singleOrderWithDependencies[column.object][column.name]}
             </Styled.SingleOrderData>
@@ -39,20 +42,13 @@ export default function SingleOrderCard({
 }
 
 const Styled = {
-  SingleOrderContainer: styled.button`
-    all: unset;
-    display: grid;
-    grid-template-columns: ${({ $allColumns }) =>
-      $allColumns.map((col) => `${col.width}%`).join(" ")};
+  SingleOrderContainer: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
-    background-color: ${({ $isOpen, theme }) =>
-      $isOpen ? theme.colors.grey7 : theme.colors.white};
-    cursor: pointer;
-    width: 100%;
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.grey7};
-    }
+    position: relative;
   `,
 
   SingleOrderData: styled.p`
