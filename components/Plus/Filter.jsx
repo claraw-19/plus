@@ -55,6 +55,7 @@ export default function Filter({
       const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
       setSelectedView(parsedSelectedViewFromStorage);
       setFilters(parsedSelectedViewFromStorage.filters);
+      setAllColumns(parsedSelectedViewFromStorage.allColumns);
     }
   }, []);
 
@@ -200,6 +201,7 @@ export default function Filter({
     }));
 
     setAllColumns(updatedColumns);
+    //setSavedViews ...
   };
 
   return (
