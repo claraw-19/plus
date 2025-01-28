@@ -42,6 +42,7 @@ export default function Filter({
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     const savedViewsFromStorage = localStorage.getItem("savedViews");
@@ -69,8 +70,6 @@ export default function Filter({
     }
   }, [selectedView]);
 
-  const theme = useContext(ThemeContext);
-
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
   };
@@ -89,7 +88,7 @@ export default function Filter({
   const handleOpenPopup = () => {
     setFilters([{ field: "", filterMethod: "", value: "" }]);
     setAllColumns(defaultColumns);
-    // setSelectedView(null);
+    setSelectedView(null);
     setIsPopupOpen(true);
     setActiveTab(0);
     setViewName("");
@@ -97,7 +96,6 @@ export default function Filter({
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
-    setSelectedView(null);
     setAllColumns(defaultColumns);
     setSingleOrders(allSingleOrdersWithDependencies);
   };

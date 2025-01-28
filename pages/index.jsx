@@ -49,7 +49,6 @@ export default function Plus() {
       width: column.visible ? equalWidth : 0,
     }));
     setAllColumns(resetColumns);
-    console.log("allColumns: ", resetColumns);
   };
 
   return (
