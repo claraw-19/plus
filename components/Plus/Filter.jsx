@@ -46,13 +46,6 @@ export default function Filter({
   const [activeTab, setActiveTab] = useState(0);
   const theme = useContext(ThemeContext);
 
-  const defaultView = {
-    name: "",
-    id: uuidv4(),
-    filters: [{ field: "", filterMethod: "", value: "" }],
-    allColumns: defaultColumns,
-  };
-
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
   };
@@ -69,7 +62,12 @@ export default function Filter({
   };
 
   const handleOpenPopup = () => {
-    const newView = { ...defaultView, isVisible: false };
+    const newView = {
+      name: "",
+      id: uuidv4(),
+      filters: [{ field: "", filterMethod: "", value: "" }],
+      allColumns: defaultColumns,
+    };
     setSavedViews((prevViews) => [...prevViews, newView]);
     setSelectedViewId(newView.id);
     setIsPopupOpen(true);
@@ -89,25 +87,13 @@ export default function Filter({
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
-    if (isEditMode) {
-      const updatedViews = savedViews.map((view) =>
-        view.id === selectedViewId
-          ? { ...view, name: viewName, filters, allColumns }
-          : view
-      );
-      setSavedViews(updatedViews);
-      setSelectedViewId(selectedViewId);
-    } else {
-      const newView = {
-        name: viewName,
-        id: uuidv4(),
-        filters,
-        allColumns,
-        isVisible: true,
-      };
-      setSavedViews([...savedViews, newView]);
-      setSelectedViewId(newView.id);
-    }
+    const updatedViews = savedViews.map((view) =>
+      view.id === selectedViewId
+        ? { ...view, name: viewName, filters, allColumns }
+        : view
+    );
+    setSavedViews(updatedViews);
+    setSelectedViewId(selectedViewId);
     setIsEditMode(false);
     setIsPopupOpen(false);
   };
@@ -187,19 +173,16 @@ export default function Filter({
   return (
     <>
       <Styled.SalesViewPanel>
-        {savedViews.map(
-          (view, index) =>
-            view.isVisible && (
-              <Styled.ViewButton
-                $active={view.id === selectedViewId}
-                key={view.id}
-                onClick={() => updateSelectedView(view)}
-                onContextMenu={(event) => handleContextMenu(event, view)}
-              >
-                {view.name}
-              </Styled.ViewButton>
-            )
-        )}
+        {savedViews.map((view, index) => (
+          <Styled.ViewButton
+            $active={view.id === selectedViewId}
+            key={view.id}
+            onClick={() => updateSelectedView(view)}
+            onContextMenu={(event) => handleContextMenu(event, view)}
+          >
+            {view.name}
+          </Styled.ViewButton>
+        ))}
         <Styled.PlaylistAddIcon onClick={handleOpenPopup} />
       </Styled.SalesViewPanel>
       <Menu
