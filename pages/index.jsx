@@ -15,8 +15,28 @@ export default function Plus() {
     allSingleOrdersWithDependencies
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState([]);
-  const [allColumns, setAllColumns] = useState(defaultColumns);
+  const [savedViews, setSavedViews] = useState([]);
+  const [selectedViewId, setSelectedViewId] = useState(undefined);
+  const allColumns =
+    savedViews.find((view) => view.id === selectedViewId)?.allColumns ||
+    defaultColumns;
+
+  const filters =
+    savedViews.find((view) => view.id === selectedViewId)?.filters || [];
+
+  const setAllColumns = (newColumns) => {
+    const updatedViews = savedViews.map((view) =>
+      view.id === selectedViewId ? { ...view, allColumns: newColumns } : view
+    );
+    setSavedViews(updatedViews);
+  };
+
+  const setFilters = (newFilters) => {
+    const updatedViews = savedViews.map((view) =>
+      view.id === selectedViewId ? { ...view, filters: newFilters } : view
+    );
+    setSavedViews(updatedViews);
+  };
 
   useEffect(() => {
     const savedColumnWidths = localStorage.getItem("columnWidths");
@@ -41,6 +61,34 @@ export default function Plus() {
     setSingleOrders(searchedSingleOrders);
   }, [filters, searchTerm]);
 
+  useEffect(() => {
+    const savedViewsFromStorage = localStorage.getItem("savedViews");
+    const selectedViewFromStorage = localStorage.getItem("selectedView");
+
+    if (savedViewsFromStorage) {
+      setSavedViews(JSON.parse(savedViewsFromStorage));
+    }
+    if (selectedViewFromStorage) {
+      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
+      setSelectedViewId(parsedSelectedViewFromStorage);
+      setFilters(parsedSelectedViewFromStorage.filters);
+      setAllColumns(parsedSelectedViewFromStorage.allColumns);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("savedViews", JSON.stringify(savedViews));
+    console.log("saving savedviews", savedViews);
+  }, [savedViews]);
+
+  useEffect(() => {
+    if (selectedViewId) {
+      localStorage.setItem("selectedViewId", JSON.stringify(selectedViewId));
+    } else {
+      localStorage.removeItem("selectedViewId");
+    }
+  }, [selectedViewId]);
+
   const resetColumnWidths = () => {
     const equalWidth =
       100 / allColumns.filter((column) => column.visible).length;
@@ -60,8 +108,11 @@ export default function Plus() {
           setAllColumns={setAllColumns}
           filters={filters}
           setFilters={setFilters}
+          savedViews={savedViews}
+          setSavedViews={setSavedViews}
           setSingleOrders={setSingleOrders}
           allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
+          setSelectedViewId={setSelectedViewId}
         />
 
         <Styled.KPIAndSearchWrapper>

@@ -34,42 +34,17 @@ export default function Filter({
   allSingleOrdersWithDependencies,
   allColumns,
   setAllColumns,
+  savedViews,
+  setSavedViews,
+  selectedViewId,
+  setSelectedViewId,
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
-  const [savedViews, setSavedViews] = useState([]);
-  const [selectedView, setSelectedView] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const theme = useContext(ThemeContext);
-
-  useEffect(() => {
-    const savedViewsFromStorage = localStorage.getItem("savedViews");
-    const selectedViewFromStorage = localStorage.getItem("selectedView");
-
-    if (savedViewsFromStorage) {
-      setSavedViews(JSON.parse(savedViewsFromStorage));
-    }
-    if (selectedViewFromStorage) {
-      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
-      setSelectedView(parsedSelectedViewFromStorage);
-      setFilters(parsedSelectedViewFromStorage.filters);
-      setAllColumns(parsedSelectedViewFromStorage.allColumns);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("savedViews", JSON.stringify(savedViews));
-  }, [savedViews]);
-
-  useEffect(() => {
-    if (selectedView) {
-      localStorage.setItem("selectedView", JSON.stringify(selectedView));
-    } else {
-      localStorage.removeItem("selectedView");
-    }
-  }, [selectedView]);
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -89,7 +64,7 @@ export default function Filter({
   const handleOpenPopup = () => {
     setFilters([{ field: "", filterMethod: "", value: "" }]);
     setAllColumns(defaultColumns);
-    setSelectedView(null);
+    setSelectedViewId(undefined);
     setIsPopupOpen(true);
     setActiveTab(0);
     setViewName("");
@@ -108,17 +83,12 @@ export default function Filter({
     }
     if (isEditMode) {
       const updatedViews = savedViews.map((view) =>
-        view.id === selectedView.id
+        view.id === selectedViewId
           ? { ...view, name: viewName, filters, allColumns }
           : view
       );
       setSavedViews(updatedViews);
-      setSelectedView({
-        ...selectedView,
-        name: viewName,
-        filters,
-        allColumns,
-      });
+      setSelectedViewId(selectedViewId);
     } else {
       const newView = {
         name: viewName,
@@ -127,7 +97,7 @@ export default function Filter({
         allColumns,
       };
       setSavedViews([...savedViews, newView]);
-      setSelectedView(newView);
+      setSelectedViewId(newView.id);
     }
     setIsEditMode(false);
     setIsPopupOpen(false);
@@ -135,7 +105,7 @@ export default function Filter({
 
   const handleContextMenu = (event, view) => {
     event.preventDefault();
-    setSelectedView(view);
+    setSelectedViewId(view.id);
     setContextMenu({
       mouseX: event.clientX,
       mouseY: event.clientY,
@@ -151,28 +121,29 @@ export default function Filter({
       (view) => view.id !== selectedView.id
     );
     setSavedViews(updatedSavedViews);
-    setSelectedView(null);
+    setSelectedViewId(undefined);
     handleCloseContextMenu();
     setSingleOrders(allSingleOrdersWithDependencies);
     setAllColumns(defaultColumns);
   };
 
   function updateSelectedView(view) {
-    if (!selectedView) {
-      setSelectedView(view);
+    if (!selectedViewId) {
+      setSelectedViewId(view.id);
       setFilters(view.filters);
       setAllColumns(view.allColumns);
-    } else if (selectedView.id === view.id) {
-      setSelectedView(null);
+    } else if (selectedViewId === view.id) {
+      setSelectedViewId(undefined);
       setFilters([]);
       setAllColumns(defaultColumns);
     } else {
-      setSelectedView(view);
+      setSelectedViewId(view.id);
       setFilters(view.filters);
       setAllColumns(view.allColumns);
     }
   }
 
+  //Hier auf savedviews zugreifen weil selectedview nurnoch id
   const handleDuplicateView = () => {
     setActiveTab(0);
     setViewName(`${selectedView.name} - Copy`);
@@ -190,6 +161,7 @@ export default function Filter({
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
+  ///////////////////////////
 
   const handleColumnChange = (selectedIds) => {
     const visibleColumnCount = selectedIds.length;
@@ -201,7 +173,6 @@ export default function Filter({
     }));
 
     setAllColumns(updatedColumns);
-    //setSavedViews ...
   };
 
   return (
@@ -209,7 +180,7 @@ export default function Filter({
       <Styled.SalesViewPanel>
         {savedViews.map((view, index) => (
           <Styled.ViewButton
-            $active={view.id === selectedView?.id}
+            $active={view.id === selectedViewId}
             key={view.id}
             onClick={() => updateSelectedView(view)}
             onContextMenu={(event) => handleContextMenu(event, view)}
