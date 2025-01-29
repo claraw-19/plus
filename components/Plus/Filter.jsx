@@ -70,19 +70,15 @@ export default function Filter({
     };
     setViewName("");
     setSavedViews((prevViews) => [...prevViews, newView]);
-    console.log("3");
 
     setSelectedViewId(newView.id);
     setIsPopupOpen(true);
     setActiveTab(0);
-    console.log("savedViews: ", savedViews);
-    console.log("newView: ", newView);
   };
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
     setAllColumns(defaultColumns);
-    console.log("setAllColumns 2");
     setSingleOrders(allSingleOrdersWithDependencies);
   };
 
@@ -97,7 +93,6 @@ export default function Filter({
         : view
     );
     setSavedViews(updatedViews);
-    console.log("4", allColumns);
 
     setSelectedViewId(selectedViewId);
     setIsEditMode(false);
@@ -118,32 +113,23 @@ export default function Filter({
   };
 
   const handleDeleteView = () => {
-    console.log("selectedViewId: ", selectedViewId);
     const updatedSavedViews = savedViews.filter(
       (view) => view.id !== selectedViewId
     );
     setSavedViews(updatedSavedViews);
-    console.log("5");
 
     setSelectedViewId(undefined);
     handleCloseContextMenu();
     setSingleOrders(allSingleOrdersWithDependencies);
   };
 
-  console.log("savedViews:", savedViews);
-
   function updateSelectedView(view) {
     if (!selectedViewId || selectedViewId !== view.id) {
       setSelectedViewId(view.id);
       setFilters(view.filters);
       setAllColumns(view.allColumns);
-      console.log("setAllColumns 3");
     } else {
       setSelectedViewId(undefined);
-      console.log(selectedViewId);
-      // setFilters([]);
-      // setAllColumns(defaultColumns, false);
-      console.log("setAllColumns 4");
     }
   }
 
@@ -154,7 +140,6 @@ export default function Filter({
     setViewName(`${selectedView.name} - Copy`);
     setFilters(selectedView.filters);
     setAllColumns(selectedView.allColumns);
-    console.log("setAllColumns 5");
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
@@ -178,7 +163,6 @@ export default function Filter({
     }));
 
     setAllColumns(updatedColumns);
-    console.log("setAllColumns 6");
   };
 
   return (
