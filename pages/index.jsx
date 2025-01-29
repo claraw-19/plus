@@ -38,56 +38,56 @@ export default function Plus() {
     setSavedViews(updatedViews);
   };
 
-  useEffect(() => {
-    const savedColumnWidths = localStorage.getItem("columnWidths");
-    if (savedColumnWidths) {
-      setAllColumns(JSON.parse(savedColumnWidths));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedColumnWidths = localStorage.getItem("columnWidths");
+  //   if (savedColumnWidths) {
+  //     setAllColumns(JSON.parse(savedColumnWidths));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (allColumns) {
-      localStorage.setItem("columnWidths", JSON.stringify(allColumns));
-    }
-  }, [allColumns]);
+  // useEffect(() => {
+  //   if (allColumns) {
+  //     localStorage.setItem("columnWidths", JSON.stringify(allColumns));
+  //   }
+  // }, [allColumns]);
 
-  useEffect(() => {
-    const filteredSingleOrders = filter(
-      allSingleOrdersWithDependencies,
-      filters
-    );
+  // useEffect(() => {
+  //   const filteredSingleOrders = filter(
+  //     allSingleOrdersWithDependencies,
+  //     filters
+  //   );
 
-    const searchedSingleOrders = search(searchTerm, filteredSingleOrders);
-    setSingleOrders(searchedSingleOrders);
-  }, [filters, searchTerm]);
+  //   const searchedSingleOrders = search(searchTerm, filteredSingleOrders);
+  //   setSingleOrders(searchedSingleOrders);
+  // }, [filters, searchTerm]);
 
-  useEffect(() => {
-    const savedViewsFromStorage = localStorage.getItem("savedViews");
-    const selectedViewFromStorage = localStorage.getItem("selectedView");
+  // useEffect(() => {
+  //   const savedViewsFromStorage = localStorage.getItem("savedViews");
+  //   const selectedViewFromStorage = localStorage.getItem("selectedView");
 
-    if (savedViewsFromStorage) {
-      setSavedViews(JSON.parse(savedViewsFromStorage));
-    }
-    if (selectedViewFromStorage) {
-      const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
-      setSelectedViewId(parsedSelectedViewFromStorage);
-      setFilters(parsedSelectedViewFromStorage.filters);
-      setAllColumns(parsedSelectedViewFromStorage.allColumns);
-    }
-  }, []);
+  //   if (savedViewsFromStorage) {
+  //     setSavedViews(JSON.parse(savedViewsFromStorage));
+  //   }
+  //   if (selectedViewFromStorage) {
+  //     const parsedSelectedViewFromStorage = JSON.parse(selectedViewFromStorage);
+  //     setSelectedViewId(parsedSelectedViewFromStorage);
+  //     setFilters(parsedSelectedViewFromStorage.filters);
+  //     setAllColumns(parsedSelectedViewFromStorage.allColumns);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("savedViews", JSON.stringify(savedViews));
-    console.log("saving savedviews", savedViews);
-  }, [savedViews]);
+  // useEffect(() => {
+  //   localStorage.setItem("savedViews", JSON.stringify(savedViews));
+  //   // console.log("saving savedviews", savedViews);
+  // }, [savedViews]);
 
-  useEffect(() => {
-    if (selectedViewId) {
-      localStorage.setItem("selectedViewId", JSON.stringify(selectedViewId));
-    } else {
-      localStorage.removeItem("selectedViewId");
-    }
-  }, [selectedViewId]);
+  // useEffect(() => {
+  //   if (selectedViewId) {
+  //     localStorage.setItem("selectedViewId", JSON.stringify(selectedViewId));
+  //   } else {
+  //     localStorage.removeItem("selectedViewId");
+  //   }
+  // }, [selectedViewId]);
 
   const resetColumnWidths = () => {
     const equalWidth =
@@ -112,6 +112,7 @@ export default function Plus() {
           setSavedViews={setSavedViews}
           setSingleOrders={setSingleOrders}
           allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
+          selectedViewId={selectedViewId}
           setSelectedViewId={setSelectedViewId}
         />
 
