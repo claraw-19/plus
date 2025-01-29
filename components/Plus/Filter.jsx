@@ -68,6 +68,7 @@ export default function Filter({
       filters: [{ field: "", filterMethod: "", value: "" }],
       allColumns: defaultColumns,
     };
+    setViewName("");
     setSavedViews((prevViews) => [...prevViews, newView]);
     setSelectedViewId(newView.id);
     setIsPopupOpen(true);
@@ -87,6 +88,7 @@ export default function Filter({
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
+    // if (isEditMode) {
     const updatedViews = savedViews.map((view) =>
       view.id === selectedViewId
         ? { ...view, name: viewName, filters, allColumns }
@@ -94,6 +96,17 @@ export default function Filter({
     );
     setSavedViews(updatedViews);
     setSelectedViewId(selectedViewId);
+    // } else {
+    //   const newView = {
+    //     name: viewName,
+    //     id: uuidv4(),
+    //     filters,
+    //     allColumns,
+    //     isVisible: true,
+    //   };
+    //   setSavedViews([...savedViews, newView]);
+    //   setSelectedViewId(newView.id);
+    // }
     setIsEditMode(false);
     setIsPopupOpen(false);
   };
