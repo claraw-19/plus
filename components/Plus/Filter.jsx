@@ -70,6 +70,8 @@ export default function Filter({
     };
     setViewName("");
     setSavedViews((prevViews) => [...prevViews, newView]);
+    console.log("3");
+
     setSelectedViewId(newView.id);
     setIsPopupOpen(true);
     setActiveTab(0);
@@ -80,6 +82,7 @@ export default function Filter({
   const handleClosePopup = () => {
     setIsPopupOpen(false);
     setAllColumns(defaultColumns);
+    console.log("setAllColumns 2");
     setSingleOrders(allSingleOrdersWithDependencies);
   };
 
@@ -88,25 +91,15 @@ export default function Filter({
       alert("Bitte gib einen Namen für die Ansicht ein.");
       return;
     }
-    // if (isEditMode) {
     const updatedViews = savedViews.map((view) =>
       view.id === selectedViewId
         ? { ...view, name: viewName, filters, allColumns }
         : view
     );
     setSavedViews(updatedViews);
+    console.log("4", allColumns);
+
     setSelectedViewId(selectedViewId);
-    // } else {
-    //   const newView = {
-    //     name: viewName,
-    //     id: uuidv4(),
-    //     filters,
-    //     allColumns,
-    //     isVisible: true,
-    //   };
-    //   setSavedViews([...savedViews, newView]);
-    //   setSelectedViewId(newView.id);
-    // }
     setIsEditMode(false);
     setIsPopupOpen(false);
   };
@@ -130,24 +123,27 @@ export default function Filter({
       (view) => view.id !== selectedViewId
     );
     setSavedViews(updatedSavedViews);
+    console.log("5");
+
     setSelectedViewId(undefined);
     handleCloseContextMenu();
     setSingleOrders(allSingleOrdersWithDependencies);
   };
 
+  console.log("savedViews:", savedViews);
+
   function updateSelectedView(view) {
-    if (!selectedViewId) {
+    if (!selectedViewId || selectedViewId !== view.id) {
       setSelectedViewId(view.id);
       setFilters(view.filters);
       setAllColumns(view.allColumns);
-    } else if (selectedViewId === view.id) {
-      setSelectedViewId(undefined);
-      setFilters([]);
-      setAllColumns(defaultColumns);
+      console.log("setAllColumns 3");
     } else {
-      setSelectedViewId(view.id);
-      setFilters(view.filters);
-      setAllColumns(view.allColumns);
+      setSelectedViewId(undefined);
+      console.log(selectedViewId);
+      // setFilters([]);
+      // setAllColumns(defaultColumns, false);
+      console.log("setAllColumns 4");
     }
   }
 
@@ -158,6 +154,7 @@ export default function Filter({
     setViewName(`${selectedView.name} - Copy`);
     setFilters(selectedView.filters);
     setAllColumns(selectedView.allColumns);
+    console.log("setAllColumns 5");
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
@@ -181,6 +178,7 @@ export default function Filter({
     }));
 
     setAllColumns(updatedColumns);
+    console.log("setAllColumns 6");
   };
 
   return (

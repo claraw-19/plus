@@ -29,15 +29,20 @@ export default function Plus() {
       view.id === selectedViewId ? { ...view, allColumns: newColumns } : view
     );
     setSavedViews(updatedViews);
+    console.log("1", newColumns, updatedViews, savedViews, selectedViewId);
   };
 
   const setFilters = (newFilters) => {
     const updatedViews = savedViews.map((view) =>
       view.id === selectedViewId ? { ...view, filters: newFilters } : view
     );
-    console.log("setFilter", savedViews, updatedViews);
     setSavedViews(updatedViews);
+    console.log("2", updatedViews, savedViews);
   };
+
+  useEffect(() => {
+    console.log("allColumns:", allColumns);
+  }, [allColumns]);
 
   useEffect(() => {
     const filteredSingleOrders = filter(
@@ -57,6 +62,7 @@ export default function Plus() {
       width: column.visible ? equalWidth : 0,
     }));
     setAllColumns(resetColumns);
+    console.log("setAllColumns 1");
   };
 
   return (
