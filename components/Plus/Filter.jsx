@@ -45,10 +45,6 @@ export default function Filter({
   const [activeTab, setActiveTab] = useState(0);
   const theme = useContext(ThemeContext);
 
-  const [tempFilters, setTempFilters] = useState([]);
-  const [tempAllColumns, setTempAllColumns] = useState([]);
-  const [tempViewName, setTempViewName] = useState("");
-
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
   };
@@ -81,11 +77,14 @@ export default function Filter({
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
-    if (selectedView) {
-      setViewName(tempViewName);
-      setFilters(tempFilters);
-      setAllColumns(tempAllColumns);
-    }
+
+    setSavedViews((prevViews) =>
+      prevViews.filter(
+        (view) => view.id !== selectedViewId || view.name.trim() !== ""
+      )
+    );
+
+    setSelectedViewId(undefined);
   };
 
   const handleSaveView = () => {
@@ -155,29 +154,8 @@ export default function Filter({
     setSelectedViewId(duplicatedView.id);
   };
 
-  const handleSaveDuplicatedView = () => {
-    if (!viewName.trim()) {
-      alert("Bitte gib einen Namen für die Ansicht ein.");
-      return;
-    }
-
-    const updatedViews = savedViews.map((view) =>
-      view.id === selectedViewId
-        ? { ...view, name: viewName, filters, allColumns }
-        : view
-    );
-
-    setSavedViews(updatedViews);
-
-    setSelectedViewId(selectedViewId);
-    setIsPopupOpen(false);
-  };
-
   const handleEditView = () => {
     setActiveTab(0);
-    setTempViewName(selectedView.name);
-    setTempFilters(selectedView.filters);
-    setTempAllColumns(selectedView.allColumns);
 
     setViewName(selectedView.name);
     setFilters(selectedView.filters);

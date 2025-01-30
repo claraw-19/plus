@@ -17,18 +17,24 @@ export default function Plus() {
   const [searchTerm, setSearchTerm] = useState("");
   const [savedViews, setSavedViews] = useState([]);
   const [selectedViewId, setSelectedViewId] = useState(undefined);
+  const [localColumns, setLoalColumns] = useState(defaultColumns);
+
   const allColumns =
     savedViews.find((view) => view.id === selectedViewId)?.allColumns ||
-    defaultColumns;
+    localColumns;
 
   const filters =
     savedViews.find((view) => view.id === selectedViewId)?.filters || [];
 
   const setAllColumns = (newColumns) => {
-    const updatedViews = savedViews.map((view) =>
-      view.id === selectedViewId ? { ...view, allColumns: newColumns } : view
-    );
-    setSavedViews(updatedViews);
+    if (selectedViewId) {
+      const updatedViews = savedViews.map((view) =>
+        view.id === selectedViewId ? { ...view, allColumns: newColumns } : view
+      );
+      setSavedViews(updatedViews);
+    } else {
+      setLoalColumns(newColumns);
+    }
   };
 
   const setFilters = (newFilters) => {
@@ -49,12 +55,13 @@ export default function Plus() {
   }, [filters, searchTerm]);
 
   const resetColumnWidths = () => {
-    const equalWidth =
-      100 / allColumns.filter((column) => column.visible).length;
+    const visibleColumns = allColumns.filter((column) => column.visible);
+    const equalWidth = 100 / visibleColumns.length;
     const resetColumns = allColumns.map((column) => ({
       ...column,
       width: column.visible ? equalWidth : 0,
     }));
+
     setAllColumns(resetColumns);
   };
 
