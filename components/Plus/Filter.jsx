@@ -42,9 +42,12 @@ export default function Filter({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [viewName, setViewName] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const theme = useContext(ThemeContext);
+
+  const [tempFilters, setTempFilters] = useState([]);
+  const [tempAllColumns, setTempAllColumns] = useState([]);
+  const [tempViewName, setTempViewName] = useState("");
 
   const handleAddFilter = () => {
     setFilters([...filters, { field: "", filterMethod: "", value: "" }]);
@@ -78,8 +81,11 @@ export default function Filter({
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
-    setAllColumns(defaultColumns);
-    setSingleOrders(allSingleOrdersWithDependencies);
+    if (selectedView) {
+      setViewName(tempViewName);
+      setFilters(tempFilters);
+      setAllColumns(tempAllColumns);
+    }
   };
 
   const handleSaveView = () => {
@@ -95,7 +101,7 @@ export default function Filter({
     setSavedViews(updatedViews);
 
     setSelectedViewId(selectedViewId);
-    setIsEditMode(false);
+    // setIsEditMode(false);
     setIsPopupOpen(false);
   };
 
@@ -146,9 +152,13 @@ export default function Filter({
 
   const handleEditView = () => {
     setActiveTab(0);
+    setTempViewName(selectedView.name);
+    setTempFilters(selectedView.filters);
+    setTempAllColumns(selectedView.allColumns);
+
     setViewName(selectedView.name);
     setFilters(selectedView.filters);
-    setIsEditMode(true);
+    setAllColumns(selectedView.allColumns);
     setIsPopupOpen(true);
     handleCloseContextMenu();
   };
