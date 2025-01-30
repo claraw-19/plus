@@ -37,6 +37,7 @@ export default function SingleOrdersListListHeader({
             nextNewWidth;
         }
         setAllColumns(updatedColumns);
+        console.log("setAllColumns in header");
       }
     };
 

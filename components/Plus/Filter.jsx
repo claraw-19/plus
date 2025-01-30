@@ -101,7 +101,6 @@ export default function Filter({
     setSavedViews(updatedViews);
 
     setSelectedViewId(selectedViewId);
-    // setIsEditMode(false);
     setIsPopupOpen(false);
   };
 
@@ -132,8 +131,6 @@ export default function Filter({
   function updateSelectedView(view) {
     if (!selectedViewId || selectedViewId !== view.id) {
       setSelectedViewId(view.id);
-      setFilters(view.filters);
-      setAllColumns(view.allColumns);
     } else {
       setSelectedViewId(undefined);
     }
