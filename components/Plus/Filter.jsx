@@ -138,13 +138,39 @@ export default function Filter({
 
   const selectedView = savedViews.find((view) => view.id === selectedViewId);
 
-  const handleDuplicateView = () => {
-    setActiveTab(0);
-    setViewName(`${selectedView.name} - Copy`);
-    setFilters(selectedView.filters);
-    setAllColumns(selectedView.allColumns);
-    setIsPopupOpen(true);
+  const handleDuplicateView = (view) => {
     handleCloseContextMenu();
+    const duplicatedView = {
+      ...selectedView,
+      id: uuidv4(),
+      name: `${selectedView.name} – copy`,
+    };
+
+    setActiveTab(0);
+    setViewName(duplicatedView.name);
+    setFilters(duplicatedView.filters);
+    setAllColumns(duplicatedView.allColumns);
+    setIsPopupOpen(true);
+    setSavedViews((prevViews) => [...prevViews, duplicatedView]);
+    setSelectedViewId(duplicatedView.id);
+  };
+
+  const handleSaveDuplicatedView = () => {
+    if (!viewName.trim()) {
+      alert("Bitte gib einen Namen für die Ansicht ein.");
+      return;
+    }
+
+    const updatedViews = savedViews.map((view) =>
+      view.id === selectedViewId
+        ? { ...view, name: viewName, filters, allColumns }
+        : view
+    );
+
+    setSavedViews(updatedViews);
+
+    setSelectedViewId(selectedViewId);
+    setIsPopupOpen(false);
   };
 
   const handleEditView = () => {
