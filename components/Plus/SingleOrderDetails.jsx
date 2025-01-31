@@ -11,6 +11,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { Details } from "@mui/icons-material";
+import TouchAppIcon from "@mui/icons-material/TouchApp";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
@@ -104,6 +105,20 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
                 ).toLocaleDateString("de-DE")}
               </>
             )}
+          </Styled.IconTextWrapper>
+        </Styled.DetailsData>
+        <Styled.DetailsData>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Klicks gesamt">
+              <TouchAppIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.user.allClicks}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Klicks 30 Tage">
+              <TouchAppIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.user.clicks}
           </Styled.IconTextWrapper>
         </Styled.DetailsData>
       </Styled.DetailsContainer>
