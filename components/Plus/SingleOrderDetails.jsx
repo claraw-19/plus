@@ -12,6 +12,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useState } from "react";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
@@ -27,6 +28,14 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
+  };
+
+  const [copiedId, setCopiedId] = useState(null);
+
+  const handleCopy = (text, id) => {
+    copyToClipboard(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 300);
   };
 
   return (
@@ -54,9 +63,14 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
             {singleOrderWithDependencies.user.email}
             <ContentCopyIcon
               onClick={() =>
-                copyToClipboard(singleOrderWithDependencies.user.email)
+                handleCopy(singleOrderWithDependencies.user.email, "email")
               }
-              style={{ cursor: "pointer", marginLeft: "8px" }}
+              style={{
+                cursor: "pointer",
+                marginLeft: "8px",
+                transition: "transform 0.2s ease-in-out",
+                transform: copiedId === "email" ? "scale(1.3)" : "scale(1)",
+              }}
             />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
@@ -64,13 +78,17 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
             {singleOrderWithDependencies.singleOrder.accessCodesId}
             <ContentCopyIcon
               onClick={() =>
-                copyToClipboard(
-                  singleOrderWithDependencies.singleOrder.accessCodesId
+                handleCopy(
+                  singleOrderWithDependencies.singleOrder.accessCodesId,
+                  "accessCode"
                 )
               }
               style={{
                 cursor: "pointer",
                 marginLeft: "8px",
+                transition: "transform 0.2s ease-in-out",
+                transform:
+                  copiedId === "accessCode" ? "scale(1.3)" : "scale(1)",
               }}
             />
           </Styled.IconTextWrapper>
