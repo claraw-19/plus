@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function SingleOrderCard({
   singleOrderWithDependencies,
-  columns,
+  allColumns,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,32 +12,23 @@ export default function SingleOrderCard({
     setIsOpen((prev) => !prev);
   };
 
-  console.log(columns);
-
   return (
     <>
       <Styled.SingleOrderContainer
-        columns={columns}
+        $allColumns={allColumns}
         $isOpen={isOpen}
         onClick={toggleDetails}
       >
-        {columns.map((column) => (
-          <Styled.SingleOrderData key={column.id}>
-            {column.id === "name"
-              ? `${singleOrderWithDependencies.user.firstName} ${singleOrderWithDependencies.user.lastName}`
-              : column.id === "email"
-                ? singleOrderWithDependencies.user.email
-                : column.id === "license"
-                  ? singleOrderWithDependencies.singleOrder.accessCodesId
-                  : column.id === "paymentDate"
-                    ? singleOrderWithDependencies.singleOrder.nextPaymentDate
-                      ? new Date(
-                          singleOrderWithDependencies.singleOrder.nextPaymentDate
-                        ).toLocaleDateString("de-DE")
-                      : ""
-                    : ""}
-          </Styled.SingleOrderData>
-        ))}
+        {allColumns
+          .filter((column) => column.visible)
+          .map((column) => (
+            <Styled.SingleOrderData
+              key={column.key}
+              style={{ width: `${column.width}%` }}
+            >
+              {singleOrderWithDependencies[column.object][column.name]}
+            </Styled.SingleOrderData>
+          ))}
       </Styled.SingleOrderContainer>
 
       {isOpen && (
@@ -50,20 +41,19 @@ export default function SingleOrderCard({
 }
 
 const Styled = {
-  SingleOrderContainer: styled.button`
-    all: unset;
-    display: grid;
-    grid-template-columns: ${({ columns }) =>
-      columns.map((col) => `${col.width}%`).join(" ")};
+  SingleOrderContainer: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
-    background-color: ${({ $isOpen, theme }) =>
-      $isOpen ? theme.colors.grey7 : theme.colors.white};
-    cursor: pointer;
-    width: 100%;
+    position: relative;
     &:hover {
       background-color: ${({ theme }) => theme.colors.grey7};
     }
+    background-color: ${({ $isOpen, theme }) =>
+      $isOpen ? theme.colors.grey7 : theme.colors.white};
+    cursor: pointer;
   `,
 
   SingleOrderData: styled.p`

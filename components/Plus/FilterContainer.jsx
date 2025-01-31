@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import styled, { ThemeContext } from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
-import filterFields from "@/constants/filterFields.json";
+import filterFields from "@/constants/allColumns.json";
 import filterMethods from "@/constants/filterMethods.json";
 import { useContext, useState } from "react";
 
@@ -49,7 +49,7 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
                 fontFamily: theme.typography.fontFamily.regular,
               }}
             >
-              {field.display}
+              {field.displayName}
             </MenuItem>
           ))}
         </Select>

@@ -8,36 +8,41 @@ import KPI from "@/components/Plus/Kpi";
 import Filter from "@/components/Plus/Filter";
 import { filter, search } from "@/utils/filterAndSearch";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
+import defaultColumns from "@/constants/allColumns.json";
 
 export default function Plus() {
   const [singleOrders, setSingleOrders] = useState(
     allSingleOrdersWithDependencies
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState([]);
-  const [columns, setColumns] = useState([
-    { id: "name", title: "Name", width: 25 },
-    { id: "email", title: "E-Mail", width: 25 },
-    { id: "license", title: "Lizenzcode", width: 25 },
-    {
-      id: "paymentDate",
-      title: "Nächstes Zahlungsdatum",
-      width: 25,
-    },
-  ]);
+  const [savedViews, setSavedViews] = useState([]);
+  const [selectedViewId, setSelectedViewId] = useState(undefined);
+  const [localColumns, setLoalColumns] = useState(defaultColumns);
 
-  useEffect(() => {
-    const savedColumnWidths = localStorage.getItem("columnWidths");
-    if (savedColumnWidths) {
-      setColumns(JSON.parse(savedColumnWidths));
-    }
-  }, []);
+  const allColumns =
+    savedViews.find((view) => view.id === selectedViewId)?.allColumns ||
+    localColumns;
 
-  useEffect(() => {
-    if (columns) {
-      localStorage.setItem("columnWidths", JSON.stringify(columns));
+  const filters =
+    savedViews.find((view) => view.id === selectedViewId)?.filters || [];
+
+  const setAllColumns = (newColumns) => {
+    if (selectedViewId) {
+      const updatedViews = savedViews.map((view) =>
+        view.id === selectedViewId ? { ...view, allColumns: newColumns } : view
+      );
+      setSavedViews(updatedViews);
+    } else {
+      setLoalColumns(newColumns);
     }
-  }, [columns]);
+  };
+
+  const setFilters = (newFilters) => {
+    const updatedViews = savedViews.map((view) =>
+      view.id === selectedViewId ? { ...view, filters: newFilters } : view
+    );
+    setSavedViews(updatedViews);
+  };
 
   useEffect(() => {
     const filteredSingleOrders = filter(
@@ -50,12 +55,14 @@ export default function Plus() {
   }, [filters, searchTerm]);
 
   const resetColumnWidths = () => {
-    const equalWidth = 100 / columns.length;
-    const resetColumns = columns.map((column) => ({
+    const visibleColumns = allColumns.filter((column) => column.visible);
+    const equalWidth = 100 / visibleColumns.length;
+    const resetColumns = allColumns.map((column) => ({
       ...column,
-      width: equalWidth,
+      width: column.visible ? equalWidth : 0,
     }));
-    setColumns(resetColumns);
+
+    setAllColumns(resetColumns);
   };
 
   return (
@@ -63,10 +70,16 @@ export default function Plus() {
       <Styled.Header>
         <h1>PLUS-Lizenzen</h1>
         <Filter
+          allColumns={allColumns}
+          setAllColumns={setAllColumns}
           filters={filters}
           setFilters={setFilters}
+          savedViews={savedViews}
+          setSavedViews={setSavedViews}
           setSingleOrders={setSingleOrders}
           allSingleOrdersWithDependencies={allSingleOrdersWithDependencies}
+          selectedViewId={selectedViewId}
+          setSelectedViewId={setSelectedViewId}
         />
 
         <Styled.KPIAndSearchWrapper>
@@ -74,22 +87,29 @@ export default function Plus() {
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <Styled.ViewColumnIcon onClick={resetColumnWidths} />
         </Styled.KPIAndSearchWrapper>
-        <SingleOrdersListHeader columns={columns} setColumns={setColumns} />
-      </Styled.Header>
-      <Styled.singleOrdersList>
-        {singleOrders.length > 0 ? (
-          singleOrders.map((singleOrderWithDependencies) => (
-            <li key={singleOrderWithDependencies.singleOrder.id}>
-              <SingleOrderCard
-                columns={columns}
-                singleOrderWithDependencies={singleOrderWithDependencies}
-              />
-            </li>
-          ))
-        ) : (
-          <p>Keine Lizenzen gefunden.</p>
+        {allColumns && (
+          <SingleOrdersListHeader
+            allColumns={allColumns}
+            setAllColumns={setAllColumns}
+          />
         )}
-      </Styled.singleOrdersList>
+      </Styled.Header>
+      {allColumns && (
+        <Styled.singleOrdersList>
+          {singleOrders.length > 0 ? (
+            singleOrders.map((singleOrderWithDependencies) => (
+              <li key={singleOrderWithDependencies.singleOrder.id}>
+                <SingleOrderCard
+                  allColumns={allColumns}
+                  singleOrderWithDependencies={singleOrderWithDependencies}
+                />
+              </li>
+            ))
+          ) : (
+            <p>Keine Lizenzen gefunden.</p>
+          )}
+        </Styled.singleOrdersList>
+      )}
     </>
   );
 }

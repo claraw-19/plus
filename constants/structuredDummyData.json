@@ -6,8 +6,7 @@
     },
     "user": {
       "id": "1",
-      "firstName": "Jonas",
-      "lastName": "Hoffmann",
+      "name": "Jonas Hoffmann",
       "email": "jonas.hoffmann@example.com"
     },
     "singleOrder": {
@@ -29,8 +28,7 @@
     },
     "user": {
       "id": "2",
-      "firstName": "Lina",
-      "lastName": "Krause",
+      "name": "Lina Krause",
       "email": "lina.krause@example.com"
     },
     "singleOrder": {
@@ -52,8 +50,7 @@
     },
     "user": {
       "id": "3",
-      "firstName": "Jonas",
-      "lastName": "Schmidt",
+      "name": "Jonas Schmidt",
       "email": "jonas.schmidt@example.com"
     },
     "singleOrder": {
@@ -75,8 +72,7 @@
     },
     "user": {
       "id": "4",
-      "firstName": "David",
-      "lastName": "Weber",
+      "name": "David Weber",
       "email": "david.weber@example.com"
     },
     "singleOrder": {
@@ -98,8 +94,7 @@
     },
     "user": {
       "id": "5",
-      "firstName": "Finn",
-      "lastName": "Becker",
+      "name": "Finn Becker",
       "email": "finn.becker@example.com"
     },
     "singleOrder": {
@@ -121,8 +116,7 @@
     },
     "user": {
       "id": "6",
-      "firstName": "Clara",
-      "lastName": "Fischer",
+      "name": "Clara Fischer",
       "email": "clara.fischer@example.com"
     },
     "singleOrder": {
@@ -144,8 +138,7 @@
     },
     "user": {
       "id": "7",
-      "firstName": "Ella",
-      "lastName": "Richter",
+      "name": "Ella Richter",
       "email": "ella.richter@example.com"
     },
     "singleOrder": {
@@ -167,8 +160,7 @@
     },
     "user": {
       "id": "8",
-      "firstName": "Hanna",
-      "lastName": "Koch",
+      "name": "Hanna Koch",
       "email": "hanna.koch@example.com"
     },
     "singleOrder": {
@@ -190,8 +182,7 @@
     },
     "user": {
       "id": "9",
-      "firstName": "Clara",
-      "lastName": "Hoffmann",
+      "name": "Clara Hoffmann",
       "email": "clara.hoffmann@example.com"
     },
     "singleOrder": {
@@ -213,8 +204,7 @@
     },
     "user": {
       "id": "10",
-      "firstName": "Jonas",
-      "lastName": "Krause",
+      "name": "Jonas Krause",
       "email": "jonas.krause@example.com"
     },
     "singleOrder": {
@@ -236,8 +226,7 @@
     },
     "user": {
       "id": "11",
-      "firstName": "Anna",
-      "lastName": "Weber",
+      "name": "Anna Weber",
       "email": "anna.weber@example.com"
     },
     "singleOrder": {
@@ -259,8 +248,7 @@
     },
     "user": {
       "id": "12",
-      "firstName": "Finn",
-      "lastName": "Koch",
+      "name": "Finn Koch",
       "email": "finn.koch@example.com"
     },
     "singleOrder": {
@@ -282,8 +270,7 @@
     },
     "user": {
       "id": "13",
-      "firstName": "Finn",
-      "lastName": "Meyer",
+      "name": "Finn Meyer",
       "email": "finn.meyer@example.com"
     },
     "singleOrder": {
@@ -305,8 +292,7 @@
     },
     "user": {
       "id": "14",
-      "firstName": "Greta",
-      "lastName": "Becker",
+      "name": "Greta Becker",
       "email": "greta.becker@example.com"
     },
     "singleOrder": {
@@ -328,8 +314,7 @@
     },
     "user": {
       "id": "15",
-      "firstName": "Lina",
-      "lastName": "Fischer",
+      "name": "Lina Fischer",
       "email": "lina.fischer@example.com"
     },
     "singleOrder": {
@@ -351,8 +336,7 @@
     },
     "user": {
       "id": "16",
-      "firstName": "David",
-      "lastName": "Richter",
+      "name": "David Richter",
       "email": "david.richter@example.com"
     },
     "singleOrder": {
@@ -374,8 +358,7 @@
     },
     "user": {
       "id": "17",
-      "firstName": "Finn",
-      "lastName": "Schneider",
+      "name": "Finn Schneider",
       "email": "finn.schneider@example.com"
     },
     "singleOrder": {
@@ -397,8 +380,7 @@
     },
     "user": {
       "id": "18",
-      "firstName": "Ella",
-      "lastName": "Becker",
+      "name": "Ella Becker",
       "email": "ella.becker@example.com"
     },
     "singleOrder": {
@@ -420,8 +402,7 @@
     },
     "user": {
       "id": "19",
-      "firstName": "Greta",
-      "lastName": "Weber",
+      "name": "Greta Weber",
       "email": "greta.weber@example.com"
     },
     "singleOrder": {
@@ -443,8 +424,7 @@
     },
     "user": {
       "id": "20",
-      "firstName": "Hanna",
-      "lastName": "Schmidt",
+      "name": "Hanna Schmidt",
       "email": "hanna.schmidt@example.com"
     },
     "singleOrder": {

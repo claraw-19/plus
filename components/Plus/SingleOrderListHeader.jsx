@@ -1,11 +1,27 @@
 import styled from "styled-components";
 
-export default function SingleOrdersListListHeader({ columns, setColumns }) {
-  const handleResize = (index, event) => {
+export default function SingleOrdersListListHeader({
+  allColumns,
+  setAllColumns,
+}) {
+  const handleResize = (column, event) => {
+    let indexInAllColumns;
+    let indexNextVisibleColumnInAllColumns;
+    for (let index = 0; index < allColumns.length; index++) {
+      if (indexInAllColumns !== undefined && allColumns[index].visible) {
+        indexNextVisibleColumnInAllColumns = index;
+        break;
+      }
+      if (allColumns[index].key === column.key) {
+        indexInAllColumns = index;
+      }
+    }
+
     event.preventDefault();
     const startX = event.clientX;
-    const startWidth = columns[index].width;
-    const nextStartWidth = columns[index + 1]?.width;
+    const startWidth = allColumns[indexInAllColumns].width;
+    const nextStartWidth =
+      allColumns[indexNextVisibleColumnInAllColumns]?.width;
 
     const onMouseMove = (moveEvent) => {
       const deltaX = moveEvent.clientX - startX;
@@ -14,10 +30,13 @@ export default function SingleOrdersListListHeader({ columns, setColumns }) {
       const nextNewWidth = nextStartWidth - (deltaX / window.innerWidth) * 100;
 
       if (newWidth > 10 && (!nextStartWidth || nextNewWidth > 10)) {
-        const updatedColumns = [...columns];
-        updatedColumns[index].width = newWidth;
-        if (nextStartWidth) updatedColumns[index + 1].width = nextNewWidth;
-        setColumns(updatedColumns);
+        const updatedColumns = [...allColumns];
+        updatedColumns[indexInAllColumns].width = newWidth;
+        if (nextStartWidth) {
+          updatedColumns[indexNextVisibleColumnInAllColumns].width =
+            nextNewWidth;
+        }
+        setAllColumns(updatedColumns);
       }
     };
 
@@ -32,17 +51,21 @@ export default function SingleOrdersListListHeader({ columns, setColumns }) {
 
   return (
     <Styled.SingleOrderContainer>
-      {columns.map((column, index) => (
-        <Styled.SingleOrderData
-          key={column.id}
-          style={{ width: `${column.width}%` }}
-        >
-          {column.title}
-          {index < columns.length - 1 && (
-            <Styled.ResizeHandle onMouseDown={(e) => handleResize(index, e)} />
-          )}
-        </Styled.SingleOrderData>
-      ))}
+      {allColumns
+        .filter((column) => column.visible)
+        .map((column, index) => (
+          <Styled.SingleOrderData
+            key={column.key}
+            style={{ width: `${column.width}%` }}
+          >
+            {column.displayName}
+            {index < allColumns.length - 1 && (
+              <Styled.ResizeHandle
+                onMouseDown={(e) => handleResize(column, e)}
+              />
+            )}
+          </Styled.SingleOrderData>
+        ))}
     </Styled.SingleOrderContainer>
   );
 }
