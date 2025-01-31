@@ -26,7 +26,12 @@ export default function SingleOrderCard({
               key={column.key}
               style={{ width: `${column.width}%` }}
             >
-              {singleOrderWithDependencies[column.object][column.name]}
+              {singleOrderWithDependencies[column.object][column.name] ===
+              singleOrderWithDependencies.singleOrder.price
+                ? `${singleOrderWithDependencies[column.object][
+                    column.name
+                  ].toLocaleString("de-DE")} €`
+                : singleOrderWithDependencies[column.object][column.name]}
             </Styled.SingleOrderData>
           ))}
       </Styled.SingleOrderContainer>
