@@ -56,7 +56,7 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
             <Styled.HoverEffect $description="Costumer Lifetime">
               <HourglassEmptyIcon />
             </Styled.HoverEffect>
-            {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} Monate`}
+            {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} ${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate) === 1 ? "Monat" : "Monate"}`}
           </Styled.IconTextWrapper>
         </Styled.DetailsData>
         <Styled.DetailsData>
