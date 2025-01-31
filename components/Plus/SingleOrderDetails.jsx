@@ -26,14 +26,10 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
     return yearsDiff * 12 + monthsDiff;
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-  };
-
   const [copiedId, setCopiedId] = useState(null);
 
   const handleCopy = (text, id) => {
-    copyToClipboard(text);
+    navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 300);
   };
