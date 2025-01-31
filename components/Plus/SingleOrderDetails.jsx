@@ -10,7 +10,6 @@ import EventBusyIcon from "@mui/icons-material/EventBusy";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import { Details } from "@mui/icons-material";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
