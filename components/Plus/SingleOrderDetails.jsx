@@ -68,7 +68,10 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
                   singleOrderWithDependencies.singleOrder.accessCodesId
                 )
               }
-              style={{ cursor: "pointer", marginLeft: "8px" }}
+              style={{
+                cursor: "pointer",
+                marginLeft: "8px",
+              }}
             />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
