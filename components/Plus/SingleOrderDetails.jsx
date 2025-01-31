@@ -11,6 +11,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
@@ -22,6 +23,10 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
     let yearsDiff = endDate.getFullYear() - start.getFullYear();
     let monthsDiff = endDate.getMonth() - start.getMonth();
     return yearsDiff * 12 + monthsDiff;
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
   };
 
   return (
@@ -47,10 +52,24 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
           <Styled.IconTextWrapper>
             <EmailIcon />
             {singleOrderWithDependencies.user.email}
+            <ContentCopyIcon
+              onClick={() =>
+                copyToClipboard(singleOrderWithDependencies.user.email)
+              }
+              style={{ cursor: "pointer", marginLeft: "8px" }}
+            />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
             <VpnKeyIcon />
             {singleOrderWithDependencies.singleOrder.accessCodesId}
+            <ContentCopyIcon
+              onClick={() =>
+                copyToClipboard(
+                  singleOrderWithDependencies.singleOrder.accessCodesId
+                )
+              }
+              style={{ cursor: "pointer", marginLeft: "8px" }}
+            />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
             <Styled.HoverEffect $description="Costumer Lifetime">
