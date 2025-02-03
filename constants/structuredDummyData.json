@@ -7,7 +7,9 @@
     "user": {
       "id": "1",
       "name": "Jonas Hoffmann",
-      "email": "jonas.hoffmann@example.com"
+      "email": "jonas.hoffmann@example.com",
+      "clicks": 87,
+      "allClicks": 627
     },
     "singleOrder": {
       "id": "1",
@@ -28,8 +30,10 @@
     },
     "user": {
       "id": "2",
-      "name": "Lina Krause",
-      "email": "lina.krause@example.com"
+      "name": "Ella Brake",
+      "email": "ella.brake@example.com",
+      "clicks": 21,
+      "allClicks": 73
     },
     "singleOrder": {
       "id": "2",
@@ -51,7 +55,9 @@
     "user": {
       "id": "3",
       "name": "Jonas Schmidt",
-      "email": "jonas.schmidt@example.com"
+      "email": "jonas.schmidt@example.com",
+      "clicks": 122,
+      "allClicks": 637
     },
     "singleOrder": {
       "id": "3",
@@ -73,7 +79,9 @@
     "user": {
       "id": "4",
       "name": "David Weber",
-      "email": "david.weber@example.com"
+      "email": "david.weber@example.com",
+      "clicks": 198,
+      "allClicks": 1672
     },
     "singleOrder": {
       "id": "4",
@@ -95,7 +103,9 @@
     "user": {
       "id": "5",
       "name": "Finn Becker",
-      "email": "finn.becker@example.com"
+      "email": "finn.becker@example.com",
+      "clicks": 45,
+      "allClicks": 801
     },
     "singleOrder": {
       "id": "5",
@@ -117,7 +127,9 @@
     "user": {
       "id": "6",
       "name": "Clara Fischer",
-      "email": "clara.fischer@example.com"
+      "email": "clara.fischer@example.com",
+      "clicks": 321,
+      "allClicks": 987
     },
     "singleOrder": {
       "id": "6",
@@ -139,7 +151,9 @@
     "user": {
       "id": "7",
       "name": "Ella Richter",
-      "email": "ella.richter@example.com"
+      "email": "ella.richter@example.com",
+      "clicks": 18,
+      "allClicks": 124
     },
     "singleOrder": {
       "id": "7",
@@ -161,7 +175,9 @@
     "user": {
       "id": "8",
       "name": "Hanna Koch",
-      "email": "hanna.koch@example.com"
+      "email": "hanna.koch@example.com",
+      "clicks": 121,
+      "allClicks": 837
     },
     "singleOrder": {
       "id": "8",
@@ -183,7 +199,9 @@
     "user": {
       "id": "9",
       "name": "Clara Hoffmann",
-      "email": "clara.hoffmann@example.com"
+      "email": "clara.hoffmann@example.com",
+      "clicks": 223,
+      "allClicks": 1253
     },
     "singleOrder": {
       "id": "9",
@@ -205,7 +223,9 @@
     "user": {
       "id": "10",
       "name": "Jonas Krause",
-      "email": "jonas.krause@example.com"
+      "email": "jonas.krause@example.com",
+      "clicks": 12,
+      "allClicks": 320
     },
     "singleOrder": {
       "id": "10",
@@ -227,7 +247,9 @@
     "user": {
       "id": "11",
       "name": "Anna Weber",
-      "email": "anna.weber@example.com"
+      "email": "anna.weber@example.com",
+      "clicks": 127,
+      "allClicks": 230
     },
     "singleOrder": {
       "id": "11",
@@ -249,7 +271,9 @@
     "user": {
       "id": "12",
       "name": "Finn Koch",
-      "email": "finn.koch@example.com"
+      "email": "finn.koch@example.com",
+      "clicks": 203,
+      "allClicks": 1029
     },
     "singleOrder": {
       "id": "12",
@@ -271,7 +295,9 @@
     "user": {
       "id": "13",
       "name": "Finn Meyer",
-      "email": "finn.meyer@example.com"
+      "email": "finn.meyer@example.com",
+      "clicks": 212,
+      "allClicks": 929
     },
     "singleOrder": {
       "id": "13",
@@ -293,7 +319,9 @@
     "user": {
       "id": "14",
       "name": "Greta Becker",
-      "email": "greta.becker@example.com"
+      "email": "greta.becker@example.com",
+      "clicks": 122,
+      "allClicks": 432
     },
     "singleOrder": {
       "id": "14",
@@ -315,7 +343,9 @@
     "user": {
       "id": "15",
       "name": "Lina Fischer",
-      "email": "lina.fischer@example.com"
+      "email": "lina.fischer@example.com",
+      "clicks": 33,
+      "allClicks": 120
     },
     "singleOrder": {
       "id": "15",
@@ -337,7 +367,9 @@
     "user": {
       "id": "16",
       "name": "David Richter",
-      "email": "david.richter@example.com"
+      "email": "david.richter@example.com",
+      "clicks": 293,
+      "allClicks": 1229
     },
     "singleOrder": {
       "id": "16",
@@ -359,7 +391,9 @@
     "user": {
       "id": "17",
       "name": "Finn Schneider",
-      "email": "finn.schneider@example.com"
+      "email": "finn.schneider@example.com",
+      "clicks": 212,
+      "allClicks": 545
     },
     "singleOrder": {
       "id": "17",
@@ -381,7 +415,9 @@
     "user": {
       "id": "18",
       "name": "Ella Becker",
-      "email": "ella.becker@example.com"
+      "email": "ella.becker@example.com",
+      "clicks": 90,
+      "allClicks": 122
     },
     "singleOrder": {
       "id": "18",
@@ -403,7 +439,9 @@
     "user": {
       "id": "19",
       "name": "Greta Weber",
-      "email": "greta.weber@example.com"
+      "email": "greta.weber@example.com",
+      "clicks": 34,
+      "allClicks": 910
     },
     "singleOrder": {
       "id": "19",
@@ -425,7 +463,9 @@
     "user": {
       "id": "20",
       "name": "Hanna Schmidt",
-      "email": "hanna.schmidt@example.com"
+      "email": "hanna.schmidt@example.com",
+      "clicks": 187,
+      "allClicks": 925
     },
     "singleOrder": {
       "id": "20",

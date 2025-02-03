@@ -118,6 +118,10 @@ export default function FilterContainer({ filter, setFilter, onDelete }) {
         value={filter.value}
         onChange={(e) => setFilter({ ...filter, value: e.target.value })}
         fullWidth
+        disabled={
+          filter.filterMethod.id === "isNotEmpty" ||
+          filter.filterMethod.id === "isEmpty"
+        }
       />
 
       <Styled.ClearFilterIcon onClick={onDelete} />

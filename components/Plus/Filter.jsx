@@ -166,14 +166,16 @@ export default function Filter({
 
   const handleColumnChange = (selectedIds) => {
     const visibleColumnCount = selectedIds.length;
-    const newWidth = 100 / visibleColumnCount;
-    const updatedColumns = allColumns.map((column) => ({
-      ...column,
-      visible: selectedIds.includes(column.key),
-      width: selectedIds.includes(column.key) ? newWidth : column.width,
-    }));
+    if (visibleColumnCount > 0) {
+      const newWidth = 100 / visibleColumnCount;
+      const updatedColumns = allColumns.map((column) => ({
+        ...column,
+        visible: selectedIds.includes(column.key),
+        width: selectedIds.includes(column.key) ? newWidth : column.width,
+      }));
 
-    setAllColumns(updatedColumns);
+      setAllColumns(updatedColumns);
+    }
   };
 
   return (

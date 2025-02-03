@@ -12,6 +12,21 @@ export default function SingleOrderCard({
     setIsOpen((prev) => !prev);
   };
 
+  const getValues = (value) => {
+    if (value === singleOrderWithDependencies.singleOrder.price) {
+      return `${value.toLocaleString("de-DE")} €`;
+    } else if (
+      value === singleOrderWithDependencies.singleOrder.date ||
+      value === singleOrderWithDependencies.singleOrder.endDate ||
+      value === singleOrderWithDependencies.singleOrder.cancellationDate ||
+      value === singleOrderWithDependencies.singleOrder.nextPaymentDate
+    ) {
+      return value ? new Date(value).toLocaleDateString("de-DE") : "";
+    } else {
+      return value;
+    }
+  };
+
   return (
     <>
       <Styled.SingleOrderContainer
@@ -26,7 +41,9 @@ export default function SingleOrderCard({
               key={column.key}
               style={{ width: `${column.width}%` }}
             >
-              {singleOrderWithDependencies[column.object][column.name]}
+              {getValues(
+                singleOrderWithDependencies[column.object][column.name]
+              )}
             </Styled.SingleOrderData>
           ))}
       </Styled.SingleOrderContainer>

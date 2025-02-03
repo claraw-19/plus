@@ -10,7 +10,9 @@ import EventBusyIcon from "@mui/icons-material/EventBusy";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import { Details } from "@mui/icons-material";
+import TouchAppIcon from "@mui/icons-material/TouchApp";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useState } from "react";
 
 export default function SingleOrderDetails({ singleOrderWithDependencies }) {
   const endDate = singleOrderWithDependencies.singleOrder.cancellationDate
@@ -22,6 +24,14 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
     let yearsDiff = endDate.getFullYear() - start.getFullYear();
     let monthsDiff = endDate.getMonth() - start.getMonth();
     return yearsDiff * 12 + monthsDiff;
+  };
+
+  const [copiedId, setCopiedId] = useState(null);
+
+  const handleCopy = (text, id) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 300);
   };
 
   return (
@@ -47,16 +57,42 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
           <Styled.IconTextWrapper>
             <EmailIcon />
             {singleOrderWithDependencies.user.email}
+            <ContentCopyIcon
+              onClick={() =>
+                handleCopy(singleOrderWithDependencies.user.email, "email")
+              }
+              style={{
+                cursor: "pointer",
+                marginLeft: "8px",
+                transition: "transform 0.2s ease-in-out",
+                transform: copiedId === "email" ? "scale(1.3)" : "scale(1)",
+              }}
+            />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
             <VpnKeyIcon />
             {singleOrderWithDependencies.singleOrder.accessCodesId}
+            <ContentCopyIcon
+              onClick={() =>
+                handleCopy(
+                  singleOrderWithDependencies.singleOrder.accessCodesId,
+                  "accessCode"
+                )
+              }
+              style={{
+                cursor: "pointer",
+                marginLeft: "8px",
+                transition: "transform 0.2s ease-in-out",
+                transform:
+                  copiedId === "accessCode" ? "scale(1.3)" : "scale(1)",
+              }}
+            />
           </Styled.IconTextWrapper>
           <Styled.IconTextWrapper>
             <Styled.HoverEffect $description="Costumer Lifetime">
               <HourglassEmptyIcon />
             </Styled.HoverEffect>
-            {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} Monate`}
+            {`${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate)} ${calcCostumerLifetime(singleOrderWithDependencies.singleOrder.date, endDate) === 1 ? "Monat" : "Monate"}`}
           </Styled.IconTextWrapper>
         </Styled.DetailsData>
         <Styled.DetailsData>
@@ -104,6 +140,20 @@ export default function SingleOrderDetails({ singleOrderWithDependencies }) {
                 ).toLocaleDateString("de-DE")}
               </>
             )}
+          </Styled.IconTextWrapper>
+        </Styled.DetailsData>
+        <Styled.DetailsData>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Klicks gesamt">
+              <TouchAppIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.user.allClicks}
+          </Styled.IconTextWrapper>
+          <Styled.IconTextWrapper>
+            <Styled.HoverEffect $description="Klicks 30 Tage">
+              <TouchAppIcon />
+            </Styled.HoverEffect>
+            {singleOrderWithDependencies.user.clicks}
           </Styled.IconTextWrapper>
         </Styled.DetailsData>
       </Styled.DetailsContainer>

@@ -64,7 +64,7 @@ export default function KPI({ singleOrdersWithDependencies }) {
             <HourglassEmptyIcon />
           </Styled.HoverEffect>
           {singleOrdersWithDependencies.length > 0
-            ? `${Math.round(calcAverageCostumerLifetime)} Monate`
+            ? `${Math.round(calcAverageCostumerLifetime)} ${Math.round(calcAverageCostumerLifetime) === 1 ? "Monat" : "Monate"}`
             : "0 Monate"}
         </Styled.IconTextWrapper>
         <Styled.IconTextWrapper>

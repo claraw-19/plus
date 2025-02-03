@@ -125,5 +125,23 @@
     "type": "string",
     "width": 25,
     "visible": false
+  },
+  {
+    "key": 16,
+    "object": "user",
+    "name": "allClicks",
+    "displayName": "Alle Klicks",
+    "type": "number",
+    "width": 25,
+    "visible": false
+  },
+  {
+    "key": 17,
+    "object": "user",
+    "name": "clicks",
+    "displayName": "Klicks 30 Tage",
+    "type": "number",
+    "width": 25,
+    "visible": false
   }
 ]
